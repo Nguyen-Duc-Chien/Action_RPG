@@ -4,7 +4,7 @@ public class Player_Combat : MonoBehaviour
 {
     public Transform attackPoint;
     public LayerMask enemyLayer;
-
+    public StatsUI statsUI;
     public Animator anim;
 
     public float cooldown;
@@ -28,6 +28,9 @@ public class Player_Combat : MonoBehaviour
 
     public void DealDamage()
     {
+        StatsManager.Instance.damage += 1;
+        statsUI.UpdateDamage();
+
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, StatsManager.Instance.weaponRange, enemyLayer);
 
         if (enemies.Length > 0)
