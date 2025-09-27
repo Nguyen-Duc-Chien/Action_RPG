@@ -11,20 +11,24 @@ public class StatsUI : MonoBehaviour
     public void Start()
     {
         UpdateAllStart();
+        statsCanvas.alpha = 0; // Start with stats UI hidden
+        statsOpen = false;
     }
 
     public void Update()
     {
         if (Input.GetButtonDown("ToggleStats"))
             if (statsOpen)
-            {
+            {// Close stats UI
                 Time.timeScale = 1;
+                UpdateAllStart();
                 statsCanvas.alpha = 0;
                 statsOpen = false;
             }
             else
-            {
+            {// Open stats UI
                 Time.timeScale = 0;
+                UpdateAllStart();
                 statsCanvas.alpha = 1;
                 statsOpen = true;
             }
