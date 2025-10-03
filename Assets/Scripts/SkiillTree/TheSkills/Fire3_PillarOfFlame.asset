@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb74ef6f14e350e479594b40dfb0c0f4, type: 3}
-  m_Name: MaxHealthBoost
+  m_Name: Fire3_PillarOfFlame
   m_EditorClassIdentifier: 
-  skillName: MaxHealthBoost
-  maxLevel: 5
-  skillIcon: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  skillName: Fire3_PillarOfFlame
+  maxLevel: 1
+  skillIcon: {fileID: 6734237056663082788, guid: c223135b7d5e30641b00605b7f03c760, type: 3}

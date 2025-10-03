@@ -135,7 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf550299c4677804db0eb30c40c85a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSO: {fileID: 11400000, guid: b5c3652c2c41f9841acfc3ba86c9c155, type: 2}
+  prerequisiteSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 3069f6440dd43b54baec602ae49a4124, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 1940715614400608443}
@@ -418,7 +419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  m_Sprite: {fileID: 5237681894992149705, guid: 5cc4b9358703033469dc1929c925ad24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
