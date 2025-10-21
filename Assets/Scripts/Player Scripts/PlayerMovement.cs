@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
 
     private bool isKnockedback;
+    public bool isShooting;
 
     public Player_Combat player_Combat;
 
