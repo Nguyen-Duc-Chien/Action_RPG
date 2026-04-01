@@ -10,8 +10,9 @@ public class StatsUI : MonoBehaviour
 
     public void Start()
     {
-        UpdateAllStart();
+        UpdateAllStats();
         statsCanvas.alpha = 0; // Start with stats UI hidden
+        statsCanvas.blocksRaycasts = false; // Disable interaction when closed
         statsOpen = false;
     }
 
@@ -21,15 +22,17 @@ public class StatsUI : MonoBehaviour
             if (statsOpen)
             {// Close stats UI
                 Time.timeScale = 1;
-                UpdateAllStart();
+                UpdateAllStats();
                 statsCanvas.alpha = 0;
+                statsCanvas.blocksRaycasts = false; // Disable interaction when closed
                 statsOpen = false;
             }
             else
             {// Open stats UI
                 Time.timeScale = 0;
-                UpdateAllStart();
+                UpdateAllStats();
                 statsCanvas.alpha = 1;
+                statsCanvas.blocksRaycasts = true; // Enable interaction when open
                 statsOpen = true;
             }
     }
@@ -44,7 +47,7 @@ public class StatsUI : MonoBehaviour
         statsSlots[1].GetComponentInChildren<TMP_Text>().text = "Speed: " + StatsManager.Instance.speed;
     }
 
-    public void UpdateAllStart()
+    public void UpdateAllStats()
     {
         UpdateDamage();
         UpdateSpeed();
