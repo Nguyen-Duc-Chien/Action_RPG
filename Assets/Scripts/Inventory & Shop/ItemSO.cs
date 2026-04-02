@@ -8,6 +8,7 @@ public class ItemSO : ScriptableObject
     public Sprite icon;
 
     public bool isGold;
+    public int stackSize = 16;
 
     [Header("Stats")]
     public int currentHealth;
