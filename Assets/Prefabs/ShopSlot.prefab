@@ -94,10 +94,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 54.05
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 3392030501365275157}
   - component: {fileID: 7685441092392516982}
   - component: {fileID: 8528236307902359312}
+  - component: {fileID: 7822046715581535399}
   m_Layer: 5
   m_Name: ShopSlot
   m_TagString: Untagged
@@ -581,3 +582,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7822046715581535399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461339977452587310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9dfb3c6e036894c960328431bcbedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopSlot
+  itemSO: {fileID: 0}
+  itemNameText: {fileID: 2775077134176132343}
+  priceText: {fileID: 6865445761245778937}
+  itemImage: {fileID: 3648981678594725500}
