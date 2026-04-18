@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21742b7c07c35904c96b5c6476d03cf5, type: 3}
-  m_Name: Pumkin
-  m_EditorClassIdentifier: 
-  itemName: Pumkin
-  itemDescription: Just a pumpkin. Not a pum-kin, a pum-win.
-  icon: {fileID: 644343070, guid: ad8f9b2ae4abe2848a1dba459332ba46, type: 3}
+  m_Name: Bone
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  itemName: Bone
+  itemDescription: A suspicious bone. Probably not mine... I hope.
+  icon: {fileID: 385851911, guid: e1de2dd7ca4667c4ca0a123ac06bfff7, type: 3}
   isGold: 0
   stackSize: 16
-  currentHealth: 3
+  currentHealth: 2
   maxHealth: 0
-  speed: 1
-  damage: 1
+  speed: 0
+  damage: 2
   duration: 2

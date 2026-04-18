@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21742b7c07c35904c96b5c6476d03cf5, type: 3}
-  m_Name: Pumkin
-  m_EditorClassIdentifier: 
-  itemName: Pumkin
-  itemDescription: Just a pumpkin. Not a pum-kin, a pum-win.
-  icon: {fileID: 644343070, guid: ad8f9b2ae4abe2848a1dba459332ba46, type: 3}
+  m_Name: Wood stick
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  itemName: Wood stick
+  itemDescription: Just a stick. Surprisingly versatile, tragically unimpressive.
+  icon: {fileID: -4420179181447111896, guid: 11f4e6bad5a6d2c48acb94c7d515297e, type: 3}
   isGold: 0
   stackSize: 16
-  currentHealth: 3
+  currentHealth: 0
   maxHealth: 0
-  speed: 1
-  damage: 1
+  speed: 0
+  damage: 2
   duration: 2

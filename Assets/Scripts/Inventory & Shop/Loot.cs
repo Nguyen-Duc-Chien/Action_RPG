@@ -13,8 +13,12 @@ public class Loot : MonoBehaviour
 
     private void OnValidate() 
     {
-        if (itemSO == null)
-            return;
+        if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
+        if (itemSO == null || sr == null) return;
+        UpdateAppearance();
+    
+        /*if (itemSO == null)
+            return;*/
     }
 
     public void Initialize(ItemSO itemSO, int quantity)
