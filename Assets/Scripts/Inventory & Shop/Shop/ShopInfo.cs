@@ -60,7 +60,7 @@ public class ShopInfo : MonoBehaviour
     public void FollowMouse()                   //Makes the Panel follow the mouse
     {
         Vector3 mousePosition = Input.mousePosition;
-        Vector3 offset = new Vector3(10, -10, 0);
+        Vector3 offset = new Vector3(200, -150, 0);
         //Note: If you want your panel to have a fixed position,
         //you can leave out the follow mouse stuff altogether
 

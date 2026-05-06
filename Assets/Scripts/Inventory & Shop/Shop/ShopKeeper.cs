@@ -14,6 +14,9 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField] private List<ShopItems> shopWeapons;
     [SerializeField] private List<ShopItems> shopArmor;
 
+    [SerializeField] private Camera shopkeeperCam;
+    [SerializeField] private Vector3 cameraOffset = new Vector3(0, 0, -1);
+
     public static event Action<ShopManager, bool> OnShopStateChanged;
     //Use bool here to ind  icate whether it's open or closed
     private bool playerInRange;
@@ -35,6 +38,10 @@ public class ShopKeeper : MonoBehaviour
                     shopCanvasGroup.alpha = 1;
                     shopCanvasGroup.blocksRaycasts = true;
                     shopCanvasGroup.interactable = true;
+
+                    shopkeeperCam.transform.position = transform.position + cameraOffset; 
+                    shopkeeperCam.gameObject.SetActive(true);
+
                     OpenItemShop();
                     // Default to opening the item shop, you can change this to open different shops based on your design
                 }
@@ -49,7 +56,10 @@ public class ShopKeeper : MonoBehaviour
                 shopCanvasGroup.alpha = 0;
                 shopCanvasGroup.blocksRaycasts = false;
                 shopCanvasGroup.interactable = false;
-            }  
+
+                shopkeeperCam.gameObject.SetActive(false);
+
+            }
         }
     }
 
