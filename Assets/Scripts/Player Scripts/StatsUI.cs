@@ -26,6 +26,7 @@ public class StatsUI : MonoBehaviour
                 statsCanvas.alpha = 0;
                 statsCanvas.blocksRaycasts = false; // Disable interaction when closed
                 statsOpen = false;
+                Debug.Log("Stats UI closed!");
             }
             else
             {// Open stats UI
@@ -34,6 +35,7 @@ public class StatsUI : MonoBehaviour
                 statsCanvas.alpha = 1;
                 statsCanvas.blocksRaycasts = true; // Enable interaction when open
                 statsOpen = true;
+                Debug.Log("Stats UI opened!");
             }
     }
 

@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Slash") && player_Combat.enabled == true)
         {
             player_Combat.Attack();
+            Debug.Log("Slash button pressed! Attack animation should play!");
         }
     }
 

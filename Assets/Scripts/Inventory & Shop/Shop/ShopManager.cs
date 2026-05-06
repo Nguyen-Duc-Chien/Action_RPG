@@ -1,27 +1,17 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class ShopManager : MonoBehaviour
 {
-    public static event Action<ShopManager, bool> OnShopStateChanged;
-    //Use bool here to indicate whether it's open or closed
-
-    [SerializeField] private List<ShopItems> shopItems;
+    
 
     [SerializeField] private ShopSlot[] shopSlots;
 
     [SerializeField] private InventoryManager inventoryManager;
 
-    private void Start()
-    {
-        PopulateShopItems();
-        OnShopStateChanged?.Invoke(this, true);
-        //Checks if there are listeners before sending out the message
-    }
 
-    public void PopulateShopItems()
+    public void PopulateShopItems(List<ShopItems> shopItems)
     {
         for (int i = 0; i < shopItems.Count && i < shopSlots.Length; i++)
         {

@@ -22,6 +22,7 @@ public class ToggleSkillTree : MonoBehaviour
                 skillsCanvas.alpha = 0;
                 skillsCanvas.blocksRaycasts = false;
                 skillTreeOpen = false;
+                Debug.Log("Closed Skill Tree");
             }
             else if (!skillTreeOpen)
             { 
@@ -29,6 +30,7 @@ public class ToggleSkillTree : MonoBehaviour
                 skillsCanvas.alpha = 1;
                 skillsCanvas.blocksRaycasts = true;
                 skillTreeOpen = true;
+                Debug.Log("Opened Skill Tree");
             }
         }
     }

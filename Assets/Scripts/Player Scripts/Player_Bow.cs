@@ -24,6 +24,7 @@ public class Player_Bow : MonoBehaviour
         {
             playerMovement.isShooting = true;
             anim.SetBool("isShooting", true);
+            Debug.Log("Shoot button pressed! Shoot animation should play!");
         }
     }
 
