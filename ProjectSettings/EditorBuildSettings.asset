@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RPG 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/RPG 2.unity
+    guid: afc6c06416884d745abc082717238e41
+  - enabled: 1
+    path: Assets/Scenes/_Thumbnail.unity
+    guid: 0b2ac645a67e141438992016cd3593fc
+  - enabled: 1
+    path: Assets/Scenes/RPG.unity
+    guid: 04afe10b7af185a43b840f363d60fa30
   m_configObjects: {}
