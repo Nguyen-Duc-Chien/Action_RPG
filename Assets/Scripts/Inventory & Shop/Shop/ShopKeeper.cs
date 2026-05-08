@@ -21,6 +21,12 @@ public class ShopKeeper : MonoBehaviour
     //Use bool here to ind  icate whether it's open or closed
     private bool playerInRange;
     private bool isShopOpen;
+    void Start()
+    {
+        shopkeeperCam = GameManager.Instance.shopCamera;
+        shopCanvasGroup = GameManager.Instance.canvasGroup;
+        shopManager = GameManager.Instance.shopManager;
+    }
 
     void Update()
     {
