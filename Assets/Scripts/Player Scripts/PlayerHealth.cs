@@ -1,22 +1,25 @@
 using UnityEngine;
-using TMPro;        // Using this for TextMeshPro
+using TMPro;
+using UnityEngine.UI;        // Using this for TextMeshPro
 
 
 public class PlayerHealth : MonoBehaviour
 {
     public TMP_Text healthText;
     public Animator healthTextAnim;
+    public Slider healthSlider; 
 
     public void Start()
     {
-        healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
+        //healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
+        UpdateHealthUI();
     }
 
     public void ChangeHealth(int amount)
     {
         StatsManager.Instance.currentHealth += amount;
-        healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
         healthTextAnim.Play("TextUpdate");
+        UpdateHealthUI();
 
         if (StatsManager.Instance.currentHealth <= 0)
         {
@@ -31,5 +34,12 @@ public class PlayerHealth : MonoBehaviour
             gameObject.SetActive(true);
             */
         }
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthSlider.maxValue = StatsManager.Instance.maxHealth;
+        healthSlider.value = StatsManager.Instance.currentHealth;
+        healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
     }
 }

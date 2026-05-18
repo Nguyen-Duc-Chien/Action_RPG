@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 0}
   healthTextAnim: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!114 &4979891121828203900
 MonoBehaviour:
   m_ObjectHideFlags: 0
