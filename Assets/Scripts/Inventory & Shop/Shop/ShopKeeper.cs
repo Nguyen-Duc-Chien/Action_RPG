@@ -54,7 +54,7 @@ public class ShopKeeper : MonoBehaviour
             }
             else if (Input.GetButtonDown("Cancel"))
             {
-                Debug.Log("Button pressed once more! Shop closed!");
+                Debug.Log("Closed!");
                 Time.timeScale = 1; // Resume the game when the shop is closed
                 currentShopKeeper = null; // Clear the current shopkeeper reference
                 isShopOpen = false;
@@ -64,7 +64,6 @@ public class ShopKeeper : MonoBehaviour
                 shopCanvasGroup.interactable = false;
 
                 shopkeeperCam.gameObject.SetActive(false);
-
             }
         }
     }
