@@ -12,6 +12,7 @@ public class ExpManager : MonoBehaviour
     public Slider expSlider;
     public TMP_Text currentLevelText;
 
+
     public static event Action<int> OnLevelUp;
 
     private void Start()
@@ -38,7 +39,7 @@ public class ExpManager : MonoBehaviour
     public void GainExperience(int amount)
     {
         currentExp += amount;
-        if(currentExp >= expToLevel)
+        if (currentExp >= expToLevel)
         {
             LevelUp();
         }

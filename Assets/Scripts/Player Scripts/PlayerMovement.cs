@@ -67,4 +67,17 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         isKnockedback = false;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Confiner"))
+        {
+            ConfinerFinder cameraFinder = FindAnyObjectByType<ConfinerFinder>();
+
+            if (cameraFinder != null)
+            {
+                cameraFinder.UpdateCameraBounds(other);
+            }
+        }
+    }
 }
