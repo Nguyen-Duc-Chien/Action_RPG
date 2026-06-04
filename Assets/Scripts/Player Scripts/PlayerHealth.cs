@@ -67,17 +67,14 @@ public class PlayerHealth : MonoBehaviour
     public void MainMenuButton()
     {
         Debug.Log("Main Menu button clicked — restarting run or reloading scene.");
-        // Unpause before restarting
         Time.timeScale = 1f;
 
-        // Prefer GameManager restart if available
         if (GameManager.Instance != null)
         {
             GameManager.Instance.RestartRun();
             return;
         }
 
-        // Fallback: reset health and reload current scene
         StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
         UpdateHealthUI();
         transform.position = startPosition;

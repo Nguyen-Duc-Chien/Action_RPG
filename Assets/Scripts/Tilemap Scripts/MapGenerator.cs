@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class MapGenerator : MonoBehaviour
         firstRoom.name = "Starting_Room";
         occupiedPositions.Add(currentPos);
         if (firstRoom.GetComponent<RoomWalls>()) spawnedRooms.Add(firstRoom.GetComponent<RoomWalls>());
+        LinkSpikeToPlayer(firstRoom);
 
         // 2. Generate the rest of the rooms
         for (int i = 1; i < totalRoomsToSpawn; i++)
@@ -45,6 +47,7 @@ public class MapGenerator : MonoBehaviour
 
             GameObject newRoom = Instantiate(roomPrefabs[randomIndex], new Vector3(nextPos.x, nextPos.y, 0), Quaternion.identity);
             newRoom.name = "Room_" + i;
+            LinkSpikeToPlayer(newRoom);
 
             RoomWalls roomWallComponent = newRoom.GetComponent<RoomWalls>();
             if (roomWallComponent != null)
@@ -61,6 +64,22 @@ public class MapGenerator : MonoBehaviour
         }
         CheckAndFixWalls();
         Debug.Log("Spawned " + totalRoomsToSpawn + " random rooms!");
+    }
+    void LinkSpikeToPlayer(GameObject roomObject)
+    {
+        Tilemap[] roomTilemaps = roomObject.GetComponentsInChildren<Tilemap>();
+        foreach (Tilemap tm in roomTilemaps)
+        {
+            if (tm.gameObject.name == "Spikes_Trap")
+            {
+                PlayerSpikeHandler playerSpikeHandler = FindAnyObjectByType<PlayerSpikeHandler>();
+                if (playerSpikeHandler != null)
+                {
+                    playerSpikeHandler.AddSpikeTilemap(tm);
+                }
+                break;
+            }
+        }
     }
     void CheckAndFixWalls()
     {

@@ -15,7 +15,7 @@ public class StatsManager : MonoBehaviour
     public float stunTime;
 
     [Header("Movement Stats")]
-    public int speed;
+    public float speed;
 
     [Header("Health Stats")]
     public int maxHealth;
