@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isKnockedback == false)
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
             if (horizontal > 0 && transform.localScale.x < 0 ||
                 horizontal < 0 && transform.localScale.x > 0)
@@ -41,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
             anim.SetFloat("horizontal", Mathf.Abs(horizontal));
             anim.SetFloat("vertical", Mathf.Abs(vertical));
 
-            rb.linearVelocity = new Vector2(horizontal, vertical) * StatsManager.Instance.speed;
+            float moveH = Input.GetAxis("Horizontal");
+            float moveV = Input.GetAxis("Vertical");
+            rb.linearVelocity = new Vector2(moveH, moveV) * StatsManager.Instance.speed;
         }
     }
 

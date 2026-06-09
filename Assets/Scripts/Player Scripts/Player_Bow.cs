@@ -55,10 +55,30 @@ public class Player_Bow : MonoBehaviour
 
     public void Shoot()
     {
-        if(shootTimer <= 0)
+        if (shootTimer <= 0)
         {
-            Arrow arrow = Instantiate(arrowPrefab, launchPoint.position, Quaternion.identity).GetComponent<Arrow>();
-            arrow.direction = aimDirection;
+            if (aimDirection == Vector2.zero || (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0))
+            {
+                aimDirection = new Vector2(playerMovement.facingDirection, 0f);
+            }
+
+            GameObject arrowObj = Instantiate(arrowPrefab, launchPoint.position, Quaternion.identity);
+            Arrow arrow = arrowObj.GetComponent<Arrow>();
+
+            if (arrow != null)
+            {
+                arrow.owner = ArrowOwner.Player; 
+                arrow.direction = aimDirection;
+                arrow.speed = 12f; 
+                arrow.damage = StatsManager.Instance.meleeDamage; 
+                arrow.knockbackForce = StatsManager.Instance.knockbackForce;
+                arrow.knockbackTime = StatsManager.Instance.knockbackTime;
+                arrow.stunTime = StatsManager.Instance.stunTime;
+
+                arrow.targetLayer = LayerMask.GetMask("Enemy");
+                arrow.obstacleLayer = LayerMask.GetMask("Default"); 
+            }
+
             shootTimer = shootCooldown;
         }
         anim.SetBool("isShooting", false);

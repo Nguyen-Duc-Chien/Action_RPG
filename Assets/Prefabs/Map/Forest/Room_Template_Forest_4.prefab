@@ -11815,11 +11815,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 11.095022, y: -7.437399}
-      - {x: -3.5843544, y: -7.460038}
-      - {x: -3.6704988, y: -29.246128}
-      - {x: 28.305199, y: -29.26252}
-      - {x: 28.340893, y: -7.4696493}
+    - - {x: 11.088999, y: -7.3681192}
+      - {x: -3.5975056, y: -7.369301}
+      - {x: -3.599761, y: -29.369919}
+      - {x: 28.399517, y: -29.368628}
+      - {x: 28.401134, y: -7.370249}
   m_UseDelaunayMesh: 0
 --- !u!1 &3130566707643126558
 GameObject:
@@ -14063,7 +14063,7 @@ Tilemap:
       - {fileID: 1961130875, guid: 98b634c5bda02cb4793b7def02a4d7c0, type: 3}
       - {fileID: -414539978, guid: 98b634c5bda02cb4793b7def02a4d7c0, type: 3}
       - {fileID: 1607274471, guid: 98b634c5bda02cb4793b7def02a4d7c0, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 10, y: 9, z: 0}
@@ -14735,7 +14735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3469599765405090124
 Transform:
   m_ObjectHideFlags: 0
@@ -16128,7 +16128,7 @@ Tilemap:
       - {fileID: -941912421, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
       - {fileID: -1322463304, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
       - {fileID: 253766796, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 13, y: -13, z: 0}
@@ -16518,7 +16518,7 @@ Tilemap:
       - {fileID: 572616520, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
       - {fileID: 1632187082, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
       - {fileID: -1290683721, guid: 39e7200011cf20a49a8231ac6d4e9af8, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -17, y: 4, z: 0}

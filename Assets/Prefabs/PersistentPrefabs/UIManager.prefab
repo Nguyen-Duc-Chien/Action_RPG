@@ -9629,14 +9629,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsUI: {fileID: 6217761696609157788}
   healthText: {fileID: 0}
-  damage: 1
-  weaponRange: 0.7
+  meleeDamage: 2
+  rangeDamage: 1
+  weaponRange: 0.2
   knockbackForce: 20
   knockbackTime: 0.15
   stunTime: 0.2
-  speed: 10
-  maxHealth: 5
-  currentHealth: 5
+  speed: 5
+  maxHealth: 20
+  currentHealth: 20
 --- !u!1 &7585345424304941021
 GameObject:
   m_ObjectHideFlags: 0

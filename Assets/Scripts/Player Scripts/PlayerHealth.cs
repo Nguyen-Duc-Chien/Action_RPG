@@ -28,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
+        Debug.Log("Changing health by: " + amount);
         StatsManager.Instance.currentHealth += amount;
 
         if (StatsManager.Instance.currentHealth < 0)

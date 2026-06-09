@@ -8,7 +8,8 @@ public class StatsManager : MonoBehaviour
     public TMP_Text healthText;
 
     [Header("Combat Stats")]
-    public int damage;
+    public int meleeDamage;
+    public int rangeDamage;
     public float weaponRange;
     public float knockbackForce;
     public float knockbackTime;
@@ -46,6 +47,18 @@ public class StatsManager : MonoBehaviour
     public void UpdateSpeed(int amount)
     {
         speed += amount;
+        statsUI.UpdateAllStats();
+    }
+
+    public void UpdateMeleeDamage(int amount)
+    {
+        meleeDamage += amount;
+        statsUI.UpdateAllStats();
+    }
+
+    public void UpdateRangeDamage(int amount)
+    {
+        rangeDamage += amount;
         statsUI.UpdateAllStats();
     }
 }

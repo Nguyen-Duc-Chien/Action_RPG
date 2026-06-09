@@ -126,4 +126,5 @@ public enum EnemyState
     Chasing,
     Attacking,
     Knockback,
+    Retreating
 }
