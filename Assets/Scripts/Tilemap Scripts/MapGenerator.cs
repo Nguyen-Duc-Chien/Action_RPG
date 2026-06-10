@@ -54,6 +54,12 @@ public class MapGenerator : MonoBehaviour
             {
                 occupiedPositions.Add(nextPos);
                 spawnedRooms.Add(roomWallComponent);
+
+                RoomEnemySpawner spawner = newRoom.GetComponent<RoomEnemySpawner>();
+                if (spawner != null)
+                {
+                    spawner.ExecuteSpawning();
+                }
             }
             else
             {

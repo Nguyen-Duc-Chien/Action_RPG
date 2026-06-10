@@ -9632,7 +9632,7 @@ MonoBehaviour:
   meleeDamage: 2
   rangeDamage: 1
   weaponRange: 0.2
-  knockbackForce: 20
+  knockbackForce: 8
   knockbackTime: 0.15
   stunTime: 0.2
   speed: 5

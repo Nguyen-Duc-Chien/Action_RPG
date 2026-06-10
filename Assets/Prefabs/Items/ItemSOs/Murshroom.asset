@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21742b7c07c35904c96b5c6476d03cf5, type: 3}
+  m_Name: Murshroom
+  m_EditorClassIdentifier: 
+  itemName: Mushroom
+  itemDescription: It's an item... It mushes?
+  icon: {fileID: -64693675, guid: dba476cb76f15af4ea432a3cbf8d9370, type: 3}
+  isGold: 0
+  currentHealth: 5
+  maxHealth: 0
+  speed: 2
+  damage: 1
+  duration: 2

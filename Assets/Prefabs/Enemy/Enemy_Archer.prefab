@@ -239,10 +239,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Ranged_Movement
   speed: 2.5
+  retreatSpeedMultiplier: 0.6
   attackRange: 5
   retreatRange: 3
   playerDetectionRange: 6
-  attackCooldown: 2
+  attackCooldown: 1.5
   detectionPoint: {fileID: 1940313452847248836}
   playerLayer:
     serializedVersion: 2
@@ -263,7 +264,7 @@ MonoBehaviour:
   firePoint: {fileID: 1452898382268155680}
   damage: 3
   arrowSpeed: 6
-  knockbackForce: 12
+  knockbackForce: 6
   stunTime: 0.2
   lifeSpawn: 2
   targetLayer:
@@ -281,7 +282,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d49f0410ee8d04c9cd285eee3e209c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Health
-  expReward: 3
+  expReward: 4
+  genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
+  lootTable:
+  - itemSO: {fileID: 11400000, guid: 566ff570abe8fe94ca5d2beb021d1d59, type: 2}
+    dropChance: 40
+    quantityTiers:
+    - amount: 3
+      rollChance: 10
+    - amount: 2
+      rollChance: 30
+    - amount: 1
+      rollChance: 60
+  - itemSO: {fileID: 11400000, guid: 09261d1b6e6dcf143a35e96540053c1e, type: 2}
+    dropChance: 85
+    quantityTiers:
+    - amount: 2
+      rollChance: 30
+    - amount: 1
+      rollChance: 70
+  - itemSO: {fileID: 11400000, guid: ea808577256e1e9419e2d73084814b62, type: 2}
+    dropChance: 60
+    quantityTiers:
+    - amount: 2
+      rollChance: 20
+    - amount: 1
+      rollChance: 80
   currentHealth: 3
   maxHealth: 3
 --- !u!114 &6786733013768587021

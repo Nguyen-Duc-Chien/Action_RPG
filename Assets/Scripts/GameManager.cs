@@ -19,17 +19,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null && Instance != this)
         {
             CleanUpAndDestroy();
             return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            MarkPersistentObjects();
-        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        MarkPersistentObjects();
     }
 
     private void MarkPersistentObjects()
@@ -60,23 +58,40 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        // Destroy persistent objects (if any)
-        if (persistentObjects != null)
-        {
-            foreach (GameObject obj in persistentObjects)
-            {
-                if (obj != null)
-                    Destroy(obj);
-            }
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        // Destroy this GameManager so the scene can create a fresh one if present in the scene
-        Destroy(gameObject);
-
-        // Load the configured start scene (fallback to scene index 0 when not set)
         if (!string.IsNullOrEmpty(startSceneName))
             SceneManager.LoadScene(startSceneName);
         else
             SceneManager.LoadScene(0);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+
+        if (playerHealth != null)
+        {
+            Vector3 targetSpawnPos = Vector3.zero;
+            GameObject spawnPointObj = GameObject.Find("SpawnPoint");
+
+            if (spawnPointObj != null)
+            {
+                targetSpawnPos = spawnPointObj.transform.position;
+                Debug.Log("Found spawnPoint at: " + targetSpawnPos);
+            }
+            else
+            {
+                Debug.LogWarning("There isn't GameObject called 'SpawnPoint' in this Scene! Spawn at (0,0,0)");
+            }
+
+            playerHealth.ResetPlayer(targetSpawnPos);
+        }
+        else
+        {
+            Debug.LogWarning("Not found PlayerHealth to Reset!");
+        }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

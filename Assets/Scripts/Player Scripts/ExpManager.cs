@@ -39,7 +39,8 @@ public class ExpManager : MonoBehaviour
     public void GainExperience(int amount)
     {
         currentExp += amount;
-        if (currentExp >= expToLevel)
+
+        while (currentExp >= expToLevel)
         {
             LevelUp();
         }
@@ -49,9 +50,10 @@ public class ExpManager : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        currentExp -= expToLevel;
+        currentExp -= expToLevel; 
         expToLevel = Mathf.RoundToInt(expToLevel * expGrowthMultiplier);
-        OnLevelUp?.Invoke(1);
+
+        OnLevelUp?.Invoke(level);
     }
 
     public void UpdateUI()

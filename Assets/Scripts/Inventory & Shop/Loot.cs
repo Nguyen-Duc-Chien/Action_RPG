@@ -21,11 +21,13 @@ public class Loot : MonoBehaviour
             return;*/
     }
 
-    public void Initialize(ItemSO itemSO, int quantity)
+    public void Initialize(ItemSO itemSO, int quantity, bool startReadyToPickUp = false)
     {
         this.itemSO = itemSO;
         this.quantity = quantity;
-        canBePickedUp = false;
+
+        canBePickedUp = startReadyToPickUp;
+
         UpdateAppearance();
     }
 

@@ -4,9 +4,11 @@ public class Enemy_Ranged_Movement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed = 2.5f;
+    [Tooltip("Smaller than 1 so that players can reach easily.")]
+    public float retreatSpeedMultiplier = 0.6f;
     public float attackRange = 6f;
     // Distance at which the enemy will start retreating if the player gets too close
-    public float retreatRange = 3f; 
+    public float retreatRange = 3f;
     public float playerDetectionRange = 9f;
     public float attackCooldown = 2f;
 
@@ -46,7 +48,7 @@ public class Enemy_Ranged_Movement : MonoBehaviour
             }
             else if (enemyState == EnemyState.Retreating)
             {
-                Retreat(); 
+                Retreat();
             }
             else if (enemyState == EnemyState.Idle)
             {
@@ -69,8 +71,7 @@ public class Enemy_Ranged_Movement : MonoBehaviour
         // Opposite direction to the player
         Vector2 direction = (transform.position - player.position).normalized;
 
-        // Multiply speed by 1.2 to make the enemy retreat faster than it chases, creating a more dynamic kiting behavior
-        rb.linearVelocity = direction * (speed * 1.2f);
+        rb.linearVelocity = direction * (speed * retreatSpeedMultiplier);
     }
 
     void HandleFlip()
@@ -101,7 +102,7 @@ public class Enemy_Ranged_Movement : MonoBehaviour
 
             if (distanceToPlayer < currentRetreatRange)
             {
-                ChangeState(EnemyState.Retreating); 
+                ChangeState(EnemyState.Retreating);
             }
             else if (distanceToPlayer <= attackRange)
             {
@@ -109,7 +110,7 @@ public class Enemy_Ranged_Movement : MonoBehaviour
             }
             else
             {
-                ChangeState(EnemyState.Chasing); 
+                ChangeState(EnemyState.Chasing);
             }
 
             if (distanceToPlayer <= attackRange && attackCooldownTimer <= 0)
@@ -119,7 +120,7 @@ public class Enemy_Ranged_Movement : MonoBehaviour
                 anim.SetTrigger("attackTrigger");
             }
 
-            HandleFlip(); 
+            HandleFlip();
         }
         else
         {

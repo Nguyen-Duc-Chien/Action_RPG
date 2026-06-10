@@ -68,10 +68,12 @@ public class PlayerHealth : MonoBehaviour
     public void MainMenuButton()
     {
         Debug.Log("Main Menu button clicked — restarting run or reloading scene.");
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; 
 
         if (GameManager.Instance != null)
         {
+            if (gameOverPanel != null) gameOverPanel.SetActive(false);
+
             GameManager.Instance.RestartRun();
             return;
         }
@@ -87,5 +89,22 @@ public class PlayerHealth : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
+    }
+
+    public void ResetPlayer(Vector3 spawnPosition)
+    {
+        StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
+        UpdateHealthUI();
+
+        transform.position = spawnPosition;
+        startPosition = spawnPosition;
+
+        if (expManager != null)
+            expManager.currentExp = 0;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        Debug.Log("Player stats reset and teleported to Spawn Point: " + spawnPosition);
     }
 }
