@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 8075342020842006986}
   - component: {fileID: 3370349443817691557}
   - component: {fileID: 3232569390245725203}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5748,6 +5748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &272830966554705992
@@ -6469,6 +6471,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &8669630228509523718
@@ -6925,7 +6929,7 @@ GameObject:
   - component: {fileID: 8183314317139817160}
   - component: {fileID: 6406594826593049906}
   - component: {fileID: 7836729051294249519}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision-High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9893,7 +9897,7 @@ GameObject:
   - component: {fileID: 1546423265937557199}
   - component: {fileID: 1558256676188366096}
   - component: {fileID: 6892739066388325740}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision-Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21169,6 +21173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &6239093176147962346
@@ -22194,6 +22200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &5719406865199581375
@@ -22723,6 +22731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6808433577013198947}
   - component: {fileID: 7171842664375231945}
+  - component: {fileID: 6588019090801978876}
   m_Layer: 0
   m_Name: Room_Template_Dungeon_4
   m_TagString: Untagged
@@ -22775,6 +22784,21 @@ MonoBehaviour:
   wallDown: {fileID: 3864292614227056621}
   wallLeft: {fileID: 7703135163747718095}
   wallRight: {fileID: 2027237760390912241}
+--- !u!114 &6588019090801978876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8279496780662168214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63eb63c864ae73a429562678d17139d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomEnemySpawner
+  enemyData: {fileID: 11400000, guid: a9874fc33d3d752488407ce31e9a7804, type: 2}
+  maxEnemiesInThisRoom: 5
+  respawnChance: 50
 --- !u!1 &8323604914824734601
 GameObject:
   m_ObjectHideFlags: 0
@@ -23702,6 +23726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &2127060550017541808
@@ -24023,6 +24049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expReward: 3
+  genericLootPrefab: {fileID: 0}
+  lootTable: []
   currentHealth: 5
   maxHealth: 5
 --- !u!114 &1765807806104529778

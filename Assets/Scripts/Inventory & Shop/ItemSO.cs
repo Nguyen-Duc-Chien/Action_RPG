@@ -11,10 +11,11 @@ public class ItemSO : ScriptableObject
     public int stackSize = 16;
 
     [Header("Stats")]
-    public int currentHealth;
-    public int maxHealth;
-    public int speed;
-    public int damage;
+    public float currentHealth;
+    public float maxHealth;
+    public float speed;
+    public float meleeDamage;
+    public float rangeDamage;
 
     [Header("For Temporary Items")]
     public float duration;

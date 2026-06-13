@@ -2002,7 +2002,7 @@ Transform:
   m_GameObject: {fileID: 2289815630692910864}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1134.4325, y: 523.20197, z: 0}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9631,11 +9631,11 @@ MonoBehaviour:
   healthText: {fileID: 0}
   meleeDamage: 2
   rangeDamage: 1
-  weaponRange: 0.2
+  weaponRange: 0.3
   knockbackForce: 8
   knockbackTime: 0.15
   stunTime: 0.2
-  speed: 5
+  speed: 3
   maxHealth: 20
   currentHealth: 20
 --- !u!1 &7585345424304941021

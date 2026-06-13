@@ -4,8 +4,9 @@ public class Player_Bow : MonoBehaviour
 {
     public Transform launchPoint;
     public GameObject arrowPrefab;
-
     public PlayerMovement playerMovement;
+
+    public Collider2D playerCollider;
 
     private Vector2 aimDirection = Vector2.right;
 
@@ -67,16 +68,22 @@ public class Player_Bow : MonoBehaviour
 
             if (arrow != null)
             {
-                arrow.owner = ArrowOwner.Player; 
+                arrow.owner = ArrowOwner.Player;
                 arrow.direction = aimDirection;
-                arrow.speed = 12f; 
-                arrow.damage = StatsManager.Instance.meleeDamage; 
+                arrow.speed = 12f;
+                arrow.damage = StatsManager.Instance.rangeDamage;
                 arrow.knockbackForce = StatsManager.Instance.knockbackForce;
                 arrow.knockbackTime = StatsManager.Instance.knockbackTime;
                 arrow.stunTime = StatsManager.Instance.stunTime;
 
                 arrow.targetLayer = LayerMask.GetMask("Enemy");
-                arrow.obstacleLayer = LayerMask.GetMask("Default"); 
+                //arrow.obstacleLayer = LayerMask.GetMask("Obstacles");
+
+                Collider2D arrowCollider = arrowObj.GetComponent<Collider2D>();
+                if (playerCollider != null && arrowCollider != null)
+                {
+                    Physics2D.IgnoreCollision(arrowCollider, playerCollider, true);
+                }
             }
 
             shootTimer = shootCooldown;

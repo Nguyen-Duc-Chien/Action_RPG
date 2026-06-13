@@ -26,13 +26,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void ChangeHealth(int amount)
+    public void ChangeHealth(float amount)
     {
-        Debug.Log("Changing health by: " + amount);
-        StatsManager.Instance.currentHealth += amount;
-
-        if (StatsManager.Instance.currentHealth < 0)
-            StatsManager.Instance.currentHealth = 0;
+        //Debug.Log("Changing health by: " + amount);
+        float targetHealth = StatsManager.Instance.currentHealth + amount;
+        StatsManager.Instance.currentHealth = Mathf.Clamp(targetHealth, 0f, StatsManager.Instance.maxHealth);
 
         if (healthTextAnim != null) healthTextAnim.Play("TextUpdate");
         UpdateHealthUI();
@@ -45,9 +43,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateHealthUI()
     {
+        if (healthSlider == null) return;
+
         healthSlider.maxValue = StatsManager.Instance.maxHealth;
         healthSlider.value = StatsManager.Instance.currentHealth;
         healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
+
+        //Debug.Log($"[UI Check] Slider Value: {healthSlider.value}, Text: {healthText.text}", healthSlider);
     }
 
     private void Die()
@@ -67,28 +69,28 @@ public class PlayerHealth : MonoBehaviour
 
     public void MainMenuButton()
     {
-        Debug.Log("Main Menu button clicked — restarting run or reloading scene.");
-        Time.timeScale = 1f; 
+        //Debug.Log("Main Menu button clicked — restarting run or reloading scene.");
+        Time.timeScale = 1f;
 
-        if (GameManager.Instance != null)
+        if (StatsManager.Instance != null)
         {
-            if (gameOverPanel != null) gameOverPanel.SetActive(false);
-
-            GameManager.Instance.RestartRun();
-            return;
+            StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
         }
-
-        StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
-        UpdateHealthUI();
-        transform.position = startPosition;
+        UpdateHealthUI(); 
 
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(false);
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RestartRun();
+            return;
+        }
 
+        transform.position = startPosition;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void ResetPlayer(Vector3 spawnPosition)

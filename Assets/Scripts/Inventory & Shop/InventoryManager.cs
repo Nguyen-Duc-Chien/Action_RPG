@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemSO itemSO, int quantity)
     {
-        Debug.Log($"Added {quantity} x {itemSO.itemName} to inventory.");
+        //Debug.Log($"Added {quantity} x {itemSO.itemName} to inventory.");
         if (itemSO.isGold)
         {
             gold += quantity;
@@ -72,7 +72,7 @@ public class InventoryManager : MonoBehaviour
 
         if(quantity > 0)
         {
-            Debug.LogWarning($"Not enough inventory space to add {quantity} x {itemSO.itemName}.");
+            //Debug.LogWarning($"Not enough inventory space to add {quantity} x {itemSO.itemName}.");
             DropLoot(itemSO, quantity);
         }
     }

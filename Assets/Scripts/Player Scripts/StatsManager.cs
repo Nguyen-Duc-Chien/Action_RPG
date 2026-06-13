@@ -8,8 +8,8 @@ public class StatsManager : MonoBehaviour
     public TMP_Text healthText;
 
     [Header("Combat Stats")]
-    public int meleeDamage;
-    public int rangeDamage;
+    public float meleeDamage;
+    public float rangeDamage;
     public float weaponRange;
     public float knockbackForce;
     public float knockbackTime;
@@ -19,8 +19,8 @@ public class StatsManager : MonoBehaviour
     public float speed;
 
     [Header("Health Stats")]
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
 
     private void Awake()
     {
@@ -30,13 +30,13 @@ public class StatsManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void UpdateMaxHealth(int amount)
+    public void UpdateMaxHealth(float amount)
     {
         maxHealth += amount;
         healthText.text = "HP: " + currentHealth + "/ " + maxHealth;
     }
 
-    public void UpdateHealth(int amount)
+    public void UpdateHealth(float amount)
     {
         currentHealth += amount;
         if (currentHealth > maxHealth)
@@ -44,19 +44,19 @@ public class StatsManager : MonoBehaviour
         healthText.text = "HP: " + currentHealth + "/ " + maxHealth;
     }
 
-    public void UpdateSpeed(int amount)
+    public void UpdateSpeed(float amount)
     {
         speed += amount;
         statsUI.UpdateAllStats();
     }
 
-    public void UpdateMeleeDamage(int amount)
+    public void UpdateMeleeDamage(float amount)
     {
         meleeDamage += amount;
         statsUI.UpdateAllStats();
     }
 
-    public void UpdateRangeDamage(int amount)
+    public void UpdateRangeDamage(float amount)
     {
         rangeDamage += amount;
         statsUI.UpdateAllStats();

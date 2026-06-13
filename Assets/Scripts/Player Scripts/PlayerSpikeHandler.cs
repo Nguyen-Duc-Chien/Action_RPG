@@ -25,7 +25,7 @@ public class PlayerSpikeHandler : MonoBehaviour
         if (newSpikeTilemap != null && !spikeTilemaps.Contains(newSpikeTilemap))
         {
             spikeTilemaps.Add(newSpikeTilemap);
-            Debug.Log($"[Spike Handler] Successfully connected Spikes from: {newSpikeTilemap.gameObject.transform.parent.parent.name}");
+            //Debug.Log($"[Spike Handler] Successfully connected Spikes from: {newSpikeTilemap.gameObject.transform.parent.parent.name}");
         }
     }
 
@@ -67,9 +67,9 @@ public class PlayerSpikeHandler : MonoBehaviour
             if (!isPlayerOnSpikes)
             {
                 isPlayerOnSpikes = true;
-                Debug.Log("Player ENTERED spikes - Slowing down!");
+                //Debug.Log("Player ENTERED spikes - Slowing down!");
 
-                StatsManager.Instance.speed = 2.5f;
+                StatsManager.Instance.speed = StatsManager.Instance.speed / 2;
 
                 TakeSpikeDamage();
             }
@@ -79,9 +79,9 @@ public class PlayerSpikeHandler : MonoBehaviour
             if (isPlayerOnSpikes)
             {
                 isPlayerOnSpikes = false;
-                Debug.Log("Player EXITED spikes - Restoring speed!");
+                //Debug.Log("Player EXITED spikes - Restoring speed!");
 
-                StatsManager.Instance.speed = 5f;
+                StatsManager.Instance.speed = StatsManager.Instance.speed * 2;
             }
         }
     }

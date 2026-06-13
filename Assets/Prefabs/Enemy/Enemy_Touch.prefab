@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7727330500347567421}
   m_Layer: 9
   m_Name: Enemy_Touch
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,10 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68239f27a02bab94b87d2caa7f98f1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 2
   attackRange: 1.2
   attackCooldown: 1
-  playerDetectionRange: 5
+  playerDetectionRange: 4
   detectionPoint: {fileID: 7588090995743090720}
   playerLayer:
     serializedVersion: 2
@@ -374,4 +374,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 2.2775736, y: 0}
-  m_Radius: 5
+  m_Radius: 4

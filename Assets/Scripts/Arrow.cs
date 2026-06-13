@@ -17,10 +17,14 @@ public class Arrow : MonoBehaviour
     public SpriteRenderer sr;
     public Sprite buriedSprite;
 
-    public int damage;
+    public float damage;
     public float knockbackForce;
     public float knockbackTime;
     public float stunTime;
+    void Awake()
+    {
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -37,6 +41,9 @@ public class Arrow : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        if (owner == ArrowOwner.Player && other.CompareTag("Player")) return;
+        if (owner == ArrowOwner.Enemy && other.CompareTag("Enemy")) return;
+
         if ((obstacleLayer.value & (1 << other.gameObject.layer)) > 0)
         {
             AttachToTarget(other.gameObject.transform);
@@ -45,17 +52,24 @@ public class Arrow : MonoBehaviour
 
         if ((targetLayer.value & (1 << other.gameObject.layer)) > 0)
         {
-            if (owner == ArrowOwner.Player)
-            {
-                other.gameObject.GetComponent<Enemy_Health>()?.ChangeHealth(-damage);
-                other.gameObject.GetComponent<Enemy_Knockback>()?.Knockback(transform, knockbackForce, knockbackTime, stunTime);
-            }
-            else if (owner == ArrowOwner.Enemy)
+            if (owner == ArrowOwner.Enemy)
             {
                 other.gameObject.GetComponent<PlayerHealth>()?.ChangeHealth(-damage);
                 other.gameObject.GetComponent<PlayerMovement>()?.Knockback(transform, knockbackForce, stunTime);
             }
-
+            else if (owner == ArrowOwner.Player)
+            {
+                Enemy_Health enemyHealth = other.gameObject.GetComponent<Enemy_Health>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.ChangeHealth(-damage);
+                }
+                Enemy_Knockback enemyKnockback = other.gameObject.GetComponent<Enemy_Knockback>();
+                if (enemyKnockback != null)
+                {
+                    enemyKnockback.Knockback(transform, knockbackForce, knockbackTime, stunTime);
+                }
+            }
             AttachToTarget(other.gameObject.transform);
         }
     }

@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
     [Header("Level Progress Config")]
-    public int targetKillsToWin = 3; 
+    public int targetKillsToWin = 0; 
     public int currentKills;
     private bool isPortalOpened = false;
 
     [Header("References")]
-    [SerializeField] private GameObject nextLevelPortal; 
+    [SerializeField] private GameObject nextLevelPortal;
+    [SerializeField] private Slider progressSlider;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         if (nextLevelPortal != null) nextLevelPortal.SetActive(false);
+        UpdateProgressUI();     // Initialize UI at the start
     }
 
     public void RegisterSpawnedEnemy()
@@ -38,17 +41,29 @@ public class LevelManager : MonoBehaviour
         if (isPortalOpened) return; 
 
         targetKillsToWin++;
-        Debug.Log($"<color=cyan>[LevelManager]</color> Enemy is coming! Target kills to win: {targetKillsToWin}");
+
+        UpdateProgressUI();     // Update Max Value when new enemy is registered
     }
 
     private void HandleMonsterDefeated(int exp)
     {
         currentKills++;
-        Debug.Log($"<color=green>[LevelManager]</color> One downed! Process: {currentKills}/{targetKillsToWin}");
+        //Debug.Log($"<color=green>[LevelManager]</color> One downed! Process: {currentKills}/{targetKillsToWin}");
+
+        UpdateProgressUI();     // Update current value when an enemy is defeated
 
         if (currentKills >= targetKillsToWin && !isPortalOpened)
         {
             OpenNextLevelPortal();
+        }
+    }
+
+    private void UpdateProgressUI()
+    {
+        if (progressSlider != null)
+        {
+            progressSlider.maxValue = targetKillsToWin;
+            progressSlider.value = currentKills;
         }
     }
 

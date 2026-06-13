@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 1266420981693324247}
   m_Layer: 9
   m_Name: Enemy_Archer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2f3d2b59cadd64bb8cedf566001d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Ranged_Movement
-  speed: 2.5
+  speed: 2
   retreatSpeedMultiplier: 0.6
   attackRange: 5
   retreatRange: 3
@@ -248,6 +248,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &6840290119431979127
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,12 @@ public class MapGenerator : MonoBehaviour
         if (firstRoom.GetComponent<RoomWalls>()) spawnedRooms.Add(firstRoom.GetComponent<RoomWalls>());
         LinkSpikeToPlayer(firstRoom);
 
+        RoomEnemySpawner startSpawner = firstRoom.GetComponent<RoomEnemySpawner>();
+        if (startSpawner != null)
+        {
+            startSpawner.ExecuteSpawning();
+        }
+
         // 2. Generate the rest of the rooms
         for (int i = 1; i < totalRoomsToSpawn; i++)
         {
@@ -69,7 +75,14 @@ public class MapGenerator : MonoBehaviour
             }
         }
         CheckAndFixWalls();
-        Debug.Log("Spawned " + totalRoomsToSpawn + " random rooms!");
+        if (LevelManager.Instance != null)
+        {
+            Debug.Log($"[MapGenerator] Created {totalRoomsToSpawn} rooms! Total enemies: <color=yellow>{LevelManager.Instance.targetKillsToWin}</color>.");
+        }
+        else
+        {
+            Debug.Log($"Spawned {totalRoomsToSpawn} random rooms!");
+        }
     }
     void LinkSpikeToPlayer(GameObject roomObject)
     {

@@ -29,7 +29,8 @@ public class ShopInfo : MonoBehaviour
 
         List<string> stats = new List<string>();
         if (itemSO.currentHealth > 0) stats.Add("Health: " + itemSO.currentHealth.ToString());
-        if (itemSO.damage > 0) stats.Add("Damage: " + itemSO.damage.ToString());
+        if (itemSO.meleeDamage > 0) stats.Add("Melee Damage: " + itemSO.meleeDamage.ToString());
+        if (itemSO.rangeDamage > 0) stats.Add("Range Damage: " + itemSO.rangeDamage.ToString());
         if (itemSO.speed > 0) stats.Add("Speed: " + itemSO.speed.ToString());
         if (itemSO.duration > 0) stats.Add("Duration: " + itemSO.duration.ToString());
 

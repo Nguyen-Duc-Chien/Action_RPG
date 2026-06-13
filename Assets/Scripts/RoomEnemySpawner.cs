@@ -56,10 +56,22 @@ public class RoomEnemySpawner : MonoBehaviour
             {
                 GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity, transform);
                 activeEnemies.Add(enemy);
+
+                if (LevelManager.Instance != null)
+                {
+                    LevelManager.Instance.RegisterSpawnedEnemy();
+                }
             }
         }
 
-        Debug.Log($"{gameObject.name}: Spawned {activeEnemies.Count} enemies!");
+        /*if (LevelManager.Instance != null)
+        {
+            Debug.Log($"<color=cyan>[RoomSpawner]</color> {gameObject.name}: Spawned {activeEnemies.Count} enemies! | In total: {LevelManager.Instance.targetKillsToWin}");
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: Spawned {activeEnemies.Count} enemies!");
+        }*/
     }
 
     private void OnEnemyGlobalDie(int exp)
