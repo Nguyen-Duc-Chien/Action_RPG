@@ -58,7 +58,7 @@ public class Enemy_Health : MonoBehaviour
         {
             Die();
         }
-        Debug.Log("Enemy health changed by: " + amount + ", current health: " + currentHealth);
+        //Debug.Log("Enemy health changed by: " + amount + ", current health: " + currentHealth);
     }
 
     private void Die()

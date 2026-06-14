@@ -5,8 +5,13 @@ public class StatsUI : MonoBehaviour
 {
     public GameObject[] statsSlots;
     public CanvasGroup statsCanvas;
+    // Reference to the ToggleSkillTree script to check if the skill tree is open
+    public ToggleSkillTree toggleSkillTree;
 
     private bool statsOpen = false;
+
+    // Getter to check if the stats UI is currently open
+    public bool IsStatsOpen => statsOpen;
 
     public void Start()
     {
@@ -29,19 +34,26 @@ public class StatsUI : MonoBehaviour
                 Debug.Log("Stats UI closed!");
             }
             else
-            {// Open stats UI
+            {
+                if (toggleSkillTree != null && toggleSkillTree.IsSkillTreeOpen)
+                {
+                    Debug.Log("Cannot open Stats UI while Skill Tree is open!");
+                    return;
+                }
+
+                // Open stats UI -> Stop the game
                 Time.timeScale = 0;
                 UpdateAllStats();
                 statsCanvas.alpha = 1;
-                statsCanvas.blocksRaycasts = true; // Enable interaction when open
+                statsCanvas.blocksRaycasts = true;
                 statsOpen = true;
                 Debug.Log("Stats UI opened!");
             }
     }
 
-    public void UpdateDamage()
+    public void UpdateHealth()
     {
-        statsSlots[0].GetComponentInChildren<TMP_Text>().text = "Damage: " + StatsManager.Instance.meleeDamage;
+        statsSlots[0].GetComponentInChildren<TMP_Text>().text = "Health: " + StatsManager.Instance.currentHealth + "/" + StatsManager.Instance.maxHealth;
     }
 
     public void UpdateSpeed()
@@ -49,9 +61,22 @@ public class StatsUI : MonoBehaviour
         statsSlots[1].GetComponentInChildren<TMP_Text>().text = "Speed: " + StatsManager.Instance.speed;
     }
 
+    public void UpdateMeleeDamage()
+    {
+        statsSlots[2].GetComponentInChildren<TMP_Text>().text = "Melee Damage: " + StatsManager.Instance.meleeDamage;
+    }
+
+    public void UpdateRangeDamage()
+    {
+        statsSlots[3].GetComponentInChildren<TMP_Text>().text = "Range Damage: " + StatsManager.Instance.rangeDamage;
+    }
+
     public void UpdateAllStats()
     {
-        UpdateDamage();
+        UpdateHealth();
         UpdateSpeed();
+
+        UpdateMeleeDamage();
+        UpdateRangeDamage();
     }
 }

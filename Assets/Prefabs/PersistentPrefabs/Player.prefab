@@ -349,8 +349,9 @@ MonoBehaviour:
   arrowPrefab: {fileID: 7478499875519044494, guid: 17a7355ce00c1f940adc9e4ed3e79ab9, type: 3}
   playerMovement: {fileID: 9223232053489507773}
   playerCollider: {fileID: 8192028625019845009}
-  shootCooldown: 0.5
   anim: {fileID: 1507084950510301690}
+  shootCooldown: 0.5
+  autoAimRadius: 3
 --- !u!114 &4894775486020289458
 MonoBehaviour:
   m_ObjectHideFlags: 0

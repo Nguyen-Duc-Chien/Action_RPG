@@ -2501,6 +2501,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 615672072429969595, guid: 7ac1c2b809859764baf5915ae7d84fe9, type: 3}
+      propertyPath: autoAimRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 864427819740292730, guid: 7ac1c2b809859764baf5915ae7d84fe9, type: 3}
       propertyPath: m_Name
       value: Player
