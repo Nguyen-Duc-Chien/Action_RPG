@@ -213,7 +213,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 5613506565207598926}
-  skillSO: {fileID: 11400000, guid: a4e3435642ef2554f9fe160557dcb240, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 5120505422256258282}
+  skillSO: {fileID: 11400000, guid: 5c4ffe72a1f904c4286d96671c09032c, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 1781744064079643102}
@@ -356,7 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 8446146995265240787}
-  skillSO: {fileID: 11400000, guid: 3069f6440dd43b54baec602ae49a4124, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 75280376d31e70f48b0138b96e1ce842, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 1333259750327191488}
@@ -575,7 +578,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 1899244953416964835}
-  skillSO: {fileID: 11400000, guid: 1dc8708081212ad4bbc7ec4d3f36b5ba, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 74db9e66369024f46af47cbd7207c388, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 1205622010481010983}
@@ -909,7 +913,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954116943331714951}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -951,7 +955,7 @@ MonoBehaviour:
   - {fileID: 8773569032886549946}
   - {fileID: 7543749279193801604}
   pointsText: {fileID: 8317195112715846375}
-  availablePoints: 20
+  availablePoints: 100
 --- !u!114 &3389328522770012300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 1379075343450873616}
-  skillSO: {fileID: 11400000, guid: 50927bff8ed3bd64a9f3addffe87bb05, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 1162759689269712472}
+  skillSO: {fileID: 11400000, guid: 87b80fc6408c96f41a0ad36a0096ad87, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 705715235042205664}
@@ -1263,7 +1269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  m_Sprite: {fileID: 1413107988, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1749,7 +1755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 / 1
+  m_text: 0 / 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -1886,7 +1892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6920829028273540874, guid: bb4467a0485ce014a8dd8e244bdccd60, type: 3}
+  m_Sprite: {fileID: 216474097, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2109,7 +2115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 1824696189721130875}
-  skillSO: {fileID: 11400000, guid: 3069f6440dd43b54baec602ae49a4124, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: d9cc3461469d9704882800cf96be9ea2, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 377303154042084489}
@@ -2423,7 +2430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 6161704738003623970}
-  skillSO: {fileID: 11400000, guid: 544e327857bcc3e4a840d0259aecb9c9, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: ead9df15933cca040a6a08a787184528, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 4272140509483286928}
@@ -2570,7 +2578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6734237056663082788, guid: c223135b7d5e30641b00605b7f03c760, type: 3}
+  m_Sprite: {fileID: -1941471389, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2858,7 +2866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6734237056663082788, guid: c223135b7d5e30641b00605b7f03c760, type: 3}
+  m_Sprite: {fileID: 260497695, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3070,7 +3078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5237681894992149705, guid: 5cc4b9358703033469dc1929c925ad24, type: 3}
+  m_Sprite: {fileID: 1377582156, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3217,7 +3225,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 1708782719276329045}
-  skillSO: {fileID: 11400000, guid: 3cd1baa6f45b5c04fb6cb6ac2703ef71, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 5120505422256258282}
+  skillSO: {fileID: 11400000, guid: 25f0060d861db3843be9ee796c6ca58e, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 4462469868474713364}
@@ -3360,7 +3370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 6967618507345791869}
-  skillSO: {fileID: 11400000, guid: bd952149e25c370488648ee62185c6d2, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 6280c6d129dd79d4b987b60cd52fdfa1, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 4464081504624925647}
@@ -3507,7 +3518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 456767350700619442, guid: e4ef77896d906514998a8f1007fdd176, type: 3}
+  m_Sprite: {fileID: -2059908905, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3529,7 +3540,7 @@ GameObject:
   - component: {fileID: 3586107297814184046}
   - component: {fileID: 6662574878346663229}
   m_Layer: 0
-  m_Name: MagicTitle
+  m_Name: RangedTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3582,9 +3593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Magic
-
-'
+  m_text: Ranged
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -3934,7 +3943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 / 1
+  m_text: Locked
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -4295,7 +4304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4632131584819206428, guid: 17d749241eb222b4ba3dd20ee2bcc595, type: 3}
+  m_Sprite: {fileID: 463081351, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4442,7 +4451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 5423318984430363594}
-  skillSO: {fileID: 11400000, guid: b41f790721e46d74aad24fbd4e2fae54, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 0f03136d3fc45434d9c75ca66201e434, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 3927105625245634084}
@@ -4703,7 +4713,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 9138863315247965472}
   m_OnClick:
     m_PersistentCalls:
@@ -4720,10 +4730,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf550299c4677804db0eb30c40c85a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: a3a83946aeaf04f488312be15d1c0633, type: 2}
+  prerequisiteSkillSlots:
+  - {fileID: 2051320133260475504}
+  conflictingSkillSlots:
+  - {fileID: 1162759689269712472}
+  skillSO: {fileID: 11400000, guid: d840667b635c2184fbe73f586e9afdfe, type: 2}
   currentLevel: 0
-  isUnlocked: 1
+  isUnlocked: 0
   skillIcon: {fileID: 3964713878379552432}
   skillButton: {fileID: 3971096984190846716}
   skillLevelText: {fileID: 4932749417296422461}
@@ -4937,14 +4950,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 456767350700619442, guid: e4ef77896d906514998a8f1007fdd176, type: 3}
+  m_Sprite: {fileID: 1982423703, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4966,7 +4979,7 @@ GameObject:
   - component: {fileID: 1066191005158067899}
   - component: {fileID: 8290726293164497762}
   m_Layer: 0
-  m_Name: Magic Tree
+  m_Name: Ranged Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5246,7 +5259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: 5a7d94bfbe275a041bbb2883e3f88a8c, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 208e1795ae3113648961bee3f8ab992c, type: 2}
   currentLevel: 0
   isUnlocked: 1
   skillIcon: {fileID: 3123127637152642311}
@@ -5389,7 +5403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 6699654935104719766}
-  skillSO: {fileID: 11400000, guid: 8ac3eb6963bc6f449b4fcd9943fe5cd6, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 784ae286e51691b4681bac072c5cc8bf, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 3123352886654496422}
@@ -5536,7 +5551,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4632131584819206428, guid: 17d749241eb222b4ba3dd20ee2bcc595, type: 3}
+  m_Sprite: {fileID: 463081351, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5683,7 +5698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 6076923935258311319}
-  skillSO: {fileID: 11400000, guid: 8ac3eb6963bc6f449b4fcd9943fe5cd6, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 09864b087a7586c4ca523de0640c41ff, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 3238996756910336460}
@@ -6176,7 +6192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 2547755081497736352}
-  skillSO: {fileID: 11400000, guid: 8ac3eb6963bc6f449b4fcd9943fe5cd6, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: b4b2b8cfcbf4e9c47a70a1a5424cfb8e, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 2620915583167207629}
@@ -6319,7 +6336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 3190383713101482561}
-  skillSO: {fileID: 11400000, guid: 14d11676fea366a48ac90c986deec4eb, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: de247076808e7de41995315b40e22d86, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 2704423779837690488}
@@ -6912,7 +6930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: b5c3652c2c41f9841acfc3ba86c9c155, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 6e86739563b40864aa64106509994100, type: 2}
   currentLevel: 0
   isUnlocked: 1
   skillIcon: {fileID: 6650774158325016603}
@@ -6983,7 +7002,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4632131584819206428, guid: 17d749241eb222b4ba3dd20ee2bcc595, type: 3}
+  m_Sprite: {fileID: 463081351, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7205,7 +7224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: 8ac3eb6963bc6f449b4fcd9943fe5cd6, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 80ab9fccb38512d4f8f46bb3bab451e4, type: 2}
   currentLevel: 0
   isUnlocked: 1
   skillIcon: {fileID: 6003790291915118330}
@@ -7276,7 +7296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5237681894992149705, guid: 5cc4b9358703033469dc1929c925ad24, type: 3}
+  m_Sprite: {fileID: -383095652, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7298,7 +7318,7 @@ GameObject:
   - component: {fileID: 2008520569621339864}
   - component: {fileID: 3234673039526578659}
   m_Layer: 0
-  m_Name: CombatTitle
+  m_Name: MeleeTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7351,7 +7371,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Combat
+  m_text: 'Melee
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -8018,7 +8040,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 456767350700619442, guid: e4ef77896d906514998a8f1007fdd176, type: 3}
+  m_Sprite: {fileID: 1982423703, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8479,7 +8501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5237681894992149705, guid: 5cc4b9358703033469dc1929c925ad24, type: 3}
+  m_Sprite: {fileID: 1067185068, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8577,7 +8599,7 @@ GameObject:
   - component: {fileID: 377184658584881644}
   - component: {fileID: 3142717986479652804}
   m_Layer: 0
-  m_Name: Combat Tree
+  m_Name: Melee Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8707,7 +8729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6734237056663082788, guid: c223135b7d5e30641b00605b7f03c760, type: 3}
+  m_Sprite: {fileID: 260497695, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8919,7 +8941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 / 1
+  m_text: 0 / 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -9208,7 +9230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6920829028273540874, guid: bb4467a0485ce014a8dd8e244bdccd60, type: 3}
+  m_Sprite: {fileID: 216474097, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9283,7 +9305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 737231511072755166, guid: b2fdeab857f255b4d9853bade915c0e1, type: 3}
+  m_Sprite: {fileID: -383095652, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9358,7 +9380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6920829028273540874, guid: bb4467a0485ce014a8dd8e244bdccd60, type: 3}
+  m_Sprite: {fileID: -2059908905, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9657,7 +9679,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 5120505422256258282}
-  skillSO: {fileID: 11400000, guid: 7e42e8f5e0b16ca499dc4104b35c8435, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 1162759689269712472}
+  skillSO: {fileID: 11400000, guid: b1665db8e7fa4a545a4eae7d65d193fe, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 8976820177170279419}
@@ -9852,9 +9876,27 @@ MonoBehaviour:
   knockbackForce: 8
   knockbackTime: 0.15
   stunTime: 0.2
+  arrowKnockbackForce: 3
+  arrowKnockbackTime: 0.15
+  arrowStunTime: 0.1
   speed: 3
   maxHealth: 20
   currentHealth: 20
+  damageResistance: 0
+  hasLowHealthResistanceSkill: 0
+  isLowHealthResistanceActive: 0
+  hasHealthRegenSkill: 0
+  regenInterval: 5
+  regenAmount: 2
+  isBowUnlocked: 0
+  arrowSlowChance: 0
+  arrowSlowDuration: 2
+  arrowSlowAmount: 0.2
+  arrowFreezeChance: 0
+  arrowFreezeDuration: 1
+  arrowBurnChance: 0
+  arrowBurnDuration: 2
+  arrowBurnDamage: 1
 --- !u!1 &7585345424304941021
 GameObject:
   m_ObjectHideFlags: 0
@@ -10057,7 +10099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  m_Sprite: {fileID: 1091275553, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10284,7 +10326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6920829028273540874, guid: bb4467a0485ce014a8dd8e244bdccd60, type: 3}
+  m_Sprite: {fileID: -2059908905, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10821,7 +10863,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 2051320133260475504}
-  skillSO: {fileID: 11400000, guid: d0269237b35a61749a74fc2749fe0fe7, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: 47fc7f14666333b4b927b930cc58405f, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 7661106689215264953}
@@ -11029,7 +11072,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6734237056663082788, guid: c223135b7d5e30641b00605b7f03c760, type: 3}
+  m_Sprite: {fileID: -1941471389, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11104,7 +11147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 456767350700619442, guid: e4ef77896d906514998a8f1007fdd176, type: 3}
+  m_Sprite: {fileID: 260497695, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11403,7 +11446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 6583518013119813469}
-  skillSO: {fileID: 11400000, guid: 3069f6440dd43b54baec602ae49a4124, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: d398b3e8f785705429a2edafa3d42f0f, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 7590906563817264417}
@@ -11474,7 +11518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  m_Sprite: {fileID: 1413107988, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11696,7 +11740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: 3ba7374f91db8114b91a9a4e8e5949d6, type: 2}
+  conflictingSkillSlots: []
+  skillSO: {fileID: 11400000, guid: e21d98fda0818504fb4ee2e73a322041, type: 2}
   currentLevel: 0
   isUnlocked: 1
   skillIcon: {fileID: 7817419936636902954}
@@ -12034,14 +12079,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4632131584819206428, guid: 17d749241eb222b4ba3dd20ee2bcc595, type: 3}
+  m_Sprite: {fileID: 463081351, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12268,7 +12313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5461583279877749565, guid: ace871e470148bd478d611469c957802, type: 3}
+  m_Sprite: {fileID: 1413107988, guid: 8526c316fa0942149bf4bdb02116b37c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12491,7 +12536,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 909406800298592673}
-  skillSO: {fileID: 11400000, guid: a1f0dd7ffc21d184a84fae2c32d25900, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 1162759689269712472}
+  skillSO: {fileID: 11400000, guid: 4d50809fff3013b4d97ab1b14321de68, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 7145448436395408714}
@@ -12615,7 +12662,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3025997322957819794}
   m_OnClick:
     m_PersistentCalls:
@@ -12632,10 +12679,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf550299c4677804db0eb30c40c85a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prerequisiteSkillSlots: []
-  skillSO: {fileID: 11400000, guid: 3590b17d04c76d74ba2c6a810e70995a, type: 2}
+  prerequisiteSkillSlots:
+  - {fileID: 2051320133260475504}
+  conflictingSkillSlots:
+  - {fileID: 5120505422256258282}
+  skillSO: {fileID: 11400000, guid: 8426ad632631f834bb5cb252f6b9f695, type: 2}
   currentLevel: 0
-  isUnlocked: 1
+  isUnlocked: 0
   skillIcon: {fileID: 6928855164141237250}
   skillButton: {fileID: 6931436618239257678}
   skillLevelText: {fileID: 1394398715186039951}
@@ -12989,7 +13039,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prerequisiteSkillSlots:
   - {fileID: 1162759689269712472}
-  skillSO: {fileID: 11400000, guid: 191c9e6e9e1229446b6c64c56b41be2f, type: 2}
+  conflictingSkillSlots:
+  - {fileID: 5120505422256258282}
+  skillSO: {fileID: 11400000, guid: 0d93681d37e504a44844221887ccd34c, type: 2}
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 7474882591902845455}
@@ -13060,7 +13112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 / 1
+  m_text: Locked
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}

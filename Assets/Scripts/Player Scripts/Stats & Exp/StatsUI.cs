@@ -31,13 +31,13 @@ public class StatsUI : MonoBehaviour
                 statsCanvas.alpha = 0;
                 statsCanvas.blocksRaycasts = false; // Disable interaction when closed
                 statsOpen = false;
-                Debug.Log("Stats UI closed!");
+                //Debug.Log("Stats UI closed!");
             }
             else
             {
                 if (toggleSkillTree != null && toggleSkillTree.IsSkillTreeOpen)
                 {
-                    Debug.Log("Cannot open Stats UI while Skill Tree is open!");
+                    //Debug.Log("Cannot open Stats UI while Skill Tree is open!");
                     return;
                 }
 
@@ -47,7 +47,7 @@ public class StatsUI : MonoBehaviour
                 statsCanvas.alpha = 1;
                 statsCanvas.blocksRaycasts = true;
                 statsOpen = true;
-                Debug.Log("Stats UI opened!");
+                //Debug.Log("Stats UI opened!");
             }
     }
 

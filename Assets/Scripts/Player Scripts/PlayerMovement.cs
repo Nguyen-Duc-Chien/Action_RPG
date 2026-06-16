@@ -32,10 +32,13 @@ public class PlayerMovement : MonoBehaviour
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            if (horizontal > 0 && transform.localScale.x < 0 ||
-                horizontal < 0 && transform.localScale.x > 0)
+            if (isShooting == false)
             {
-                Flip();
+                if (horizontal > 0 && transform.localScale.x < 0 ||
+                    horizontal < 0 && transform.localScale.x > 0)
+                {
+                    Flip();
+                }
             }
 
             anim.SetFloat("horizontal", Mathf.Abs(horizontal));
@@ -43,7 +46,15 @@ public class PlayerMovement : MonoBehaviour
 
             float moveH = Input.GetAxis("Horizontal");
             float moveV = Input.GetAxis("Vertical");
-            rb.linearVelocity = new Vector2(moveH, moveV) * StatsManager.Instance.speed;
+
+            float currentSpeed = StatsManager.Instance.speed;
+
+            if (isShooting)
+            {
+                currentSpeed *= 0.3f;
+            }
+
+            rb.linearVelocity = new Vector2(moveH, moveV) * currentSpeed;
         }
     }
 
@@ -53,6 +64,17 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = new Vector3 (transform.localScale.x * -1, 
                                              transform.localScale.y, 
                                              transform.localScale.z);
+    }
+
+    public void ForceFlip(int direction)
+    {
+        if (direction != facingDirection)
+        {
+            facingDirection = direction;
+            transform.localScale = new Vector3(transform.localScale.x * -1,
+                                                 transform.localScale.y,
+                                                 transform.localScale.z);
+        }
     }
 
     public void Knockback(Transform enemy, float force, float stunTime)

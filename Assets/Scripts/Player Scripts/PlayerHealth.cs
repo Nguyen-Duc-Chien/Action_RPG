@@ -13,7 +13,8 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverPanel;
     public TMP_Text gameOverExpText;
 
-    private Vector3 startPosition; 
+    private Vector3 startPosition;
+    private Coroutine regenCoroutine;
 
     public void Start()
     {
@@ -24,16 +25,67 @@ public class PlayerHealth : MonoBehaviour
         {
             gameOverPanel.SetActive(false);
         }
+
+        if (regenCoroutine == null)
+        {
+            regenCoroutine = StartCoroutine(RegenHealthRoutine());
+        }
+    }
+
+    private System.Collections.IEnumerator RegenHealthRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(StatsManager.Instance.regenInterval);
+
+            if (StatsManager.Instance.hasHealthRegenSkill)
+            {
+                float healthRatio = StatsManager.Instance.currentHealth / (float)StatsManager.Instance.maxHealth;
+
+                if (healthRatio < 0.5f && StatsManager.Instance.currentHealth > 0)
+                {
+                    ChangeHealth(StatsManager.Instance.regenAmount);
+                    Debug.Log($"Health_Regeneration activated.");
+                }
+            }
+        }
     }
 
     public void ChangeHealth(float amount)
     {
-        //Debug.Log("Changing health by: " + amount);
+        if (amount < 0)     // If taking damage
+        {
+            float currentResistance = Mathf.Clamp(StatsManager.Instance.damageResistance, 0f, 0.9f);
+            amount = amount * (1f - currentResistance);
+        }
+
         float targetHealth = StatsManager.Instance.currentHealth + amount;
         StatsManager.Instance.currentHealth = Mathf.Clamp(targetHealth, 0f, StatsManager.Instance.maxHealth);
 
         if (healthTextAnim != null) healthTextAnim.Play("TextUpdate");
         UpdateHealthUI();
+
+        if (StatsManager.Instance.hasLowHealthResistanceSkill)
+        {
+            float healthRatio = StatsManager.Instance.currentHealth / (float)StatsManager.Instance.maxHealth;
+
+            if (healthRatio < 0.25f && !StatsManager.Instance.isLowHealthResistanceActive)
+            {
+                StatsManager.Instance.damageResistance += 0.5f; 
+                StatsManager.Instance.isLowHealthResistanceActive = true; 
+
+                if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
+                //Debug.Log($"Health_Resistence activate.");
+            }
+            else if (healthRatio >= 0.25f && StatsManager.Instance.isLowHealthResistanceActive)
+            {
+                StatsManager.Instance.damageResistance -= 0.5f;
+                StatsManager.Instance.isLowHealthResistanceActive = false; 
+
+                if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
+                //Debug.Log($"Health_Resistence deactivate.");
+            }
+        }
 
         if (StatsManager.Instance.currentHealth <= 0)
         {

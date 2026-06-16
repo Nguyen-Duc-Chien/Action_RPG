@@ -7,7 +7,11 @@ using System.Collections.Generic; // Add this to use generic List<T>
 
 public class SkillSlot : MonoBehaviour
 {
+    [Header("Prerequisite Skills")]
     public List<SkillSlot> prerequisiteSkillSlots;
+    [Header("Conflict Skills")]
+    public List<SkillSlot> conflictingSkillSlots;
+
     public SkillSO skillSO;
 
     public int currentLevel;
@@ -30,7 +34,7 @@ public class SkillSlot : MonoBehaviour
 
     public void TryUpgradeSkill()
     {
-       if(isUnlocked && currentLevel < skillSO.maxLevel)
+        if (isUnlocked && currentLevel < skillSO.maxLevel && CanUnlockSkill())
         {
             currentLevel++;
             UpdateUI();
@@ -44,13 +48,22 @@ public class SkillSlot : MonoBehaviour
 
     public bool CanUnlockSkill()
     {
-        foreach(SkillSlot slot in prerequisiteSkillSlots)
+        foreach (SkillSlot slot in prerequisiteSkillSlots)
         {
-            if(!slot.isUnlocked || slot.currentLevel < slot.skillSO.maxLevel)
+            if (!slot.isUnlocked || slot.currentLevel < slot.skillSO.maxLevel)
             {
                 return false;
             }
         }
+
+        foreach (SkillSlot slot in conflictingSkillSlots)
+        {
+            if (slot.currentLevel > 0)
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -60,10 +73,13 @@ public class SkillSlot : MonoBehaviour
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
+        if (skillIcon == null || skillButton == null || skillLevelText == null) return;
+
         skillIcon.sprite = skillSO.skillIcon;
-        if(isUnlocked)
+
+        if (isUnlocked && CanUnlockSkill())
         {
             skillButton.interactable = true;
             skillLevelText.text = currentLevel.ToString() + " / " + skillSO.maxLevel.ToString();
@@ -72,8 +88,17 @@ public class SkillSlot : MonoBehaviour
         else
         {
             skillButton.interactable = false;
-            skillLevelText.text = "Locked";
-            skillIcon.color = Color.grey;
+
+            if (isUnlocked && !CanUnlockSkill())
+            {
+                skillLevelText.text = "Blocked";
+                skillIcon.color = new Color(0.3f, 0.3f, 0.3f, 0.6f); 
+            }
+            else
+            {
+                skillLevelText.text = "Locked";
+                skillIcon.color = Color.grey;
+            }
         }
     }
 }

@@ -69,6 +69,11 @@ public class Arrow : MonoBehaviour
                 {
                     enemyKnockback.Knockback(transform, knockbackForce, knockbackTime, stunTime);
                 }
+                Enemy_DebuffManager debuffManager = other.gameObject.GetComponent<Enemy_DebuffManager>();
+                if (debuffManager != null)
+                {
+                    debuffManager.ApplyArrowDebuff();
+                }
             }
             AttachToTarget(other.gameObject.transform);
         }

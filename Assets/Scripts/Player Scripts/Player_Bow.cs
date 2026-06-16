@@ -27,6 +27,16 @@ public class Player_Bow : MonoBehaviour
         {
             playerMovement.isShooting = true;
             anim.SetBool("isShooting", true);
+
+            if (aimDirection.x < -0.1f)
+            {
+                playerMovement.ForceFlip(-1);
+            }
+            else if (aimDirection.x > 0.1f)
+            {
+                playerMovement.ForceFlip(1);
+            }
+
             //Debug.Log("Shoot button pressed! Auto-aiming target!");
         }
     }
@@ -102,9 +112,9 @@ public class Player_Bow : MonoBehaviour
                 arrow.speed = 12f;
 
                 arrow.damage = StatsManager.Instance.rangeDamage;
-                arrow.knockbackForce = StatsManager.Instance.knockbackForce;
-                arrow.knockbackTime = StatsManager.Instance.knockbackTime;
-                arrow.stunTime = StatsManager.Instance.stunTime;
+                arrow.knockbackForce = StatsManager.Instance.arrowKnockbackForce;
+                arrow.knockbackTime = StatsManager.Instance.arrowKnockbackTime;
+                arrow.stunTime = StatsManager.Instance.arrowStunTime;
 
                 arrow.targetLayer = LayerMask.GetMask("Enemy");
 
@@ -118,6 +128,7 @@ public class Player_Bow : MonoBehaviour
             shootTimer = shootCooldown;
         }
         anim.SetBool("isShooting", false);
+        playerMovement.isShooting = false;
     }
 
     // Just for debugging: visualize the auto-aim radius in the editor

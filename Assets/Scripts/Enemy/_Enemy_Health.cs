@@ -69,7 +69,12 @@ public class Enemy_Health : MonoBehaviour
 
         CalculateLoot();
 
-        if (anim != null) anim.SetTrigger("dieTrig");
+        Animator anim = GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.speed = 1f;
+            anim.SetTrigger("dieTrig");
+        }
         if (enemyCollider != null) enemyCollider.enabled = false;
 
         Enemy_Movement meleeMovement = GetComponent<Enemy_Movement>();

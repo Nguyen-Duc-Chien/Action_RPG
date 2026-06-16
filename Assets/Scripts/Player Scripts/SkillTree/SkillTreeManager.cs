@@ -44,6 +44,11 @@ public class SkillTreeManager : MonoBehaviour
         {
             UpdateAbilityPoints(-1);
         }
+
+        foreach (SkillSlot slot in skillSlots)
+        {
+            slot.UpdateUI();
+        }
     }
 
     private void HandleSkillMaxed(SkillSlot skillSlot)
