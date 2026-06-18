@@ -54,7 +54,14 @@ public class PlayerMovement : MonoBehaviour
                 currentSpeed *= 0.3f;
             }
 
-            rb.linearVelocity = new Vector2(moveH, moveV) * currentSpeed;
+            Vector2 moveDirection = new Vector2(moveH, moveV);
+
+            if (moveDirection.magnitude > 1f)
+            {
+                moveDirection = moveDirection.normalized;
+            }
+
+            rb.linearVelocity = moveDirection * currentSpeed;
         }
     }
 

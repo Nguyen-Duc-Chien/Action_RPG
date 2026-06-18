@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 615672072429969595}
   - component: {fileID: 4894775486020289458}
   - component: {fileID: 7110658607958553911}
+  - component: {fileID: 4908497761870456341}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -381,6 +382,19 @@ MonoBehaviour:
   spikeTilemaps: []
   damageAmount: 1
   damageInterval: 1
+--- !u!114 &4908497761870456341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864427819740292730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852066d0a464652468e4d96348e204f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player_DebuffManager
+  burnColor: {r: 1, g: 0.3, b: 0, a: 1}
 --- !u!1 &1193449900049288634
 GameObject:
   m_ObjectHideFlags: 0

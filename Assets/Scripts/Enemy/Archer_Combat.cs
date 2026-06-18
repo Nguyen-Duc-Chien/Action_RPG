@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Ranged_Combat : MonoBehaviour
+public class Archer_Combat : MonoBehaviour
 {
     [Header("References")]
     public GameObject arrowPrefab;       

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Combat : MonoBehaviour
+public class Torch_Combat : MonoBehaviour
 {
     public float damage = 1;
     public Transform attackPoint;
@@ -9,14 +9,24 @@ public class Enemy_Combat : MonoBehaviour
     public float stunTime;
     public LayerMask playerLayer;
 
+    [Header("Torch Flame Settings")]
+    public float burnDuration = 2f;
+    public float burnDamagePerSecond = 1f;
+
     public void Attack()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, weaponRange, playerLayer);
 
-        if(hits.Length > 0 )
+        if (hits.Length > 0)
         {
-            hits[0].GetComponent<PlayerHealth>().ChangeHealth(-damage);
-            hits[0].GetComponent<PlayerMovement>().Knockback(transform, knockbackForce, stunTime);
+            hits[0].GetComponent<PlayerHealth>().ChangeHealth(-damage); //[cite: 3]
+            hits[0].GetComponent<PlayerMovement>().Knockback(transform, knockbackForce, stunTime); //[cite: 3]
+
+            Player_DebuffManager debuffManager = hits[0].GetComponent<Player_DebuffManager>();
+            if (debuffManager != null)
+            {
+                debuffManager.ApplyBurnDebuff(burnDuration, burnDamagePerSecond);
+            }
         }
     }
 }

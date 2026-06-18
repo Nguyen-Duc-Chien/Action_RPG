@@ -99,8 +99,8 @@ public class PlayerHealth : MonoBehaviour
 
         healthSlider.maxValue = StatsManager.Instance.maxHealth;
         healthSlider.value = StatsManager.Instance.currentHealth;
-        healthText.text = "HP : " + StatsManager.Instance.currentHealth + " / " + StatsManager.Instance.maxHealth;
-
+        healthText.text = "HP : " + Mathf.RoundToInt(StatsManager.Instance.currentHealth) + " / " + StatsManager.Instance.maxHealth;
+        
         //Debug.Log($"[UI Check] Slider Value: {healthSlider.value}, Text: {healthText.text}", healthSlider);
     }
 

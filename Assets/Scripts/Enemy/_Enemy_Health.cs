@@ -75,13 +75,40 @@ public class Enemy_Health : MonoBehaviour
             anim.speed = 1f;
             anim.SetTrigger("dieTrig");
         }
+        // Disable collider to prevent further interactions
         if (enemyCollider != null) enemyCollider.enabled = false;
 
-        Enemy_Movement meleeMovement = GetComponent<Enemy_Movement>();
-        if (meleeMovement != null) meleeMovement.enabled = false;
+        // Disable movement scripts
+        Torch_Movement torchMovement = GetComponent<Torch_Movement>();
+        if (torchMovement != null)
+        {
+            torchMovement.enabled = false;
+        }
 
-        Enemy_Ranged_Movement rangedMovement = GetComponent<Enemy_Ranged_Movement>();
-        if (rangedMovement != null) rangedMovement.enabled = false;
+        Archer_Movement archerMovement = GetComponent<Archer_Movement>();
+        if (archerMovement != null)
+        {
+            archerMovement.enabled = false;
+        }
+
+        Barrel_Suicide barrelSuicide = GetComponent<Barrel_Suicide>();
+        if (barrelSuicide != null)
+        {
+            barrelSuicide.enabled = false;
+        }
+
+        Frostbite_Archer_Movement frostbiteArcherMovement = GetComponent<Frostbite_Archer_Movement>();
+        if (frostbiteArcherMovement != null)
+        {
+            frostbiteArcherMovement.enabled = false;
+        }
+
+        // Diable all debuffs
+        Enemy_DebuffManager debuffManager = GetComponent<Enemy_DebuffManager>();
+        if (debuffManager != null)
+        {
+            debuffManager.enabled = false;
+        }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)

@@ -4,20 +4,26 @@ using UnityEngine;
 public class Enemy_Knockback : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Enemy_Movement meleeMovement;
-    private Enemy_Ranged_Movement rangedMovement;
+    private Torch_Movement torchMovement;
+    private Archer_Movement archerMovement;
+    private Barrel_Suicide barielSuicide;
+    private Frostbite_Archer_Movement frostbiteArcherMovement;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        meleeMovement = GetComponent<Enemy_Movement>();
-        rangedMovement = GetComponent<Enemy_Ranged_Movement>();
+        torchMovement = GetComponent<Torch_Movement>();
+        archerMovement = GetComponent<Archer_Movement>();
+        barielSuicide = GetComponent<Barrel_Suicide>();
+        frostbiteArcherMovement = GetComponent<Frostbite_Archer_Movement>();
     }
 
     public void Knockback(Transform forceTransform, float knockbackForce, float knockbackRange, float stunTime)
     {
-        if (meleeMovement != null) meleeMovement.ChangeState(EnemyState.Knockback);
-        if (rangedMovement != null) rangedMovement.ChangeState(EnemyState.Knockback);
+        if (torchMovement != null) torchMovement.ChangeState(EnemyState.Knockback);
+        if (archerMovement != null) archerMovement.ChangeState(EnemyState.Knockback);
+        if (barielSuicide != null) barielSuicide.ChangeState(BarrelState.Knockback);
+        if (frostbiteArcherMovement != null) frostbiteArcherMovement.ChangeState(EnemyState.Knockback);
 
         StartCoroutine(StunTimer(knockbackRange, stunTime)); 
         Vector2 direction = (transform.position - forceTransform.position).normalized;
@@ -31,7 +37,9 @@ public class Enemy_Knockback : MonoBehaviour
         rb.linearVelocity = Vector2.zero; 
         yield return new WaitForSeconds(stunTime);
 
-        if (meleeMovement != null) meleeMovement.ChangeState(EnemyState.Idle);
-        if (rangedMovement != null) rangedMovement.ChangeState(EnemyState.Idle);
+        if (torchMovement != null) torchMovement.ChangeState(EnemyState.Idle);
+        if (archerMovement != null) archerMovement.ChangeState(EnemyState.Idle);
+        if (barielSuicide != null) barielSuicide.ChangeState(BarrelState.Awakening);
+        if (frostbiteArcherMovement != null) frostbiteArcherMovement.ChangeState(EnemyState.Idle);
     }
 }

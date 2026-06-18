@@ -13,8 +13,11 @@ public class Enemy_DebuffManager : MonoBehaviour
     public Color burnColor = new Color(1f, 0.3f, 0f, 1f);
     private Color originalColor;            
 
-    private Enemy_Movement meleeMovement;
-    private Enemy_Ranged_Movement rangedMovement;
+    private Torch_Movement torchMovement;
+    private Archer_Movement archerMovement;
+    private Barrel_Suicide barrelSuicide;
+    private Frostbite_Archer_Movement frostbiteArcherMovement;
+
     private Enemy_Health enemyHealth;
     private SpriteRenderer spriteRenderer; 
 
@@ -24,13 +27,19 @@ public class Enemy_DebuffManager : MonoBehaviour
 
     private void Awake()
     {
-        meleeMovement = GetComponent<Enemy_Movement>();
-        rangedMovement = GetComponent<Enemy_Ranged_Movement>();
+        
+        torchMovement = GetComponent<Torch_Movement>();
+        archerMovement = GetComponent<Archer_Movement>();
+        barrelSuicide = GetComponent<Barrel_Suicide>();
+        frostbiteArcherMovement = GetComponent<Frostbite_Archer_Movement>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyHealth = GetComponent<Enemy_Health>();
 
-        if (meleeMovement != null) originalSpeed = meleeMovement.speed;
-        else if (rangedMovement != null) originalSpeed = rangedMovement.speed;
+        if (torchMovement != null) originalSpeed = torchMovement.speed;
+        if (archerMovement != null) originalSpeed = archerMovement.speed;
+        if (barrelSuicide != null) originalSpeed = barrelSuicide.speed;
+        if (frostbiteArcherMovement != null) originalSpeed = frostbiteArcherMovement.speed;
 
         if (spriteRenderer != null)
         {
@@ -188,7 +197,7 @@ public class Enemy_DebuffManager : MonoBehaviour
         }
         else if (activeDebuffRoutine != null)
         {
-            spriteRenderer.color = (meleeMovement?.speed == 0f || rangedMovement?.speed == 0f) ? freezeColor : slowColor;
+            spriteRenderer.color = (torchMovement?.speed == 0f || archerMovement?.speed == 0f || barrelSuicide?.speed == 0f) ? freezeColor : slowColor;
         }
         else
         {
@@ -198,8 +207,10 @@ public class Enemy_DebuffManager : MonoBehaviour
 
     private void SetEnemySpeed(float newSpeed)
     {
-        if (meleeMovement != null) meleeMovement.speed = newSpeed;
-        if (rangedMovement != null) rangedMovement.speed = newSpeed;
+        if (torchMovement != null) torchMovement.speed = newSpeed;
+        if (archerMovement != null) archerMovement.speed = newSpeed;
+        if (barrelSuicide != null) barrelSuicide.speed = newSpeed;
+        if (frostbiteArcherMovement != null) frostbiteArcherMovement.speed = newSpeed;
     }
 
     private void SetAnimatorSpeed(float animSpeed)

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Enemy_Ranged_Movement : MonoBehaviour
+public class Archer_Movement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float speed = 2.5f;
+    public float speed = 2f;
     [Tooltip("Smaller than 1 so that players can reach easily.")]
     public float retreatSpeedMultiplier = 0.6f;
-    public float attackRange = 6f;
+    public float attackRange = 5f;
     // Distance at which the enemy will start retreating if the player gets too close
     public float retreatRange = 3f;
-    public float playerDetectionRange = 9f;
-    public float attackCooldown = 2f;
+    public float playerDetectionRange = 6f;
+    public float attackCooldown = 1.5f;
 
     [Header("References")]
     public Transform detectionPoint;
