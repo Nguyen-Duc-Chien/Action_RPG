@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95022fa911a99e49a6633101a009b1b, type: 3}
+  m_Name: Level_05
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  levelIndex: 5
+  levelName: Forest Level 5
+  roomPrefabs:
+  - {fileID: 5396347043672148955, guid: 5a185a6c8e8411f4ca1134333f862bd1, type: 3}
+  - {fileID: 1377535045567040875, guid: 3b1a191beedb90a41aa7e504a5d80691, type: 3}
+  - {fileID: 5274835348631003470, guid: f3ee4f436ce1b9b4db9686677daa328c, type: 3}
+  - {fileID: 7063540201324244160, guid: 537e6d427ac28964c9673133310900e0, type: 3}
+  totalRooms: 5
+  enemyData: {fileID: 11400000, guid: a828f8bc7651fd445a51492b7b4bb1cb, type: 2}
+  maxEnemiesPerRoom: 3
+  targetKillsToWin: 15
+  hasBoss: 0

@@ -23,7 +23,17 @@ public class SceneChanger : MonoBehaviour
     IEnumerator DelayFade()
     {
         yield return new WaitForSeconds(fadeTime);
-        player.position = newPlayerPosition; 
-        SceneManager.LoadScene(sceneToLoad);
+
+        // Ưu tiên dùng RunManager để về lobby
+        if (RunManager.Instance != null)
+        {
+            RunManager.Instance.GoToLobby();
+        }
+        else
+        {
+            // Fallback: dùng sceneToLoad đã set trong Inspector
+            player.position = newPlayerPosition;
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }

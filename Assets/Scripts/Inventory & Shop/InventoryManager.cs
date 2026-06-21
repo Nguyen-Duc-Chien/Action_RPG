@@ -1,7 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class InventoryManager : MonoBehaviour 
 {
@@ -14,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public Transform player;
     private void Start()
     {
+        LoadFromSave();
         goldText.text = gold.ToString();
         foreach (var slot in itemSlots)
         {
@@ -38,6 +37,7 @@ public class InventoryManager : MonoBehaviour
         {
             gold += quantity;
             goldText.text = gold.ToString();
+            SaveToPlayerPrefs();
             return;
         }
         
@@ -66,6 +66,7 @@ public class InventoryManager : MonoBehaviour
                 slot.itemSO = itemSO;
                 slot.quantity = quantity;
                 slot.UpdateUI();
+                SaveToPlayerPrefs();
                 return;
             }
         }
@@ -86,6 +87,7 @@ public class InventoryManager : MonoBehaviour
             slot.itemSO = null;
         }
         slot.UpdateUI();
+        SaveToPlayerPrefs();
     }
 
     private void DropLoot(ItemSO itemSO, int quantity)
@@ -106,7 +108,27 @@ public class InventoryManager : MonoBehaviour
                 slot.itemSO = null;
             }
             slot.UpdateUI();
-
+            SaveToPlayerPrefs();
         }
     }
+
+    #region Save/Load
+
+    public void SaveToPlayerPrefs()
+    {
+        if (RunManager.Instance == null) return;
+
+        RunManager.Instance.SaveGold(gold);
+        RunManager.Instance.SaveInventory(itemSlots);
+    }
+
+    private void LoadFromSave()
+    {
+        if (RunManager.Instance == null) return;
+
+        gold = RunManager.Instance.LoadGold();
+        RunManager.Instance.LoadInventory(itemSlots);
+    }
+
+    #endregion
 }

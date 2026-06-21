@@ -17,6 +17,7 @@ public class ExpManager : MonoBehaviour
 
     private void Start()
     {
+        LoadFromSave();
         UpdateUI();
     }
     public void Update()
@@ -44,6 +45,7 @@ public class ExpManager : MonoBehaviour
         {
             LevelUp();
         }
+        SaveToPlayerPrefs();
         UpdateUI();
     }
 
@@ -62,4 +64,25 @@ public class ExpManager : MonoBehaviour
         expSlider.value = currentExp;
         currentLevelText.text = "Level: " + level;
     }
+
+    #region Save/Load
+
+    public void SaveToPlayerPrefs()
+    {
+        if (RunManager.Instance == null) return;
+        RunManager.Instance.SaveExp(level, currentExp, expToLevel);
+    }
+
+    private void LoadFromSave()
+    {
+        if (RunManager.Instance == null) return;
+        if (!RunManager.Instance.HasExpSave()) return;
+
+        RunManager.Instance.LoadExp(out int savedLevel, out int savedExp, out int savedExpToLevel);
+        level      = savedLevel;
+        currentExp = savedExp;
+        expToLevel = savedExpToLevel;
+    }
+
+    #endregion
 }

@@ -2328,6 +2328,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &7359447427096066513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8581,6 +8583,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &2819460529065590631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20612,6 +20616,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &8970040585514649590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21726,6 +21732,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &2104908865668535509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23643,6 +23651,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &8722337573150745676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24591,6 +24601,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &6333382683015951165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25836,6 +25848,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &2923849937229023714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27584,6 +27598,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDuration: 2
+  burnDamagePerSecond: 1
 --- !u!114 &2981740914853656418
 MonoBehaviour:
   m_ObjectHideFlags: 0

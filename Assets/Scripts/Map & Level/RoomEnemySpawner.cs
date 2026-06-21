@@ -10,6 +10,12 @@ public class RoomEnemySpawner : MonoBehaviour
     [SerializeField] private int maxEnemiesInThisRoom = 3;
     [Range(0f, 100f)][SerializeField] private float respawnChance = 50f;
 
+    public void Initialize(EnemyData data, int maxEnemies)
+    {
+        if (data != null) enemyData = data;
+        if (maxEnemies > 0) maxEnemiesInThisRoom = maxEnemies;
+    }
+
     private List<Transform> spawnPoints = new List<Transform>();
     private List<GameObject> activeEnemies = new List<GameObject>();
 
@@ -128,6 +134,19 @@ public class RoomEnemySpawner : MonoBehaviour
             if (randomValue <= currentWeightSum) return enemy.enemyPrefab;
         }
         return null;
+    }
+
+    public int GetSpawnPointCount()
+    {
+        if (spawnPoints.Count == 0)
+        {
+            Transform[] allChildren = GetComponentsInChildren<Transform>(true);
+            foreach (Transform child in allChildren)
+            {
+                if (child.CompareTag("EnemySpawnPoint")) spawnPoints.Add(child);
+            }
+        }
+        return spawnPoints.Count;
     }
 
     private void ShuffleSpawnPoints()

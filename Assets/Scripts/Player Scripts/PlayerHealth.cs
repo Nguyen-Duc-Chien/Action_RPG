@@ -1,12 +1,10 @@
+using System;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;        // Using this for TextMeshPro
 
 public class PlayerHealth : MonoBehaviour
 {
-    public TMP_Text healthText;
-    public Animator healthTextAnim;
-    public Slider healthSlider;
+    public event Action<float, float> OnHealthChanged;
     public ExpManager expManager;
 
     [Header("Game Over UI")]
@@ -20,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     {
         startPosition = transform.position;
 
+        LoadHPFromSave();
+        OnHealthChanged?.Invoke(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
         UpdateHealthUI();
         if (gameOverPanel != null)
         {
@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
                 if (healthRatio < 0.5f && StatsManager.Instance.currentHealth > 0)
                 {
                     ChangeHealth(StatsManager.Instance.regenAmount);
-                    Debug.Log($"Health_Regeneration activated.");
+                    Debug.Log($"Health_Regeneration activated. Amount: {StatsManager.Instance.regenAmount}");
                 }
             }
         }
@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
-        if (amount < 0)     // If taking damage
+        if (amount < 0)
         {
             float currentResistance = Mathf.Clamp(StatsManager.Instance.damageResistance, 0f, 0.9f);
             amount = amount * (1f - currentResistance);
@@ -62,7 +62,6 @@ public class PlayerHealth : MonoBehaviour
         float targetHealth = StatsManager.Instance.currentHealth + amount;
         StatsManager.Instance.currentHealth = Mathf.Clamp(targetHealth, 0f, StatsManager.Instance.maxHealth);
 
-        if (healthTextAnim != null) healthTextAnim.Play("TextUpdate");
         UpdateHealthUI();
 
         if (StatsManager.Instance.hasLowHealthResistanceSkill)
@@ -75,7 +74,6 @@ public class PlayerHealth : MonoBehaviour
                 StatsManager.Instance.isLowHealthResistanceActive = true; 
 
                 if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
-                //Debug.Log($"Health_Resistence activate.");
             }
             else if (healthRatio >= 0.25f && StatsManager.Instance.isLowHealthResistanceActive)
             {
@@ -83,7 +81,6 @@ public class PlayerHealth : MonoBehaviour
                 StatsManager.Instance.isLowHealthResistanceActive = false; 
 
                 if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
-                //Debug.Log($"Health_Resistence deactivate.");
             }
         }
 
@@ -91,17 +88,25 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            SaveHPToPlayerPrefs();
+        }
     }
 
     public void UpdateHealthUI()
     {
-        if (healthSlider == null) return;
+        if (StatsManager.Instance != null)
+        {
+            // Invoke the event for any listeners (like PlayerHealthUI if using events)
+            OnHealthChanged?.Invoke(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
 
-        healthSlider.maxValue = StatsManager.Instance.maxHealth;
-        healthSlider.value = StatsManager.Instance.currentHealth;
-        healthText.text = "HP : " + Mathf.RoundToInt(StatsManager.Instance.currentHealth) + " / " + StatsManager.Instance.maxHealth;
-        
-        //Debug.Log($"[UI Check] Slider Value: {healthSlider.value}, Text: {healthText.text}", healthSlider);
+            // Directly call the Singleton (which you were already doing, just fixed the method name)
+            if (PlayerHealthUI.Instance != null)
+            {
+                PlayerHealthUI.Instance.UpdateHealthUI(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
+            }
+        }
     }
 
     private void Die()
@@ -121,7 +126,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void MainMenuButton()
     {
-        //Debug.Log("Main Menu button clicked � restarting run or reloading scene.");
         Time.timeScale = 1f;
 
         if (StatsManager.Instance != null)
@@ -134,6 +138,16 @@ public class PlayerHealth : MonoBehaviour
         {
             gameOverPanel.SetActive(false);
         }
+
+        // Xóa sạch tiến trình level khi chết — chỉ giữ lại Level 1 mở khóa
+        if (RunManager.Instance != null)
+        {
+            RunManager.Instance.ResetAllProgress();
+        }
+
+        // Xóa debuff
+        Player_DebuffManager debuffMgr = GetComponent<Player_DebuffManager>();
+        if (debuffMgr != null) debuffMgr.ResetAllDebuffs();
 
         if (GameManager.Instance != null)
         {
@@ -150,6 +164,9 @@ public class PlayerHealth : MonoBehaviour
         StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
         UpdateHealthUI();
 
+        Player_DebuffManager debuffMgr = GetComponent<Player_DebuffManager>();
+        if (debuffMgr != null) debuffMgr.ResetAllDebuffs();
+
         transform.position = spawnPosition;
         startPosition = spawnPosition;
 
@@ -161,4 +178,27 @@ public class PlayerHealth : MonoBehaviour
 
         Debug.Log("Player stats reset and teleported to Spawn Point: " + spawnPosition);
     }
+
+    #region HP Save/Load
+
+    private void SaveHPToPlayerPrefs()
+    {
+        if (RunManager.Instance == null || StatsManager.Instance == null) return;
+        RunManager.Instance.SaveHP(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
+    }
+
+    private void LoadHPFromSave()
+    {
+        if (RunManager.Instance == null || StatsManager.Instance == null) return;
+        if (!RunManager.Instance.HasHPSave()) return;
+
+        RunManager.Instance.LoadHP(out float savedCurrent, out float savedMax);
+        if (savedMax > 0)
+        {
+            StatsManager.Instance.maxHealth = savedMax;
+            StatsManager.Instance.currentHealth = savedCurrent;
+        }
+    }
+
+    #endregion
 }

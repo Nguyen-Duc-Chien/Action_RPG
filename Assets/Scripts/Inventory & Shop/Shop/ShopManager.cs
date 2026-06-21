@@ -35,6 +35,7 @@ public class ShopManager : MonoBehaviour
                 inventoryManager.gold -= price;
                 inventoryManager.goldText.text = inventoryManager.gold.ToString();
                 inventoryManager.AddItem(itemSO, 1);
+                inventoryManager.SaveToPlayerPrefs();
                 Debug.Log("Bought 1 x " + itemSO.itemName);
             }
             else
@@ -73,6 +74,7 @@ public class ShopManager : MonoBehaviour
             {
                 inventoryManager.gold += slot.price;  // Flexable to allow different sell prices in the future
                 inventoryManager.goldText.text = inventoryManager.gold.ToString();
+                inventoryManager.SaveToPlayerPrefs();
                 return;
             }
         }

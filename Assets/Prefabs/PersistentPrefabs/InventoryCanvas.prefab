@@ -814,7 +814,7 @@ MonoBehaviour:
   - {fileID: 1290540326032890726}
   - {fileID: 1382579514207231234}
   useItem: {fileID: 5524028533306148908}
-  gold: 100
+  gold: 0
   goldText: {fileID: 1910985417327615086}
   lootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
   player: {fileID: 0}

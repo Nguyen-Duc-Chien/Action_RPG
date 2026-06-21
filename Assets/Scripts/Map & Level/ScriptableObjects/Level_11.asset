@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95022fa911a99e49a6633101a009b1b, type: 3}
+  m_Name: Level_11
+  m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
+  levelIndex: 11
+  levelName: Dungeon Level 1
+  roomPrefabs:
+  - {fileID: 8279496780662168214, guid: c43fe27936a511d4e8ad4f1d4ff0a15e, type: 3}
+  - {fileID: 8279496780662168214, guid: a85368f612d205642af641aac84cf565, type: 3}
+  - {fileID: 8279496780662168214, guid: 451493ce5a5a84942bb5de8dfa210ce4, type: 3}
+  - {fileID: 8279496780662168214, guid: bc5fcfecc67ecdd439ce6a148071d0da, type: 3}
+  totalRooms: 5
+  enemyData: {fileID: 11400000, guid: a828f8bc7651fd445a51492b7b4bb1cb, type: 2}
+  maxEnemiesPerRoom: 5
+  targetKillsToWin: 20
+  hasBoss: 0

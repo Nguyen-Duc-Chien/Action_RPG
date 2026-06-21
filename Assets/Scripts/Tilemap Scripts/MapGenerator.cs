@@ -11,13 +11,33 @@ public class MapGenerator : MonoBehaviour
     public int totalRoomsToSpawn;
     public float roomLength;
     public float roomWidth;
+
+    private EnemyData _currentEnemyData;
+    private int _maxEnemiesPerRoom = 3;
     
     private List<Vector2> occupiedPositions = new List<Vector2>();
     private List<RoomWalls> spawnedRooms = new List<RoomWalls>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (RunManager.Instance != null)
+        {
+            LevelConfig cfg = RunManager.Instance.GetCurrentConfig();
+            if (cfg != null)
+            {
+                if (cfg.roomPrefabs != null && cfg.roomPrefabs.Count > 0)
+                    roomPrefabs = cfg.roomPrefabs;
+
+                if (cfg.totalRooms > 0)
+                    totalRoomsToSpawn = cfg.totalRooms;
+
+                _currentEnemyData    = cfg.enemyData;
+                _maxEnemiesPerRoom   = cfg.maxEnemiesPerRoom;
+
+                Debug.Log($"<color=cyan>[MapGenerator]</color> Loaded config for Level {cfg.levelIndex}: {cfg.levelName} | Rooms: {totalRoomsToSpawn} | Max enemies/room: {_maxEnemiesPerRoom}");
+            }
+        }
+
         GenerateMap();
     }
 
@@ -29,7 +49,8 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        // 1. Spawn 1st room at (0,0)
+        List<RoomEnemySpawner> allSpawners = new List<RoomEnemySpawner>();
+
         Vector2 currentPos = Vector2.zero;
         GameObject firstRoom = Instantiate(roomPrefabs[0], new Vector3(currentPos.x, currentPos.y, 0), Quaternion.identity);
         firstRoom.name = "Starting_Room";
@@ -40,15 +61,13 @@ public class MapGenerator : MonoBehaviour
         RoomEnemySpawner startSpawner = firstRoom.GetComponent<RoomEnemySpawner>();
         if (startSpawner != null)
         {
-            startSpawner.ExecuteSpawning();
+            allSpawners.Add(startSpawner);
         }
 
-        // 2. Generate the rest of the rooms
         for (int i = 1; i < totalRoomsToSpawn; i++)
         {
             Vector2 nextPos = GetRandomNeighborPosition();
 
-            // Pick a random room prefab from the list (excluding the first one which is used for the starting room)
             int randomIndex = Random.Range(0, roomPrefabs.Count);
 
             GameObject newRoom = Instantiate(roomPrefabs[randomIndex], new Vector3(nextPos.x, nextPos.y, 0), Quaternion.identity);
@@ -64,7 +83,7 @@ public class MapGenerator : MonoBehaviour
                 RoomEnemySpawner spawner = newRoom.GetComponent<RoomEnemySpawner>();
                 if (spawner != null)
                 {
-                    spawner.ExecuteSpawning();
+                    allSpawners.Add(spawner);
                 }
             }
             else
@@ -75,6 +94,63 @@ public class MapGenerator : MonoBehaviour
             }
         }
         CheckAndFixWalls();
+
+        int targetTotal = 0;
+        if (RunManager.Instance != null)
+        {
+            LevelConfig cfg = RunManager.Instance.GetCurrentConfig();
+            if (cfg != null) targetTotal = cfg.targetKillsToWin;
+        }
+
+        if (targetTotal > 0)
+        {
+            int[] spawnsPerRoom = new int[allSpawners.Count];
+            List<int> availableRooms = new List<int>();
+            for (int i = 0; i < allSpawners.Count; i++)
+            {
+                if (allSpawners[i].GetSpawnPointCount() > 0)
+                    availableRooms.Add(i);
+            }
+
+            int enemiesLeft = targetTotal;
+            while (enemiesLeft > 0 && availableRooms.Count > 0)
+            {
+                int rndIdx = Random.Range(0, availableRooms.Count);
+                int roomIdx = availableRooms[rndIdx];
+
+                spawnsPerRoom[roomIdx]++;
+                enemiesLeft--;
+
+                int maxPossible = Mathf.Min(_maxEnemiesPerRoom, allSpawners[roomIdx].GetSpawnPointCount());
+                if (spawnsPerRoom[roomIdx] >= maxPossible)
+                {
+                    availableRooms.RemoveAt(rndIdx);
+                }
+            }
+
+            for (int i = 0; i < allSpawners.Count; i++)
+            {
+                allSpawners[i].Initialize(_currentEnemyData, spawnsPerRoom[i]);
+                if (spawnsPerRoom[i] > 0)
+                {
+                    allSpawners[i].ExecuteSpawning();
+                }
+            }
+
+            if (enemiesLeft > 0 && LevelManager.Instance != null)
+            {
+                LevelManager.Instance.OverrideKillTarget(targetTotal - enemiesLeft);
+            }
+        }
+        else
+        {
+            foreach (var spawner in allSpawners)
+            {
+                spawner.Initialize(_currentEnemyData, _maxEnemiesPerRoom);
+                spawner.ExecuteSpawning();
+            }
+        }
+
         if (LevelManager.Instance != null)
         {
             Debug.Log($"[MapGenerator] Created {totalRoomsToSpawn} rooms! Total enemies: <color=yellow>{LevelManager.Instance.targetKillsToWin}</color>.");
@@ -118,7 +194,6 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    // Find a random valid neighboring position to spawn the next room
     Vector2 GetRandomNeighborPosition()
     {
         bool validPositionFound = false;
@@ -126,10 +201,8 @@ public class MapGenerator : MonoBehaviour
 
         while (!validPositionFound)
         {
-            // Pick a random existing room from the list of occupied positions
             Vector2 randomExistingRoom = occupiedPositions[Random.Range(0, occupiedPositions.Count)];
 
-            // Choose a random direction (up, down, left, right) to check for the next room position
             int randomDirection = Random.Range(0, 4);
             checkingPos = randomExistingRoom;
 
@@ -141,7 +214,6 @@ public class MapGenerator : MonoBehaviour
                 case 3: checkingPos += new Vector2(roomWidth, 0); break;
             }
 
-            // If the checking position is not already occupied, we can use it for the next room
             if (!occupiedPositions.Contains(checkingPos))
             {
                 validPositionFound = true;

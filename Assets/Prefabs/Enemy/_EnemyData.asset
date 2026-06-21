@@ -17,3 +17,7 @@ MonoBehaviour:
     spawnChance: 0
   - enemyPrefab: {fileID: 1275697865482374782, guid: 1c53a7c0292c71c4e95b857519137b82, type: 3}
     spawnChance: 100
+  - enemyPrefab: {fileID: 5520574988371585014, guid: e571d1ed44c908b4a99d99e6a74a04ee, type: 3}
+    spawnChance: 0
+  - enemyPrefab: {fileID: 3983496834088718729, guid: 98f37ca3fcce4ec4c85461429f37f298, type: 3}
+    spawnChance: 0

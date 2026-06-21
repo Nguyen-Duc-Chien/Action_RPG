@@ -39,6 +39,7 @@ public class FrostSlowTrigger : MonoBehaviour
 {
     private float duration;
     private float amount;
+    private bool hasTriggered = false;
 
     public void Setup(float slowDuration, float slowAmount)
     {
@@ -48,8 +49,12 @@ public class FrostSlowTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasTriggered) return;
+
         if (collision.CompareTag("Player"))
         {
+            hasTriggered = true;
+
             Player_DebuffManager playerDebuff = collision.GetComponent<Player_DebuffManager>();
             if (playerDebuff != null)
             {

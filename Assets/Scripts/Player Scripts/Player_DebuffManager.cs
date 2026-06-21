@@ -114,9 +114,33 @@ public class Player_DebuffManager : MonoBehaviour
         else spriteRenderer.color = originalColor;
     }
 
+    public void ResetAllDebuffs()
+    {
+        if (activeBurnRoutine != null)
+        {
+            StopCoroutine(activeBurnRoutine);
+            activeBurnRoutine = null;
+        }
+
+        if (activeSlowRoutine != null)
+        {
+            StopCoroutine(activeSlowRoutine);
+            activeSlowRoutine = null;
+            if (StatsManager.Instance != null && baseSpeed > 0)
+            {
+                StatsManager.Instance.speed = baseSpeed;
+                if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
+            }
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
+        }
+    }
+
     private void OnDestroy()
     {
-        if (activeBurnRoutine != null) StopCoroutine(activeBurnRoutine);
-        if (activeSlowRoutine != null) StopCoroutine(activeSlowRoutine);
+        ResetAllDebuffs();
     }
 }
