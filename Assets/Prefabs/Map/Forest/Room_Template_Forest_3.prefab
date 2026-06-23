@@ -7594,17 +7594,8 @@ MonoBehaviour:
   anim: {fileID: 5666634310974217262}
   shopCanvasGroup: {fileID: 0}
   shopManager: {fileID: 0}
-  shopItems:
-  - itemSO: {fileID: 11400000, guid: 49562934e5bfcbd4f9187673c1220e1a, type: 2}
-    price: 3
-  - itemSO: {fileID: 11400000, guid: a60bdc919d7a3574b91119c6c5591048, type: 2}
-    price: 5
-  shopWeapons:
-  - itemSO: {fileID: 11400000, guid: dee88f34adf8d1a438477cbf3dd9302a, type: 2}
-    price: 10
-  shopArmor:
-  - itemSO: {fileID: 11400000, guid: f16f629bdce887d46a3a4de7856085ee, type: 2}
-    price: 15
+  shopConsumables: []
+  shopMiscellaneous: []
   shopkeeperCam: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: -1}
 --- !u!1 &4005658571778851207
@@ -8110,17 +8101,8 @@ MonoBehaviour:
   anim: {fileID: 62381559272205517}
   shopCanvasGroup: {fileID: 0}
   shopManager: {fileID: 0}
-  shopItems:
-  - itemSO: {fileID: 11400000, guid: 49562934e5bfcbd4f9187673c1220e1a, type: 2}
-    price: 3
-  - itemSO: {fileID: 11400000, guid: a60bdc919d7a3574b91119c6c5591048, type: 2}
-    price: 5
-  shopWeapons:
-  - itemSO: {fileID: 11400000, guid: dee88f34adf8d1a438477cbf3dd9302a, type: 2}
-    price: 10
-  shopArmor:
-  - itemSO: {fileID: 11400000, guid: f16f629bdce887d46a3a4de7856085ee, type: 2}
-    price: 15
+  shopConsumables: []
+  shopMiscellaneous: []
   shopkeeperCam: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: -1}
 --- !u!1 &4587388213047161971
@@ -9202,17 +9184,8 @@ MonoBehaviour:
   anim: {fileID: 922110362721226189}
   shopCanvasGroup: {fileID: 0}
   shopManager: {fileID: 0}
-  shopItems:
-  - itemSO: {fileID: 11400000, guid: 49562934e5bfcbd4f9187673c1220e1a, type: 2}
-    price: 5
-  - itemSO: {fileID: 11400000, guid: a60bdc919d7a3574b91119c6c5591048, type: 2}
-    price: 8
-  shopWeapons:
-  - itemSO: {fileID: 11400000, guid: dee88f34adf8d1a438477cbf3dd9302a, type: 2}
-    price: 15
-  shopArmor:
-  - itemSO: {fileID: 11400000, guid: f16f629bdce887d46a3a4de7856085ee, type: 2}
-    price: 20
+  shopConsumables: []
+  shopMiscellaneous: []
   shopkeeperCam: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: -1}
 --- !u!1 &5248813707686891653
@@ -13823,17 +13796,8 @@ MonoBehaviour:
   anim: {fileID: 2254611614256194313}
   shopCanvasGroup: {fileID: 0}
   shopManager: {fileID: 0}
-  shopItems:
-  - itemSO: {fileID: 11400000, guid: 49562934e5bfcbd4f9187673c1220e1a, type: 2}
-    price: 2
-  - itemSO: {fileID: 11400000, guid: a60bdc919d7a3574b91119c6c5591048, type: 2}
-    price: 4
-  shopWeapons:
-  - itemSO: {fileID: 11400000, guid: dee88f34adf8d1a438477cbf3dd9302a, type: 2}
-    price: 8
-  shopArmor:
-  - itemSO: {fileID: 11400000, guid: f16f629bdce887d46a3a4de7856085ee, type: 2}
-    price: 12
+  shopConsumables: []
+  shopMiscellaneous: []
   shopkeeperCam: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: -1}
 --- !u!1 &6641499182515267152

@@ -19,15 +19,6 @@ public class LevelSelectUI : MonoBehaviour
     [SerializeField] private Color tabActiveColor   = new Color(0.95f, 0.88f, 0.65f);
     [SerializeField] private Color tabInactiveColor = new Color(0.20f, 0.18f, 0.22f);
 
-    [Header("Level Button Colors")]
-    [SerializeField] private Color colorForest  = new Color(0.10f, 0.28f, 0.12f);
-    [SerializeField] private Color colorDungeon = new Color(0.18f, 0.08f, 0.30f);
-    [SerializeField] private Color colorLocked  = new Color(0.12f, 0.11f, 0.13f);
-    [SerializeField] private Color colorBoss    = new Color(0.35f, 0.06f, 0.06f);
-
-    [Header("Level Button Text Colors")]
-    [SerializeField] private Color textUnlocked = new Color(0.95f, 0.92f, 0.85f);
-    [SerializeField] private Color textLocked   = new Color(0.45f, 0.43f, 0.48f);
 
     #endregion
 
@@ -42,7 +33,8 @@ public class LevelSelectUI : MonoBehaviour
 
     private void Awake()
     {
-        SetCanvasVisible(false);
+        if (panelCanvasGroup == null)
+            panelCanvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start()
@@ -140,67 +132,54 @@ public class LevelSelectUI : MonoBehaviour
             GameObject btnObj = Instantiate(levelButtonPrefab, buttonContainer);
             btnObj.name = "LevelBtn_" + levelNum;
 
-            // ── Màu nền ───────────────────────────────────────────────────────
-            Image bg = btnObj.GetComponent<Image>();
-            if (bg != null)
-            {
-                if (!unlocked)                     bg.color = colorLocked;
-                else if (isBoss)                   bg.color = colorBoss;
-                else if (currentTab == Tab.Forest) bg.color = colorForest;
-                else                               bg.color = colorDungeon;
-            }
+
 
             TMP_Text label = btnObj.transform.Find("Label")?.GetComponent<TMP_Text>();
             if (label != null)
             {
-                label.color = unlocked ? textUnlocked : textLocked;
-
                 int    displayNum = (currentTab == Tab.Forest) ? levelNum : levelNum - 10;
-                string biomeHex   = (currentTab == Tab.Forest) ? "#7EC87A" : "#B07EE8";
-                string biomeIcon  = (currentTab == Tab.Forest) ? "🌲" : "🏰";
 
-                string biomeStr = $"<color={biomeHex}><size=80%>{biomeIcon}</size></color>";
                 string numStr   = $"<b>{displayNum}</b>";
-                string doneStr  = completed ? " <color=#7EC87A><size=70%>✓</size></color>" : "";
-                string bossStr  = isBoss ? "\n<color=#FF6B6B><size=65%>💀 BOSS</size></color>" : "";
+                string doneStr  = completed ? " <color=#7EC87A><size=70%>Completed</size></color>" : "";
 
-                label.text = $"{biomeStr} {numStr}{doneStr}{bossStr}";
+                label.text = $"{numStr} {doneStr}";
             }
-
-            TMP_Text subLabel = btnObj.transform.Find("SubLabel")?.GetComponent<TMP_Text>();
-            if (subLabel != null)
-            {
-                if (unlocked && cfg != null && cfg.targetKillsToWin > 0)
-                {
-                    string killColor = isBoss ? "#FF9999" : "#AAAAAA";
-                    subLabel.text = $"<color={killColor}><size=85%>⚔ {cfg.targetKillsToWin} kills</size></color>";
-                }
-                else
-                {
-                    subLabel.text = unlocked ? "" : "<color=#444444><size=80%>🔒</size></color>";
-                }
-            }
-
-            Transform completedIcon = btnObj.transform.Find("CompletedIcon");
-            if (completedIcon != null) completedIcon.gameObject.SetActive(completed);
-
-            Transform lockedIcon = btnObj.transform.Find("LockedIcon");
-            if (lockedIcon != null) lockedIcon.gameObject.SetActive(!unlocked);
 
             CanvasGroup cg = btnObj.GetComponent<CanvasGroup>();
-            if (cg != null) cg.alpha = unlocked ? 1f : 0.35f;
+            if (cg != null)
+            {
+                if (!unlocked)       cg.alpha = 0.35f; // locked
+                else if (completed)  cg.alpha = 1.00f; // completed — view only
+                else                 cg.alpha = 1.00f; // current — playable
+            }
+
+            // Chỉ cho chơi level hiện tại (unlocked + chưa completed)
+            // Nếu đang debug → tất cả level đều chơi được
+            bool debugMode = RunManager.Instance.unlockAllLevels;
+            bool playable  = debugMode ? true : (unlocked && !completed);
 
             Button btn = btnObj.GetComponent<Button>();
             if (btn != null)
             {
-                btn.interactable = unlocked;
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
+                btn.interactable = playable;
+                
+                if (completed && !playable)
                 {
-                    Hide();
-                    Time.timeScale = 1f;
-                    RunManager.Instance.PlayLevel(levelNum - 1);
-                });
+                    ColorBlock cb = btn.colors;
+                    cb.disabledColor = cb.normalColor;
+                    btn.colors = cb;
+                }
+
+                btn.onClick.RemoveAllListeners();
+                if (playable)
+                {
+                    btn.onClick.AddListener(() =>
+                    {
+                        Hide();
+                        Time.timeScale = 1f;
+                        RunManager.Instance.PlayLevel(levelNum - 1);
+                    });
+                }
             }
         }
     }
@@ -211,10 +190,12 @@ public class LevelSelectUI : MonoBehaviour
 
     private void SetCanvasVisible(bool visible)
     {
-        if (panelCanvasGroup == null) return;
-        panelCanvasGroup.alpha          = visible ? 1f : 0f;
-        panelCanvasGroup.blocksRaycasts = visible;
-        panelCanvasGroup.interactable   = visible;
+        if (panelCanvasGroup != null)
+        {
+            panelCanvasGroup.alpha          = visible ? 1f : 0f;
+            panelCanvasGroup.blocksRaycasts = visible;
+            panelCanvasGroup.interactable   = visible;
+        }
     }
 
     #endregion

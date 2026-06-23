@@ -111,6 +111,8 @@ GameObject:
   - component: {fileID: 4894775486020289458}
   - component: {fileID: 7110658607958553911}
   - component: {fileID: 4908497761870456341}
+  - component: {fileID: 5917500648422558555}
+  - component: {fileID: 1561987175797366551}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -296,7 +298,9 @@ MonoBehaviour:
   facingDirection: 1
   rb: {fileID: 4631348067763622599}
   anim: {fileID: 1507084950510301690}
+  isKnockedback: 0
   isShooting: 0
+  isDashing: 0
   player_Combat: {fileID: 4979891121828203900}
 --- !u!114 &5835555539230468636
 MonoBehaviour:
@@ -310,12 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fd6edb47f0ff643a05825f5d658c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
-  healthTextAnim: {fileID: 0}
-  healthSlider: {fileID: 0}
   expManager: {fileID: 0}
   gameOverPanel: {fileID: 0}
   gameOverExpText: {fileID: 0}
+  isInvincible: 0
 --- !u!114 &4979891121828203900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +397,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_DebuffManager
   burnColor: {r: 1, g: 0.3, b: 0, a: 1}
+  slowColor: {r: 0.3, g: 0.75, b: 1, a: 1}
+--- !u!114 &5917500648422558555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864427819740292730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ac9feb43e747d4cad7c3b8e7a3478a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
+  dashSpeed: 25
+  dashDuration: 0.15
+  dashCooldown: 0.8
+  dashEnergyCost: 30
+  rb: {fileID: 4631348067763622599}
+  playerMovement: {fileID: 9223232053489507773}
+  energyManager: {fileID: 1561987175797366551}
+  anim: {fileID: 1507084950510301690}
+--- !u!114 &1561987175797366551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864427819740292730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93456c29254ce14d9a374e77c70c004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnergyManager
+  maxEnergy: 100
+  currentEnergy: 100
+  passiveRegenRate: 6
+  regenDelay: 1
+  killRegenAmount: 10
 --- !u!1 &1193449900049288634
 GameObject:
   m_ObjectHideFlags: 0

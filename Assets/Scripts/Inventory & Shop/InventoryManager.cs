@@ -30,6 +30,25 @@ public class InventoryManager : MonoBehaviour
         Loot.OnItemLooted -= AddItem;
     }
 
+    public void ResetInventory()
+    {
+        gold = 0;
+        if (goldText != null)
+        {
+            goldText.text = gold.ToString();
+        }
+
+        foreach (var slot in itemSlots)
+        {
+            if (slot != null)
+            {
+                slot.itemSO = null;
+                slot.quantity = 0;
+                slot.UpdateUI();
+            }
+        }
+    }
+
     public void AddItem(ItemSO itemSO, int quantity)
     {
         //Debug.Log($"Added {quantity} x {itemSO.itemName} to inventory.");

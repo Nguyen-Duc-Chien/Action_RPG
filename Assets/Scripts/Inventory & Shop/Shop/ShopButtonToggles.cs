@@ -2,27 +2,19 @@ using UnityEngine;
 
 public class ShopButtonToggles : MonoBehaviour
 {
-    public void OpenItemShop()
+    public void OpenConsumablesShop()
     {
         if(ShopKeeper.currentShopKeeper != null)
         {
-            ShopKeeper.currentShopKeeper.OpenItemShop();
+            ShopKeeper.currentShopKeeper.OpenConsumablesShop();
         }
     }
 
-    public void OpenWeaponShop()
+    public void OpenMiscellaneousShop()
     {
         if (ShopKeeper.currentShopKeeper != null)
         {
-            ShopKeeper.currentShopKeeper.OpenWeaponShop();
-        }
-    }
-
-    public void OpenArmorShop()
-    {
-        if (ShopKeeper.currentShopKeeper != null)
-        {
-            ShopKeeper.currentShopKeeper.OpenArmorShop();
+            ShopKeeper.currentShopKeeper.OpenMiscellaneousShop();
         }
     }
 }

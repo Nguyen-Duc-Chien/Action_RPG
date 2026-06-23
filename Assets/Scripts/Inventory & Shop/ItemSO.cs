@@ -7,8 +7,16 @@ public class ItemSO : ScriptableObject
     [TextArea] public string itemDescription;
     public Sprite icon;
 
+    public bool isConsumable;
+
     public bool isGold;
     public int stackSize = 16;
+
+    [Header("Shop")]
+    public bool canBuy = true;
+    public int buyPrice;
+    public bool canSell = true;
+    public int sellPrice;
 
     [Header("Stats")]
     public float currentHealth;

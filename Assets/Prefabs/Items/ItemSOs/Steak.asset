@@ -15,10 +15,16 @@ MonoBehaviour:
   itemName: Steak
   itemDescription: Something suprecious!
   icon: {fileID: 5558420398955925738, guid: a4e9593d7fdeb3841bd70ae6da3ddc8c, type: 3}
+  isConsumable: 1
   isGold: 0
   stackSize: 16
-  currentHealth: 5
+  canBuy: 1
+  buyPrice: 3
+  canSell: 1
+  sellPrice: 3
+  currentHealth: 3
   maxHealth: 0
-  speed: 2
-  damage: 2
+  speed: 1
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 2

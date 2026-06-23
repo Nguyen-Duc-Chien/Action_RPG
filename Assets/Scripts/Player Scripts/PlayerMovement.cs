@@ -10,8 +10,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
 
-    private bool isKnockedback;
+    [HideInInspector] public bool isKnockedback;
     public bool isShooting;
+    [HideInInspector] public bool isDashing;
 
     public Player_Combat player_Combat;
 
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Fixed Update is called 50x second
     void FixedUpdate()
     {
-        if (isKnockedback == false)
+        if (isKnockedback == false && !isDashing)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");

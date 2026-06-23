@@ -15,35 +15,39 @@ public class ToggleSkillTree : MonoBehaviour
     {
         skillsCanvas.alpha = 0;
         skillsCanvas.blocksRaycasts = false;
+        skillsCanvas.interactable = false;
         skillTreeOpen = false;
     }
-    public void Update()
+    public void OpenPanel()
     {
-        if(Input.GetButtonDown("ToggleSkillTree"))
-        {
-            if(skillTreeOpen)
-            {
-                Time.timeScale = 1;
-                skillsCanvas.alpha = 0;
-                skillsCanvas.blocksRaycasts = false;
-                skillTreeOpen = false;
-                //Debug.Log("Closed Skill Tree");
-            }
-            else if (!skillTreeOpen)
-            {
-                if (statsUI != null && statsUI.IsStatsOpen)
-                {
-                    //Debug.Log("Cannot open Skill Tree while Stats UI is open!");
-                    return;
-                }
+        if (skillTreeOpen) return;
 
-                // Open Skill Tree -> Stop game
-                Time.timeScale = 0;
-                skillsCanvas.alpha = 1;
-                skillsCanvas.blocksRaycasts = true;
-                skillTreeOpen = true;
-                //Debug.Log("Opened Skill Tree");
-            }
+        if (statsUI != null && statsUI.IsStatsOpen)
+        {
+            // Không mở nếu bảng Stats đang mở
+            return;
         }
+
+        // Open Skill Tree -> Stop game
+        Time.timeScale = 0;
+        skillsCanvas.alpha = 1;
+        skillsCanvas.blocksRaycasts = true;
+        skillsCanvas.interactable = true;
+        skillTreeOpen = true;
+    }
+
+    public void ClosePanel()
+    {
+        if (!skillTreeOpen) return;
+
+        Time.timeScale = 1;
+        skillsCanvas.alpha = 0;
+        skillsCanvas.blocksRaycasts = false;
+        skillsCanvas.interactable = false;
+        if (UnityEngine.EventSystems.EventSystem.current != null)
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+        }
+        skillTreeOpen = false;
     }
 }

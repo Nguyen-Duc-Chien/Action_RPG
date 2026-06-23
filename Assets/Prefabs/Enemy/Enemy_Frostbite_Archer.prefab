@@ -283,7 +283,7 @@ MonoBehaviour:
   genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
   lootTable:
   - itemSO: {fileID: 11400000, guid: 566ff570abe8fe94ca5d2beb021d1d59, type: 2}
-    dropChance: 50
+    dropChance: 80
     quantityTiers:
     - amount: 3
       rollChance: 10
@@ -292,7 +292,7 @@ MonoBehaviour:
     - amount: 1
       rollChance: 60
   - itemSO: {fileID: 11400000, guid: 09261d1b6e6dcf143a35e96540053c1e, type: 2}
-    dropChance: 85
+    dropChance: 80
     quantityTiers:
     - amount: 2
       rollChance: 30

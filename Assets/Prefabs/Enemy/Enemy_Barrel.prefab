@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3541301454556350181
 Transform:
   m_ObjectHideFlags: 0
@@ -175,7 +175,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Health
   expReward: 3
   genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
-  lootTable: []
+  lootTable:
+  - itemSO: {fileID: 11400000, guid: 566ff570abe8fe94ca5d2beb021d1d59, type: 2}
+    dropChance: 80
+    quantityTiers:
+    - amount: 3
+      rollChance: 10
+    - amount: 2
+      rollChance: 30
+    - amount: 1
+      rollChance: 60
+  - itemSO: {fileID: 11400000, guid: d1476fd01cf665340b44a648f3faca94, type: 2}
+    dropChance: 80
+    quantityTiers:
+    - amount: 2
+      rollChance: 25
+    - amount: 1
+      rollChance: 75
   currentHealth: 6
   maxHealth: 6
 --- !u!114 &4830662375791826098
@@ -190,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10540cdfa7ea97648bfa2577970e3de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Barrel_Suicide
-  speed: 3.5
+  speed: 3
   playerDetectionRange: 5
   chaseTriggerRange: 3.2
   explodeTriggerRange: 2

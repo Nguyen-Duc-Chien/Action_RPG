@@ -15,9 +15,16 @@ MonoBehaviour:
   itemName: Mushroom
   itemDescription: It's an item... It mushes?
   icon: {fileID: -64693675, guid: dba476cb76f15af4ea432a3cbf8d9370, type: 3}
+  isConsumable: 1
   isGold: 0
-  currentHealth: 5
+  stackSize: 16
+  canBuy: 1
+  buyPrice: 2
+  canSell: 1
+  sellPrice: 2
+  currentHealth: 2.5
   maxHealth: 0
-  speed: 2
-  damage: 1
+  speed: 0
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 2

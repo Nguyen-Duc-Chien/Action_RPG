@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverPanel;
     public TMP_Text gameOverExpText;
 
+    public bool isInvincible = false;
+
     private Vector3 startPosition;
     private Coroutine regenCoroutine;
 
@@ -53,6 +55,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
+        // I-frames: skip damage while dashing
+        if (amount < 0 && isInvincible) return;
+
         if (amount < 0)
         {
             float currentResistance = Mathf.Clamp(StatsManager.Instance.damageResistance, 0f, 0.9f);
@@ -117,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
             gameOverPanel.SetActive(true);
             if (gameOverExpText != null)
             {
-                gameOverExpText.text = "Score: " + expManager.currentExp;
+                gameOverExpText.text = "Score: " + expManager.totalExp;
             }
         }
 
@@ -137,6 +142,24 @@ public class PlayerHealth : MonoBehaviour
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(false);
+        }
+
+        ExpManager foundExpManager = expManager != null ? expManager : FindAnyObjectByType<ExpManager>();
+        if (foundExpManager != null)
+        {
+            foundExpManager.ResetExp();
+        }
+
+        InventoryManager invManager = FindAnyObjectByType<InventoryManager>();
+        if (invManager != null)
+        {
+            invManager.ResetInventory();
+        }
+
+        // Reset energy
+        if (EnergyManager.Instance != null)
+        {
+            EnergyManager.Instance.ResetEnergy();
         }
 
         // Xóa sạch tiến trình level khi chết — chỉ giữ lại Level 1 mở khóa
@@ -170,8 +193,23 @@ public class PlayerHealth : MonoBehaviour
         transform.position = spawnPosition;
         startPosition = spawnPosition;
 
-        if (expManager != null)
-            expManager.currentExp = 0;
+        ExpManager foundExpManager = expManager != null ? expManager : FindAnyObjectByType<ExpManager>();
+        if (foundExpManager != null)
+        {
+            foundExpManager.ResetExp();
+        }
+
+        InventoryManager invManager = FindAnyObjectByType<InventoryManager>();
+        if (invManager != null)
+        {
+            invManager.ResetInventory();
+        }
+
+        // Reset energy
+        if (EnergyManager.Instance != null)
+        {
+            EnergyManager.Instance.ResetEnergy();
+        }
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);

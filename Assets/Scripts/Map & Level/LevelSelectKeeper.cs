@@ -12,26 +12,20 @@ public class LevelSelectKeeper : MonoBehaviour
     [SerializeField] private LevelSelectUI levelSelectUI;
     [SerializeField] private Animator anim;
 
-    [Header("Interaction")]
-    [SerializeField] private string interactButton = "Interact";
-    [SerializeField] private string cancelButton   = "Cancel";
-
-    // ── Runtime state ─────────────────────────────────────────────────────────
     private bool playerInRange = false;
     private bool isPanelOpen   = false;
 
-    // ══════════════════════════════════════════════════════════════════════════
     #region Unity Lifecycle
 
     private void Update()
     {
         if (!playerInRange) return;
 
-        if (!isPanelOpen && Input.GetButtonDown(interactButton))
+        if (!isPanelOpen && Input.GetButtonDown("Interact"))
         {
             OpenPanel();
         }
-        else if (isPanelOpen && Input.GetButtonDown(cancelButton))
+        else if (isPanelOpen && Input.GetButtonDown("Cancel"))
         {
             ClosePanel();
         }
@@ -42,7 +36,9 @@ public class LevelSelectKeeper : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
 
         playerInRange = true;
-        if (anim != null) anim.SetBool("playerInRange", true);
+        //Debug.Log($"[LevelSelectKeeper] Player entered range. anim is null? {anim == null}");
+        if (anim != null)
+            anim.SetBool("playerInRange", true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -60,7 +56,6 @@ public class LevelSelectKeeper : MonoBehaviour
     // ══════════════════════════════════════════════════════════════════════════
     #region Public API
 
-    /// <summary>Gọi từ nút X trên Canvas để đóng panel.</summary>
     public void ClosePanel()
     {
         if (!isPanelOpen) return;
@@ -92,6 +87,7 @@ public class LevelSelectKeeper : MonoBehaviour
         levelSelectUI.Show();
         Debug.Log("[LevelSelectKeeper] Panel opened.");
     }
+    
 
     #endregion
 }

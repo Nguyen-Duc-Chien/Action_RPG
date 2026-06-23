@@ -10,9 +10,8 @@ public class ShopKeeper : MonoBehaviour
     public CanvasGroup shopCanvasGroup;
     public ShopManager shopManager;
 
-    [SerializeField] private List<ShopItems> shopItems;
-    [SerializeField] private List<ShopItems> shopWeapons;
-    [SerializeField] private List<ShopItems> shopArmor;
+    [SerializeField] private List<ItemSO> shopConsumables;
+    [SerializeField] private List<ItemSO> shopMiscellaneous;
 
     [SerializeField] private Camera shopkeeperCam;
     [SerializeField] private Vector3 cameraOffset = new Vector3(0, 0, -1);
@@ -48,7 +47,7 @@ public class ShopKeeper : MonoBehaviour
                     shopkeeperCam.transform.position = transform.position + cameraOffset; 
                     shopkeeperCam.gameObject.SetActive(true);
 
-                    OpenItemShop();
+                    OpenConsumablesShop();
                     // Default to opening the item shop, you can change this to open different shops based on your design
                 }
             }
@@ -68,19 +67,14 @@ public class ShopKeeper : MonoBehaviour
         }
     }
 
-    public void OpenItemShop()
+    public void OpenConsumablesShop()
     {
-        shopManager.PopulateShopItems(shopItems);
+        shopManager.PopulateShopItems(shopConsumables);
     }
 
-    public void OpenWeaponShop()
+    public void OpenMiscellaneousShop()
     {
-        shopManager.PopulateShopItems(shopWeapons);
-    }
-
-    public void OpenArmorShop()
-    {
-        shopManager.PopulateShopItems(shopArmor);
+        shopManager.PopulateShopItems(shopMiscellaneous);
     }   
 
     private void OnTriggerEnter2D(Collider2D collision)

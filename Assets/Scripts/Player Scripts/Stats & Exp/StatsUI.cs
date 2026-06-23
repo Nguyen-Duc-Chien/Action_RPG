@@ -18,20 +18,17 @@ public class StatsUI : MonoBehaviour
         UpdateAllStats();
         statsCanvas.alpha = 0; // Start with stats UI hidden
         statsCanvas.blocksRaycasts = false; // Disable interaction when closed
+        statsCanvas.interactable = false;
         statsOpen = false;
     }
 
     public void Update()
     {
         if (Input.GetButtonDown("ToggleStats"))
+        {
             if (statsOpen)
-            {// Close stats UI
-                Time.timeScale = 1;
-                UpdateAllStats();
-                statsCanvas.alpha = 0;
-                statsCanvas.blocksRaycasts = false; // Disable interaction when closed
-                statsOpen = false;
-                //Debug.Log("Stats UI closed!");
+            {
+                CloseStatsUI();
             }
             else
             {
@@ -46,9 +43,29 @@ public class StatsUI : MonoBehaviour
                 UpdateAllStats();
                 statsCanvas.alpha = 1;
                 statsCanvas.blocksRaycasts = true;
+                statsCanvas.interactable = true;
                 statsOpen = true;
                 //Debug.Log("Stats UI opened!");
             }
+        }
+    }
+
+    public void CloseStatsUI()
+    {
+        if (statsOpen)
+        {
+            Time.timeScale = 1;
+            UpdateAllStats();
+            statsCanvas.alpha = 0;
+            statsCanvas.blocksRaycasts = false; // Disable interaction when closed
+            statsCanvas.interactable = false;
+            if (UnityEngine.EventSystems.EventSystem.current != null)
+            {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+            }
+            statsOpen = false;
+            //Debug.Log("Stats UI closed!");
+        }
     }
 
     public void UpdateHealth()

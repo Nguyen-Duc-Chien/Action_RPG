@@ -15,10 +15,16 @@ MonoBehaviour:
   itemName: Pumkin
   itemDescription: Just a pumpkin. Not a pum-kin, a pum-win.
   icon: {fileID: 644343070, guid: ad8f9b2ae4abe2848a1dba459332ba46, type: 3}
+  isConsumable: 1
   isGold: 0
   stackSize: 16
-  currentHealth: 3
+  canBuy: 1
+  buyPrice: 1
+  canSell: 1
+  sellPrice: 1
+  currentHealth: 1
   maxHealth: 0
-  speed: 1
-  damage: 1
+  speed: 1.5
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 2

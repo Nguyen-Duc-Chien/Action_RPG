@@ -15,10 +15,16 @@ MonoBehaviour:
   itemName: Wood stick
   itemDescription: Just a stick. Surprisingly versatile, tragically unimpressive.
   icon: {fileID: -4420179181447111896, guid: 11f4e6bad5a6d2c48acb94c7d515297e, type: 3}
+  isConsumable: 0
   isGold: 0
   stackSize: 16
+  canBuy: 0
+  buyPrice: 0
+  canSell: 1
+  sellPrice: 1
   currentHealth: 0
   maxHealth: 0
   speed: 0
-  damage: 2
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 2

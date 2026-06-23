@@ -11,12 +11,12 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
 
 
-    public void PopulateShopItems(List<ShopItems> shopItems)
+    public void PopulateShopItems(List<ItemSO> shopItems)
     {
         for (int i = 0; i < shopItems.Count && i < shopSlots.Length; i++)
         {
-            ShopItems shopItem = shopItems[i];
-            shopSlots[i].Initialized(shopItem.itemSO, shopItem.price);
+            ItemSO shopItem = shopItems[i];
+            shopSlots[i].Initialized(shopItem);
             shopSlots[i].gameObject.SetActive(true);
         }
 
@@ -26,13 +26,13 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void TryBuyItem(ItemSO itemSO, int price)
+    public void TryBuyItem(ItemSO itemSO)
     {
-        if(itemSO != null && inventoryManager.gold >= price)
+        if(itemSO != null && itemSO.canBuy && inventoryManager.gold >= itemSO.buyPrice)
         {
             if(HasSpaceForItem(itemSO))
             {
-                inventoryManager.gold -= price;
+                inventoryManager.gold -= itemSO.buyPrice;
                 inventoryManager.goldText.text = inventoryManager.gold.ToString();
                 inventoryManager.AddItem(itemSO, 1);
                 inventoryManager.SaveToPlayerPrefs();
@@ -45,10 +45,12 @@ public class ShopManager : MonoBehaviour
         }
         else // Debugging messages for why the purchase failed
         {
-            if(inventoryManager.gold < price)
-                Debug.LogWarning("Not enough gold to buy " + itemSO.itemName);
             if(itemSO == null)
                 Debug.LogWarning("Item does not exist in shop.");
+            else if(!itemSO.canBuy)
+                Debug.LogWarning("Item cannot be bought.");
+            else if(inventoryManager.gold < itemSO.buyPrice)
+                Debug.LogWarning("Not enough gold to buy " + itemSO.itemName);
         }
     }
 
@@ -66,24 +68,35 @@ public class ShopManager : MonoBehaviour
 
     public void SellItem(ItemSO itemSO)
     {
-        if (itemSO == null)
+        if (itemSO == null || !itemSO.canSell)
             return;
-        foreach (var slot in shopSlots)
+            
+        bool hasItem = false;
+        foreach (var slot in inventoryManager.itemSlots)
         {
-            if(slot.itemSO == itemSO)
+            if (slot.itemSO == itemSO && slot.quantity > 0)
             {
-                inventoryManager.gold += slot.price;  // Flexable to allow different sell prices in the future
-                inventoryManager.goldText.text = inventoryManager.gold.ToString();
-                inventoryManager.SaveToPlayerPrefs();
-                return;
+                hasItem = true;
+                slot.quantity--;
+                if(slot.quantity <= 0)
+                {
+                    slot.itemSO = null;
+                }
+                slot.UpdateUI();
+                break;
             }
         }
-    }
-}
 
-[System.Serializable]
-public class ShopItems
-{
-    public ItemSO itemSO;
-    public int price;
+        if (hasItem)
+        {
+            inventoryManager.gold += itemSO.sellPrice;
+            inventoryManager.goldText.text = inventoryManager.gold.ToString();
+            inventoryManager.SaveToPlayerPrefs();
+            Debug.Log("Sold 1 x " + itemSO.itemName);
+        }
+        else
+        {
+            Debug.LogWarning("Cannot sell " + itemSO.itemName + " because you don't have it in your inventory.");
+        }
+    }
 }

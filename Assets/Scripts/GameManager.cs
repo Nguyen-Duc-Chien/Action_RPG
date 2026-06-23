@@ -58,6 +58,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        if (RunManager.Instance != null)
+        {
+            RunManager.Instance.ResetAllProgress();
+        }
+
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         if (!string.IsNullOrEmpty(startSceneName))

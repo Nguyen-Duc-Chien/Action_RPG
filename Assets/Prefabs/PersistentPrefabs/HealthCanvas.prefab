@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 7289263983698690555}
   - component: {fileID: 812117412218471685}
   m_Layer: 5
-  m_Name: Player UI
+  m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,6 +446,7 @@ MonoBehaviour:
   healthSlider: {fileID: 180934648580570321}
   healthText: {fileID: 7052918227267638789}
   healthTextAnim: {fileID: 8105512732097646459}
+  playerHealth: {fileID: 0}
 --- !u!1 &3625065380962893003
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,9 +878,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 20
+  m_Value: 0.602
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -896,7 +897,7 @@ GameObject:
   - component: {fileID: 7052918227267638789}
   - component: {fileID: 8105512732097646459}
   m_Layer: 5
-  m_Name: HP Text
+  m_Name: HP_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,7 +1034,7 @@ Animator:
   m_GameObject: {fileID: 7416952830544945179}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76b2019c618daad43869cbc10a4b2c57, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0db53716c9d989b40b64094ffd78b91c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

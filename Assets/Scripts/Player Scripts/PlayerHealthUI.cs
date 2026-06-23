@@ -38,7 +38,13 @@ public class PlayerHealthUI : MonoBehaviour
         {
             Destroy(this);
         }
+
+        if (healthSlider != null)
+        {
+            healthSlider.interactable = false;
+        }
     }
+
 
     public void UpdateHealthUI(float currentHealth, float maxHealth)
     {

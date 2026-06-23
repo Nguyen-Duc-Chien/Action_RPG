@@ -9,6 +9,10 @@ public class RunManager : MonoBehaviour
     [Header("Level Configs (20 levels — index 0 = Level 1)")]
     public List<LevelConfig> levelConfigs;
 
+    [Header("Debug")]
+    [Tooltip("Bật để mở khoá tất cả level khi test. Nhớ tắt trước khi build!")]
+    public bool unlockAllLevels = false;
+
     public ItemDatabase itemDatabase;
 
     [Header("Scene Names")]
@@ -102,6 +106,7 @@ public class RunManager : MonoBehaviour
 
     public bool IsLevelUnlocked(int levelNumber)
     {
+        if (unlockAllLevels) return true;
         int unlocked = PlayerPrefs.GetInt("UnlockedLevel", 1);
         return levelNumber <= unlocked;
     }
@@ -157,19 +162,21 @@ public class RunManager : MonoBehaviour
 
     #region Exp Save/Load
 
-    public void SaveExp(int level, int currentExp, int expToLevel)
+    public void SaveExp(int level, int currentExp, int expToLevel, int totalExp)
     {
         PlayerPrefs.SetInt("Player_Level", level);
         PlayerPrefs.SetInt("Player_CurrentExp", currentExp);
         PlayerPrefs.SetInt("Player_ExpToLevel", expToLevel);
+        PlayerPrefs.SetInt("Player_TotalExp", totalExp);
         PlayerPrefs.Save();
     }
 
-    public void LoadExp(out int level, out int currentExp, out int expToLevel)
+    public void LoadExp(out int level, out int currentExp, out int expToLevel, out int totalExp)
     {
         level      = PlayerPrefs.GetInt("Player_Level", 0);
         currentExp = PlayerPrefs.GetInt("Player_CurrentExp", 0);
         expToLevel = PlayerPrefs.GetInt("Player_ExpToLevel", 0);
+        totalExp   = PlayerPrefs.GetInt("Player_TotalExp", 0);
     }
 
     public bool HasExpSave()
@@ -254,6 +261,14 @@ public class RunManager : MonoBehaviour
         PlayerPrefs.SetInt("UnlockedLevel", 1);
         PlayerPrefs.Save();
         Debug.LogWarning("[RunManager] All progress has been reset (levels, gold, exp, inventory)!");
+    }
+
+    [ContextMenu("Unlock All Levels (DEBUG)")]
+    public void UnlockAllLevelsDebug()
+    {
+        PlayerPrefs.SetInt("UnlockedLevel", 20);
+        PlayerPrefs.Save();
+        Debug.LogWarning("[RunManager] All 20 levels unlocked!");
     }
 
     #endregion

@@ -34,9 +34,12 @@ public class SkillManager : MonoBehaviour
                 StatsManager.Instance.UpdateSpeed(0.5f);
                 //Debug.Log("Speed Boost 2 applied.");
                 break;
-            case "Stun Strike":         // Increase the duration of the stun effect on enemies when hit with melee attacks
-                StatsManager.Instance.stunTime += 0.2f;
-                //Debug.Log("Stun Strike applied.");
+            case "Extra Energy":        // Increase max energy for more energy
+                if (EnergyManager.Instance != null)
+                {
+                    EnergyManager.Instance.UpdateMaxEnergy(10f);
+                }
+                //Debug.Log("Extra Energy applied.");
                 break;
 
             //Column 2
@@ -67,7 +70,7 @@ public class SkillManager : MonoBehaviour
                 StatsManager.Instance.knockbackTime += 0.05f;
                 //Debug.Log("Knockback Force 1 applied.");
                 break;
-            case "Melee Damage Up 2":   // Increase melee damage for more damage output
+            /*case "Melee Damage Up 2":   // Increase melee damage for more damage output
                 StatsManager.Instance.UpdateMeleeDamage(0.5f);
                 //Debug.Log("Melee Damage Up 2 applied.");
                 break;
@@ -75,8 +78,19 @@ public class SkillManager : MonoBehaviour
                 StatsManager.Instance.knockbackForce += 0.5f;
                 StatsManager.Instance.knockbackTime += 0.05f;
                 //Debug.Log("Knockback Force 2 applied.");
+                break;*/
+            case "Stun Strike":         // Increase the duration of the stun effect on enemies when hit with melee attacks
+                StatsManager.Instance.stunTime += 0.2f;
+                //Debug.Log("Stun Strike applied.");
                 break;
-
+            case "Dash Efficiency":     // Decrease the energy cost of dashing
+                PlayerDash dash = FindAnyObjectByType<PlayerDash>(FindObjectsInactive.Include);
+                if (dash != null)
+                {
+                    dash.dashEnergyCost -= 5f;
+                }
+                //Debug.Log("Dash Efficiency applied.");
+                break;
 
             //Column 4
             case "Unlock Bow":          // Allow player to use bow and arrow, unlocking the rest of the column

@@ -15,9 +15,16 @@ MonoBehaviour:
   itemName: Gold
   itemDescription: Cold hard cash!
   icon: {fileID: -7942359355602504142, guid: e3353b1ad83ad1445bb99f07317ab9c1, type: 3}
+  isConsumable: 0
   isGold: 1
+  stackSize: 16
+  canBuy: 0
+  buyPrice: 0
+  canSell: 0
+  sellPrice: 0
   currentHealth: 0
   maxHealth: 0
   speed: 0
-  damage: 0
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 0

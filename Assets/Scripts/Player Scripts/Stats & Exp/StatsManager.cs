@@ -64,7 +64,13 @@ public class StatsManager : MonoBehaviour
     public void UpdateMaxHealth(float amount)
     {
         maxHealth += amount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
         healthText.text = "HP: " + currentHealth + "/ " + maxHealth;
+
+        // Cập nhật slider
+        if (PlayerHealthUI.Instance != null)
+            PlayerHealthUI.Instance.UpdateHealthUI(currentHealth, maxHealth);
     }
 
     public void UpdateHealth(float amount)
@@ -73,6 +79,10 @@ public class StatsManager : MonoBehaviour
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
         healthText.text = "HP: " + currentHealth + "/ " + maxHealth;
+
+        // Cập nhật slider
+        if (PlayerHealthUI.Instance != null)
+            PlayerHealthUI.Instance.UpdateHealthUI(currentHealth, maxHealth);
     }
 
     public void UpdateDamageResistance(float amount)

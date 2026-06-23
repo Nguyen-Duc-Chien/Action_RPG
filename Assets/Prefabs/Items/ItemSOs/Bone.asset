@@ -15,10 +15,16 @@ MonoBehaviour:
   itemName: Bone
   itemDescription: A suspicious bone. Probably not mine... I hope.
   icon: {fileID: 385851911, guid: e1de2dd7ca4667c4ca0a123ac06bfff7, type: 3}
+  isConsumable: 0
   isGold: 0
   stackSize: 16
+  canBuy: 0
+  buyPrice: 0
+  canSell: 1
+  sellPrice: 1
   currentHealth: 2
   maxHealth: 0
   speed: 0
-  damage: 2
+  meleeDamage: 0
+  rangeDamage: 0
   duration: 2
