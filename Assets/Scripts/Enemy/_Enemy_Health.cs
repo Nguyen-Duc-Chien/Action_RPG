@@ -103,6 +103,12 @@ public class Enemy_Health : MonoBehaviour
             frostbiteArcherMovement.enabled = false;
         }
 
+        Pawn_Red_Movement pawnRedMovement = GetComponent<Pawn_Red_Movement>();
+        if (pawnRedMovement != null)
+        {
+            pawnRedMovement.enabled = false;
+        }
+
         // Diable all debuffs
         Enemy_DebuffManager debuffManager = GetComponent<Enemy_DebuffManager>();
         if (debuffManager != null)

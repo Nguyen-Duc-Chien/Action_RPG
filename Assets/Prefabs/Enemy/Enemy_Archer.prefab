@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 6786733013768587021}
   - component: {fileID: 1266420981693324247}
   - component: {fileID: 5852874127438185742}
+  - component: {fileID: 8242267460129389276}
   m_Layer: 9
   m_Name: Enemy_Archer
   m_TagString: Enemy
@@ -95,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9078402337691296874}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.05, y: 5.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 7478499875519044494, guid: 17a7355ce00c1f940adc9e4ed3e79ab9, type: 3}
   firePoint: {fileID: 1452898382268155680}
   damage: 3
-  arrowSpeed: 6
+  arrowSpeed: 8
   knockbackForce: 6
   stunTime: 0.2
   lifeSpawn: 2
@@ -286,11 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d49f0410ee8d04c9cd285eee3e209c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Health
-  expReward: 4
+  expReward: 5
   genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
   lootTable:
   - itemSO: {fileID: 11400000, guid: 566ff570abe8fe94ca5d2beb021d1d59, type: 2}
-    dropChance: 40
+    dropChance: 50
     quantityTiers:
     - amount: 3
       rollChance: 10
@@ -312,8 +313,8 @@ MonoBehaviour:
       rollChance: 20
     - amount: 1
       rollChance: 80
-  currentHealth: 6
-  maxHealth: 6
+  currentHealth: 5
+  maxHealth: 5
 --- !u!114 &6786733013768587021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,3 +362,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_DebuffManager
   isBoss: 0
+  freezeColor: {r: 0.3, g: 0.75, b: 1, a: 1}
+  slowColor: {r: 0.6, g: 0.4, b: 0.8, a: 1}
+  burnColor: {r: 1, g: 0.3, b: 0, a: 1}
+--- !u!114 &8242267460129389276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078402337691296874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fa33c6805921748b3b8d373e3925e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AStarPathfinder
+  cellSize: 0.25
+  gridExtent: 30
+  pathUpdateInterval: 0.3
+  obstaclePadding: 0.5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024

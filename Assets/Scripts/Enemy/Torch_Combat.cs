@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Torch_Combat : MonoBehaviour
 {
-    public float damage = 1;
+    public float damage = 2f;
     public Transform attackPoint;
     public float weaponRange;
-    public float knockbackForce;
-    public float stunTime;
+    public float knockbackForce = 5f;
+    public float stunTime = 0.2f;
     public LayerMask playerLayer;
 
     [Header("Torch Flame Settings")]

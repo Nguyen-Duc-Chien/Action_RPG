@@ -22776,7 +22776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63eb63c864ae73a429562678d17139d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomEnemySpawner
-  enemyData: {fileID: 11400000, guid: a9874fc33d3d752488407ce31e9a7804, type: 2}
+  enemyData: {fileID: 0}
   maxEnemiesInThisRoom: 5
   respawnChance: 50
 --- !u!1 &8323604914824734601

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Torch_Movement : MonoBehaviour
 {
-    public float speed;
+    public float speed = 4.5f;
     public float attackRange;
     public float attackCooldown = 2;
     public float playerDetectionRange = 5;
@@ -111,6 +111,12 @@ public class Torch_Movement : MonoBehaviour
             anim.SetBool("isChasing", true);
         else if (enemyState == EnemyState.Attacking)
             anim.SetBool("isAttacking", true);
+    }
+
+    // Hàm này cần được gọi thông qua Animation Event ở frame cuối cùng của animation tấn công
+    public void FinishAttack()
+    {
+        ChangeState(EnemyState.Idle);
     }
 
     private void OnDrawGizmosSelected()

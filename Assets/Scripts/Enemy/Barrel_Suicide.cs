@@ -6,7 +6,7 @@ public enum BarrelState { Idle, Awakening, Chasing, Retracting, Igniting, Knockb
 public class Barrel_Suicide : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float speed = 3.5f;
+    public float speed = 5f;
     [Tooltip("Round 1: Detection range to trigger alert (Green Gizmo)")]
     public float playerDetectionRange = 5f;
     [Tooltip("Round 2: Range begins chasing the player (Gizmo Blue)")]
@@ -16,8 +16,10 @@ public class Barrel_Suicide : MonoBehaviour
 
     [Header("Explosion Settings")]
     public float maxExplosionRadius = 2.5f; // Damage radius (Red Gizmo)
-    public float maxDamage = 30f;
-    public float minDamage = 5f;
+    public float maxDamage = 35f;
+    public float minDamage = 10f;
+    public float knockbackForce = 10f;
+    public float stunTime = 0.3f;
     public float fuseDuration = 1f;
     public LayerMask playerLayer;
 
@@ -244,7 +246,7 @@ public class Barrel_Suicide : MonoBehaviour
                 PlayerMovement pMovement = obj.GetComponent<PlayerMovement>();
                 if (pMovement != null)
                 {
-                    pMovement.Knockback(transform, 8f, 0.25f);
+                    pMovement.Knockback(transform, knockbackForce, stunTime);
                 }
             }
         }

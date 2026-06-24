@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2667438400939221749}
   - component: {fileID: 994567730847947383}
   - component: {fileID: 7957357745265263047}
+  - component: {fileID: 8238533599878704548}
   m_Layer: 9
   m_Name: Enemy_Frostbite_Archer
   m_TagString: Enemy
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec24c37b8513d61438c04ca349bb1e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frostbite_Archer_Movement
-  speed: 2.5
+  speed: 2
   retreatSpeedMultiplier: 0.6
   attackRange: 5
   retreatRange: 3
@@ -257,8 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Frostbite_Archer_Combat
   arrowPrefab: {fileID: 7478499875519044494, guid: 17a7355ce00c1f940adc9e4ed3e79ab9, type: 3}
   firePoint: {fileID: 1940326371300029806}
-  damage: 1
-  arrowSpeed: 6
+  damage: 3
+  arrowSpeed: 8
   knockbackForce: 6
   stunTime: 0.2
   lifeSpawn: 2
@@ -266,7 +267,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   slowDuration: 2.5
-  slowAmount: 0.25
+  slowAmount: 0.4
 --- !u!114 &2667438400939221749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,8 +306,8 @@ MonoBehaviour:
       rollChance: 20
     - amount: 1
       rollChance: 80
-  currentHealth: 6
-  maxHealth: 6
+  currentHealth: 5
+  maxHealth: 5
 --- !u!114 &994567730847947383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +336,25 @@ MonoBehaviour:
   freezeColor: {r: 0.3, g: 0.75, b: 1, a: 1}
   slowColor: {r: 0.6, g: 0.4, b: 0.8, a: 1}
   burnColor: {r: 1, g: 0.3, b: 0, a: 1}
+--- !u!114 &8238533599878704548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983496834088718729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fa33c6805921748b3b8d373e3925e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AStarPathfinder
+  cellSize: 0.25
+  gridExtent: 30
+  pathUpdateInterval: 0.3
+  obstaclePadding: 0.3
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &8918822425750743315
 GameObject:
   m_ObjectHideFlags: 0

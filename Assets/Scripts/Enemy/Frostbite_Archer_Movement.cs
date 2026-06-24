@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Frostbite_Archer_Movement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float speed = 2f;
+    public float speed = 3.5f;
     [Tooltip("Smaller than 1 so that players can reach easily.")]
     public float retreatSpeedMultiplier = 0.6f;
     public float attackRange = 5f;
@@ -25,12 +26,22 @@ public class Frostbite_Archer_Movement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform player;
+    private AStarPathfinder pathfinder;
     private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        // Setup A* pathfinder
+        pathfinder = GetComponent<AStarPathfinder>();
+        if (pathfinder == null)
+        {
+            pathfinder = gameObject.AddComponent<AStarPathfinder>();
+        }
+        pathfinder.obstacleLayer = obstacleLayer;
+
         ChangeState(EnemyState.Idle);
     }
 
@@ -61,32 +72,43 @@ public class Frostbite_Archer_Movement : MonoBehaviour
     }
 
     // Step closer to the player if they are within detection range but outside of attack range
+    // Uses A* pathfinding to navigate around obstacles
     void Chase()
     {
         HandleFlip();
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction = pathfinder.GetDirectionToTarget(player.position);
 
-        RaycastHit2D wallCheck = Physics2D.Raycast(transform.position, direction, 1.0f, obstacleLayer);
-
-        if (wallCheck.collider != null && !wallCheck.collider.CompareTag("Player"))
+        if (direction != Vector2.zero)
         {
-            Vector2 detourDirection = new Vector2(-direction.y, direction.x);
-            rb.linearVelocity = detourDirection * speed;
+            rb.linearVelocity = direction * speed;
         }
         else
         {
-            rb.linearVelocity = direction * speed;
+            // If A* can't find a path (e.g. player is completely blocked off), stop moving to avoid stuttering into walls
+            rb.linearVelocity = Vector2.zero;
         }
     }
 
     void Retreat()
     {
         HandleFlip();
-        // Opposite direction to the player
-        Vector2 direction = (transform.position - player.position).normalized;
 
-        rb.linearVelocity = direction * (speed * retreatSpeedMultiplier);
+        // Calculate a retreat point away from the player, then pathfind to it
+        Vector2 awayFromPlayer = ((Vector2)transform.position - (Vector2)player.position).normalized;
+        Vector2 retreatTarget = (Vector2)transform.position + awayFromPlayer * retreatRange;
+
+        Vector2 direction = pathfinder.GetDirectionToTarget(retreatTarget);
+
+        if (direction != Vector2.zero)
+        {
+            rb.linearVelocity = direction * (speed * retreatSpeedMultiplier);
+        }
+        else
+        {
+            // If A* can't find a path (e.g. backed into a corner), stop moving instead of pushing blindly into the wall
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     void HandleFlip()
@@ -113,13 +135,22 @@ public class Frostbite_Archer_Movement : MonoBehaviour
         {
             player = hits[0].transform;
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            bool canSee = CanSeePlayer();
+            bool clearShot = canSee && HasClearShot();
 
-            if (!CanSeePlayer())
+            if (!canSee)
             {
+                // Can't see player at all -> chase around obstacles
+                ChangeState(EnemyState.Chasing);
+            }
+            else if (!clearShot)
+            {
+                // Can see player but no clear shot (obstacle partially blocking) -> keep moving
                 ChangeState(EnemyState.Chasing);
             }
             else
             {
+                // Full clear line of fire
                 float currentRetreatRange = (enemyState == EnemyState.Retreating) ? (retreatRange + 0.5f) : retreatRange;
 
                 if (distanceToPlayer < currentRetreatRange)
@@ -136,7 +167,8 @@ public class Frostbite_Archer_Movement : MonoBehaviour
                 }
             }
 
-            if (distanceToPlayer <= attackRange && attackCooldownTimer <= 0 && CanSeePlayer())
+            // Only attack when we have a clear, unobstructed shot
+            if (distanceToPlayer <= attackRange && attackCooldownTimer <= 0 && clearShot)
             {
                 attackCooldownTimer = attackCooldown;
                 anim.SetTrigger("attackTrigger");
@@ -180,6 +212,35 @@ public class Frostbite_Archer_Movement : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Checks if the archer has a WIDE clear shot to the player.
+    /// Unlike CanSeePlayer (thin raycast), this uses a box/circle cast
+    /// to make sure the arrow won't clip an obstacle edge.
+    /// </summary>
+    private bool HasClearShot()
+    {
+        if (player == null) return false;
+
+        Vector2 origin = detectionPoint.position;
+        Vector2 target = player.position;
+        Vector2 direction = (target - origin).normalized;
+        float distance = Vector2.Distance(origin, target);
+
+        bool previousSetting = Physics2D.queriesStartInColliders;
+        Physics2D.queriesStartInColliders = false;
+
+        // Use CircleCast with a small radius to simulate arrow width
+        // This catches cases where a thin raycast passes through but an arrow would hit the wall
+        RaycastHit2D hit = Physics2D.CircleCast(origin, 0.25f, direction, distance, obstacleLayer);
+
+        Physics2D.queriesStartInColliders = previousSetting;
+
+        // Draw debug line (blue = clear shot, yellow = blocked)
+        Debug.DrawRay(origin, direction * distance, hit.collider == null ? Color.blue : Color.yellow);
+
+        return hit.collider == null;
     }
 
     public void ChangeState(EnemyState newState)

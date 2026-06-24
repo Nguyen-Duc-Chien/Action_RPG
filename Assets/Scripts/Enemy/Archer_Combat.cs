@@ -7,8 +7,8 @@ public class Archer_Combat : MonoBehaviour
     public Transform firePoint;         
 
     [Header("Arrow Settings For Enemy")]
-    public int damage = 3;
-    public float arrowSpeed = 6f;
+    public int damage = 4;
+    public float arrowSpeed = 8f;
     public float knockbackForce = 6f;
     public float stunTime = 0.2f;
     public float lifeSpawn = 2f;
@@ -16,7 +16,7 @@ public class Archer_Combat : MonoBehaviour
 
     private Transform player;
 
-    public void Attack()
+    public virtual void Attack()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj == null) return;

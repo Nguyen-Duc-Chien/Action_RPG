@@ -7,7 +7,7 @@ public class Frostbite_Archer_Combat : Archer_Combat
     [Range(0f, 1f)]
     public float slowAmount = 0.4f;
 
-    public new void Attack()
+    public override void Attack()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj == null) return;
@@ -28,39 +28,9 @@ public class Frostbite_Archer_Combat : Archer_Combat
             arrow.stunTime = stunTime;
             arrow.lifeSpawn = lifeSpawn;
             arrow.targetLayer = targetLayer;
-
-            var slowTrigger = arrowObj.AddComponent<FrostSlowTrigger>();
-            slowTrigger.Setup(slowDuration, slowAmount);
-        }
-    }
-}
-
-public class FrostSlowTrigger : MonoBehaviour
-{
-    private float duration;
-    private float amount;
-    private bool hasTriggered = false;
-
-    public void Setup(float slowDuration, float slowAmount)
-    {
-        duration = slowDuration;
-        amount = slowAmount;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (hasTriggered) return;
-
-        if (collision.CompareTag("Player"))
-        {
-            hasTriggered = true;
-
-            Player_DebuffManager playerDebuff = collision.GetComponent<Player_DebuffManager>();
-            if (playerDebuff != null)
-            {
-                playerDebuff.ApplySlowDebuff(duration, amount);
-            }
-            Destroy(this);
+            
+            arrow.slowDuration = slowDuration;
+            arrow.slowAmount = slowAmount;
         }
     }
 }

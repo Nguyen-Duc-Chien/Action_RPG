@@ -21,6 +21,11 @@ public class Arrow : MonoBehaviour
     public float knockbackForce;
     public float knockbackTime;
     public float stunTime;
+    
+    [Header("Debuff Settings (Enemy Only)")]
+    public float slowDuration = 0f;
+    public float slowAmount = 0f;
+
     void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();
@@ -56,6 +61,15 @@ public class Arrow : MonoBehaviour
             {
                 other.gameObject.GetComponent<PlayerHealth>()?.ChangeHealth(-damage);
                 other.gameObject.GetComponent<PlayerMovement>()?.Knockback(transform, knockbackForce, stunTime);
+                
+                if (slowDuration > 0 && slowAmount > 0)
+                {
+                    Player_DebuffManager debuffManager = other.gameObject.GetComponent<Player_DebuffManager>();
+                    if (debuffManager != null)
+                    {
+                        debuffManager.ApplySlowDebuff(slowDuration, slowAmount);
+                    }
+                }
             }
             else if (owner == ArrowOwner.Player)
             {

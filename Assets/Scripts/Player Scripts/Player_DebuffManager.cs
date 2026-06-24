@@ -81,6 +81,7 @@ public class Player_DebuffManager : MonoBehaviour
         }
 
         activeSlowRoutine = StartCoroutine(SlowRoutine(duration, slowAmount));
+        UpdateVisualColor();
     }
 
     private IEnumerator SlowRoutine(float duration, float slowAmount)
@@ -90,8 +91,6 @@ public class Player_DebuffManager : MonoBehaviour
             StatsManager.Instance.speed = baseSpeed * (1f - slowAmount);
             if (StatsManager.Instance.statsUI != null) StatsManager.Instance.statsUI.UpdateAllStats();
         }
-
-        UpdateVisualColor();
 
         yield return new WaitForSeconds(duration);
 

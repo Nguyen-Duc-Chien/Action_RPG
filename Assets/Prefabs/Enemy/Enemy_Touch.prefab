@@ -180,7 +180,7 @@ MonoBehaviour:
   damage: 2
   attackPoint: {fileID: 7588897735595883946}
   weaponRange: 0.8
-  knockbackForce: 10
+  knockbackForce: 5
   stunTime: 0.2
   playerLayer:
     serializedVersion: 2
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68239f27a02bab94b87d2caa7f98f1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   attackRange: 1.2
   attackCooldown: 1
   playerDetectionRange: 4
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d49f0410ee8d04c9cd285eee3e209c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expReward: 2
+  expReward: 3
   genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
   lootTable:
   - itemSO: {fileID: 11400000, guid: d1a62013a36e8c1498848230d758ac6b, type: 2}

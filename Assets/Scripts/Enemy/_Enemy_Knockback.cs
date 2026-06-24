@@ -8,6 +8,7 @@ public class Enemy_Knockback : MonoBehaviour
     private Archer_Movement archerMovement;
     private Barrel_Suicide barielSuicide;
     private Frostbite_Archer_Movement frostbiteArcherMovement;
+    private Pawn_Red_Movement pawnRedMovement;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class Enemy_Knockback : MonoBehaviour
         archerMovement = GetComponent<Archer_Movement>();
         barielSuicide = GetComponent<Barrel_Suicide>();
         frostbiteArcherMovement = GetComponent<Frostbite_Archer_Movement>();
+        pawnRedMovement = GetComponent<Pawn_Red_Movement>();
     }
 
     public void Knockback(Transform forceTransform, float knockbackForce, float knockbackRange, float stunTime)
@@ -24,6 +26,7 @@ public class Enemy_Knockback : MonoBehaviour
         if (archerMovement != null) archerMovement.ChangeState(EnemyState.Knockback);
         if (barielSuicide != null) barielSuicide.ChangeState(BarrelState.Knockback);
         if (frostbiteArcherMovement != null) frostbiteArcherMovement.ChangeState(EnemyState.Knockback);
+        if (pawnRedMovement != null) pawnRedMovement.ChangeState(EnemyState.Knockback);
 
         StartCoroutine(StunTimer(knockbackRange, stunTime)); 
         Vector2 direction = (transform.position - forceTransform.position).normalized;
@@ -41,5 +44,6 @@ public class Enemy_Knockback : MonoBehaviour
         if (archerMovement != null) archerMovement.ChangeState(EnemyState.Idle);
         if (barielSuicide != null) barielSuicide.ChangeState(BarrelState.Awakening);
         if (frostbiteArcherMovement != null) frostbiteArcherMovement.ChangeState(EnemyState.Idle);
+        if (pawnRedMovement != null) pawnRedMovement.ChangeState(EnemyState.Idle);
     }
 }
