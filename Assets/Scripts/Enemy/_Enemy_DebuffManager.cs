@@ -18,6 +18,7 @@ public class Enemy_DebuffManager : MonoBehaviour
     private Barrel_Suicide barrelSuicide;
     private Frostbite_Archer_Movement frostbiteArcherMovement;
     private Pawn_Red_Movement pawnRedMovement;
+    private RockBoss_Movement rockBossMovement;
 
     private Enemy_Health enemyHealth;
     private SpriteRenderer spriteRenderer; 
@@ -34,6 +35,7 @@ public class Enemy_DebuffManager : MonoBehaviour
         barrelSuicide = GetComponent<Barrel_Suicide>();
         frostbiteArcherMovement = GetComponent<Frostbite_Archer_Movement>();
         pawnRedMovement = GetComponent<Pawn_Red_Movement>();
+        rockBossMovement = GetComponent<RockBoss_Movement>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyHealth = GetComponent<Enemy_Health>();
@@ -43,6 +45,7 @@ public class Enemy_DebuffManager : MonoBehaviour
         if (barrelSuicide != null) originalSpeed = barrelSuicide.speed;
         if (frostbiteArcherMovement != null) originalSpeed = frostbiteArcherMovement.speed;
         if (pawnRedMovement != null) originalSpeed = pawnRedMovement.speed;
+        if (rockBossMovement != null) originalSpeed = rockBossMovement.speed;
 
         if (spriteRenderer != null)
         {
@@ -200,7 +203,7 @@ public class Enemy_DebuffManager : MonoBehaviour
         }
         else if (activeDebuffRoutine != null)
         {
-            spriteRenderer.color = (torchMovement?.speed == 0f || archerMovement?.speed == 0f || barrelSuicide?.speed == 0f || frostbiteArcherMovement?.speed == 0f || pawnRedMovement?.speed == 0f) ? freezeColor : slowColor;
+            spriteRenderer.color = (torchMovement?.speed == 0f || archerMovement?.speed == 0f || barrelSuicide?.speed == 0f || frostbiteArcherMovement?.speed == 0f || pawnRedMovement?.speed == 0f || rockBossMovement?.speed == 0f) ? freezeColor : slowColor;
         }
         else
         {
@@ -215,6 +218,7 @@ public class Enemy_DebuffManager : MonoBehaviour
         if (barrelSuicide != null) barrelSuicide.speed = newSpeed;
         if (frostbiteArcherMovement != null) frostbiteArcherMovement.speed = newSpeed;
         if (pawnRedMovement != null) pawnRedMovement.speed = newSpeed;
+        if (rockBossMovement != null) rockBossMovement.speed = newSpeed;
     }
 
     private void SetAnimatorSpeed(float animSpeed)

@@ -156,6 +156,13 @@ public class PlayerHealth : MonoBehaviour
             invManager.ResetInventory();
         }
 
+        // Reset skills
+        SkillTreeManager skillTreeManager = FindAnyObjectByType<SkillTreeManager>(FindObjectsInactive.Include);
+        if (skillTreeManager != null)
+        {
+            skillTreeManager.ResetSkills();
+        }
+
         // Reset energy
         if (EnergyManager.Instance != null)
         {
@@ -203,6 +210,13 @@ public class PlayerHealth : MonoBehaviour
         if (invManager != null)
         {
             invManager.ResetInventory();
+        }
+
+        // Reset skills
+        SkillTreeManager skillTreeMgr = FindAnyObjectByType<SkillTreeManager>(FindObjectsInactive.Include);
+        if (skillTreeMgr != null)
+        {
+            skillTreeMgr.ResetSkills();
         }
 
         // Reset energy

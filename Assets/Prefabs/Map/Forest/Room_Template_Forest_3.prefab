@@ -9377,7 +9377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomEnemySpawner
   enemyData: {fileID: 11400000, guid: a828f8bc7651fd445a51492b7b4bb1cb, type: 2}
   maxEnemiesInThisRoom: 3
-  respawnChance: 50
 --- !u!61 &8744649299556875621
 BoxCollider2D:
   m_ObjectHideFlags: 0

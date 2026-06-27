@@ -24,6 +24,14 @@ public class SkillSlot : MonoBehaviour
     public static event Action<SkillSlot> OnAbilityPointSpend;
     public static event Action<SkillSlot> OnSkillMaxed;
 
+    /// <summary>
+    /// Dùng khi load save — fire event để SkillManager re-apply effect mà không trừ point.
+    /// </summary>
+    public static void InvokeAbilityPointSpendForLoad(SkillSlot slot)
+    {
+        OnAbilityPointSpend?.Invoke(slot);
+    }
+
     private void OnValidate()
     {
         if (skillSO != null && skillLevelText != null)

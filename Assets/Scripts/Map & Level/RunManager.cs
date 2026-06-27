@@ -252,6 +252,53 @@ public class RunManager : MonoBehaviour
 
     #endregion
 
+    #region Skills Save/Load
+
+    public void SaveSkills(SkillSlot[] slots, int availablePoints)
+    {
+        PlayerPrefs.SetInt("Skill_SlotCount", slots.Length);
+        PlayerPrefs.SetInt("Skill_AvailablePoints", availablePoints);
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            string keyLevel    = "Skill_Slot_" + i + "_Level";
+            string keyUnlocked = "Skill_Slot_" + i + "_Unlocked";
+
+            PlayerPrefs.SetInt(keyLevel, slots[i].currentLevel);
+            PlayerPrefs.SetInt(keyUnlocked, slots[i].isUnlocked ? 1 : 0);
+        }
+
+        PlayerPrefs.Save();
+        Debug.Log($"<color=cyan>[RunManager]</color> Skills saved ({slots.Length} slots, {availablePoints} points)");
+    }
+
+    public void LoadSkills(SkillSlot[] slots, out int availablePoints)
+    {
+        availablePoints = PlayerPrefs.GetInt("Skill_AvailablePoints", 0);
+
+        int savedCount = PlayerPrefs.GetInt("Skill_SlotCount", 0);
+        int count = Mathf.Min(savedCount, slots.Length);
+
+        for (int i = 0; i < count; i++)
+        {
+            string keyLevel    = "Skill_Slot_" + i + "_Level";
+            string keyUnlocked = "Skill_Slot_" + i + "_Unlocked";
+
+            slots[i].currentLevel = PlayerPrefs.GetInt(keyLevel, 0);
+            slots[i].isUnlocked  = PlayerPrefs.GetInt(keyUnlocked, 0) == 1;
+            slots[i].UpdateUI();
+        }
+
+        Debug.Log($"<color=cyan>[RunManager]</color> Skills loaded ({count} slots, {availablePoints} points)");
+    }
+
+    public bool HasSkillsSave()
+    {
+        return PlayerPrefs.HasKey("Skill_SlotCount");
+    }
+
+    #endregion
+
     #region Debug
 
     [ContextMenu("Reset All Progress (DEBUG)")]

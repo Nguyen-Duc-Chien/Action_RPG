@@ -109,6 +109,24 @@ public class Enemy_Health : MonoBehaviour
             pawnRedMovement.enabled = false;
         }
 
+        RockBoss_Movement rockBossMovement = GetComponent<RockBoss_Movement>();
+        if (rockBossMovement != null)
+        {
+            rockBossMovement.enabled = false;
+        }
+
+        RockBoss_Combat rockBossCombat = GetComponent<RockBoss_Combat>();
+        if (rockBossCombat != null)
+        {
+            rockBossCombat.enabled = false;
+        }
+
+        BossHealthBar bossHealthBar = GetComponent<BossHealthBar>();
+        if (bossHealthBar != null)
+        {
+            bossHealthBar.enabled = false;
+        }
+
         // Diable all debuffs
         Enemy_DebuffManager debuffManager = GetComponent<Enemy_DebuffManager>();
         if (debuffManager != null)

@@ -363,9 +363,9 @@ public class AStarPathfinder : MonoBehaviour
         Vector2 direction = b - a;
         float distance = direction.magnitude;
         
-        // Use CircleCast instead of Raycast to account for the character's body width.
-        // This prevents the smoothed path from cutting corners too closely and getting stuck.
-        float castRadius = cellSize * 0.4f;
+        // FIXED: Use the actual padded size instead of a tiny hardcoded radius.
+        // This prevents large enemies (like Bosses) from getting stuck on corners when the path is smoothed.
+        float castRadius = (cellSize * 0.5f) + obstaclePadding;
         RaycastHit2D hit = Physics2D.CircleCast(a, castRadius, direction.normalized, distance, obstacleLayer);
         
         return hit.collider == null;

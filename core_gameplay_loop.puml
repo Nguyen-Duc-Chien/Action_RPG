@@ -1,0 +1,56 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam activity {
+  BackgroundColor LightCyan
+  BorderColor DeepSkyBlue
+}
+skinparam arrow {
+  Color DeepSkyBlue
+}
+
+(*) -> "Khởi động Trò chơi"
+"Khởi động Trò chơi" -> "Sảnh Chính (Lobby)"
+
+"Sảnh Chính (Lobby)" --> if "Tương tác NPC?" then
+  -right-> [SkillKeeper / ShopKeeper] "Nâng cấp Kỹ năng\n/ Mua sắm vật phẩm"
+  "Nâng cấp Kỹ năng\n/ Mua sắm vật phẩm" -up-> "Sảnh Chính (Lobby)"
+else
+  --> [LevelSelectKeeper] "Chọn Màn chơi"
+endif
+
+"Chọn Màn chơi" -> "Xác nhận Bắt\nđầu Vượt ải"
+"Xác nhận Bắt\nđầu Vượt ải" -> "Hệ thống sinh Bản đồ\nvà Quái ngẫu nhiên"
+"Hệ thống sinh Bản đồ\nvà Quái ngẫu nhiên" --> "Khởi tạo Nhân vật\nvào Màn chơi"
+
+"Khởi tạo Nhân vật\nvào Màn chơi" -> "Khám phá phòng mới"
+"Khám phá phòng mới" -> "Tiến hành Chiến đấu\n(Đánh, Lướt, Kỹ năng)"
+
+"Tiến hành Chiến đấu\n(Đánh, Lướt, Kỹ năng)" --> if "Người chơi hết máu?" then
+  -right-> [Đúng] "Kích hoạt Permadeath\n(Xóa tiến trình)"
+else
+  --> [Sai] if "Tiêu diệt hết Kẻ địch?" then
+    -up-> [Chưa] "Tiến hành Chiến đấu\n(Đánh, Lướt, Kỹ năng)"
+  else
+    --> [Đã tiêu diệt hết] "Mở khóa cửa phòng"
+  endif
+endif
+
+"Mở khóa cửa phòng" -> "Nhặt phần thưởng\n(Vàng, Kinh nghiệm)"
+"Nhặt phần thưởng\n(Vàng, Kinh nghiệm)" --> if "Đã đến Phòng Boss Cuối?" then
+  -up-> [Chưa] "Khám phá phòng mới"
+else
+  --> [Đúng] "Chạm trán Boss Cuối\n(Rock Boss)"
+endif
+
+"Chạm trán Boss Cuối\n(Rock Boss)" --> if "Chiến thắng Boss?" then
+  --> [Có] "Hoàn thành Màn chơi"
+  "Hoàn thành Màn chơi" -> "Lưu dữ liệu tiến trình"
+  "Lưu dữ liệu tiến trình" -up-> "Sảnh Chính (Lobby)"
+else
+  -right-> [Không] "Kích hoạt Permadeath\n(Xóa tiến trình)"
+endif
+
+"Kích hoạt Permadeath\n(Xóa tiến trình)" -> "Hiển thị Game Over"
+"Hiển thị Game Over" -up-> "Sảnh Chính (Lobby)"
+
+@enduml

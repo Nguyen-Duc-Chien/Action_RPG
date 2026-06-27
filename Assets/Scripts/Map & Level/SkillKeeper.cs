@@ -15,23 +15,38 @@ public class SkillKeeper : MonoBehaviour
 
     #region Unity Lifecycle
 
+    private void Awake()
+    {
+        TryFindToggleSkillTree();
+    }
+
     private void Update()
     {
         if (!playerInRange) return;
 
+        // Re-tìm reference nếu bị mất (sau scene reload / knockback)
+        if (toggleSkillTree == null)
+        {
+            TryFindToggleSkillTree();
+            if (toggleSkillTree == null) return; // Vẫn null → bỏ qua frame này
+        }
+
         // Bấm nút tương tác (chữ E / tay cầm)
         if (Input.GetButtonDown("Interact"))
         {
-            if (toggleSkillTree != null)
+            if (toggleSkillTree == null)
             {
-                if (!toggleSkillTree.IsSkillTreeOpen)
-                {
-                    OpenPanel();
-                }
-                else
-                {
-                    ClosePanel();
-                }
+                Debug.LogError("[SkillKeeper] ToggleSkillTree reference is NULL! Cannot interact.");
+                return;
+            }
+
+            if (!toggleSkillTree.IsSkillTreeOpen)
+            {
+                OpenPanel();
+            }
+            else
+            {
+                ClosePanel();
             }
         }
         else if (Input.GetButtonDown("Cancel"))
@@ -65,11 +80,30 @@ public class SkillKeeper : MonoBehaviour
         {
             ClosePanel();
         }
+
+        // Safety: đảm bảo game không bị đứng nếu panel close bị lỗi
+        Time.timeScale = 1f;
     }
 
     #endregion
 
     #region Private Helpers
+
+    /// <summary>
+    /// Tự tìm ToggleSkillTree nếu reference bị null.
+    /// Dùng FindAnyObjectByType + FindObjectsInactive.Include vì Canvas có thể bị disable.
+    /// </summary>
+    private void TryFindToggleSkillTree()
+    {
+        if (toggleSkillTree != null) return;
+
+        toggleSkillTree = FindAnyObjectByType<ToggleSkillTree>(FindObjectsInactive.Include);
+
+        if (toggleSkillTree != null)
+            Debug.Log("[SkillKeeper] ToggleSkillTree was auto-found at runtime (including inactive objects).");
+        else
+            Debug.LogWarning("[SkillKeeper] ToggleSkillTree not found anywhere in scene (even inactive)!");
+    }
 
     private void OpenPanel()
     {

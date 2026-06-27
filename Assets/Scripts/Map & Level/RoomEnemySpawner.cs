@@ -8,7 +8,6 @@ public class RoomEnemySpawner : MonoBehaviour
 
     [Header("Spawn Rules")]
     [SerializeField] private int maxEnemiesInThisRoom = 3;
-    [Range(0f, 100f)][SerializeField] private float respawnChance = 50f;
 
     public void Initialize(EnemyData data, int maxEnemies)
     {
@@ -102,14 +101,6 @@ public class RoomEnemySpawner : MonoBehaviour
             if (!hasSpawnedFirstTime)
             {
                 ExecuteSpawning();
-            }
-            else if (isCleared)
-            {
-                if (Random.Range(0f, 100f) <= respawnChance)
-                {
-                    Debug.Log($"{gameObject.name}: Respawned new wave for farming exp!");
-                    ExecuteSpawning();
-                }
             }
         }
     }

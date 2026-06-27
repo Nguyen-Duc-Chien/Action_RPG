@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6061874780335411944
 Transform:
   m_ObjectHideFlags: 0
@@ -181,30 +181,30 @@ MonoBehaviour:
   genericLootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
   lootTable:
   - itemSO: {fileID: 11400000, guid: 566ff570abe8fe94ca5d2beb021d1d59, type: 2}
-    dropChance: 80
+    dropChance: 100
     quantityTiers:
-    - amount: 3
+    - amount: 5
       rollChance: 10
+    - amount: 3
+      rollChance: 60
     - amount: 2
       rollChance: 30
-    - amount: 1
-      rollChance: 60
   - itemSO: {fileID: 11400000, guid: d1a62013a36e8c1498848230d758ac6b, type: 2}
-    dropChance: 70
+    dropChance: 100
     quantityTiers:
     - amount: 2
       rollChance: 20
     - amount: 1
       rollChance: 80
   - itemSO: {fileID: 11400000, guid: a60bdc919d7a3574b91119c6c5591048, type: 2}
-    dropChance: 40
+    dropChance: 60
     quantityTiers:
     - amount: 2
       rollChance: 30
     - amount: 1
       rollChance: 70
-  currentHealth: 15
-  maxHealth: 15
+  currentHealth: 20
+  maxHealth: 20
 --- !u!114 &6385258515812990108
 MonoBehaviour:
   m_ObjectHideFlags: 0

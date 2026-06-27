@@ -25033,7 +25033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomEnemySpawner
   enemyData: {fileID: 0}
   maxEnemiesInThisRoom: 5
-  respawnChance: 50
 --- !u!1 &8323604914824734601
 GameObject:
   m_ObjectHideFlags: 0

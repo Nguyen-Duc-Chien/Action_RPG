@@ -1,0 +1,126 @@
+@startuml
+' --- Presentation & Resolution Settings ---
+skinparam defaultFontSize 24
+skinparam classFontSize 26
+skinparam packageFontSize 28
+skinparam titleFontSize 36
+skinparam classBorderThickness 2
+skinparam packageBorderThickness 2
+skinparam shadowing false
+skinparam nodesep 50
+skinparam ranksep 70
+hide circle
+hide empty members
+
+' --- Color Scheme ---
+skinparam class {
+    BackgroundColor #FDFDFD
+    ArrowColor #222222
+    BorderColor #222222
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #444444
+    FontWeight bold
+}
+
+title 2.1.3 Overall Class Diagram (Sơ đồ Lớp tổng thể)
+
+package "Core Management" {
+    class GameManager {
+        + ChangeState()
+    }
+    class RunManager {
+        + StartNewRun()
+    }
+    class LevelManager {
+        + LoadLevel()
+    }
+    class StatsManager {
+        + ApplyStatUpgrades()
+    }
+}
+
+package "Map Generation" {
+    class MapGenerator {
+        + GenerateMap()
+    }
+    class RoomEnemySpawner {
+        + SpawnEnemies()
+    }
+    class RoomWalls
+}
+
+package "Enemy Subsystem" {
+    class _Enemy_Health {
+        + TakeDamage()
+    }
+    class AStarPathfinder {
+        + FindPath()
+    }
+    class RockBoss_Combat
+    class RockBoss_Movement
+}
+
+package "Player Subsystem" {
+    class PlayerMovement
+    class PlayerDash
+    class Player_Combat
+    class PlayerHealth
+    class EnergyManager {
+        + ConsumeEnergy()
+    }
+    class ExpManager {
+        + AddExp()
+    }
+}
+
+package "UI & Progression" {
+    class SkillManager {
+        + UnlockSkill()
+    }
+    class InventoryManager {
+        + AddItem()
+    }
+    class ShopManager {
+        + BuyItem()
+    }
+    class SkillTreeManager
+}
+
+' --- Ép các khối xếp dọc 100% ---
+"Core Management" -[hidden]down-> "Map Generation"
+"Map Generation" -[hidden]down-> "Enemy Subsystem"
+"Enemy Subsystem" -[hidden]down-> "Player Subsystem"
+"Player Subsystem" -[hidden]down-> "UI & Progression"
+
+' --- Relationships (Sử dụng 100% mũi tên dọc) ---
+
+' Core Management
+GameManager "1" -down-> "1" RunManager
+GameManager "1" -down-> "1" LevelManager
+GameManager "1" -down-> "1" StatsManager
+
+' Map links
+LevelManager -down-> MapGenerator
+MapGenerator -down-> RoomEnemySpawner
+MapGenerator -down-> RoomWalls
+
+' Enemy links
+RoomEnemySpawner -down-> _Enemy_Health
+RoomEnemySpawner -down-> RockBoss_Movement
+RockBoss_Movement -down-> AStarPathfinder
+
+' Player links
+RockBoss_Combat -down-> PlayerHealth : damages
+PlayerMovement -down-> EnergyManager
+PlayerDash -down-> EnergyManager
+Player_Combat -up-> _Enemy_Health : damages
+
+' Progression links
+Player_Combat -up-> StatsManager
+PlayerHealth -up-> StatsManager
+ExpManager -down-> SkillManager
+SkillTreeManager -down-> SkillManager
+
+@enduml

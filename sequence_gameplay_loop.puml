@@ -1,0 +1,95 @@
+@startuml
+skinparam maxMessageSize 100
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+skinparam defaultFontName Arial
+skinparam sequence {
+    ArrowColor DeepSkyBlue
+    ActorBorderColor DeepSkyBlue
+    LifeLineBorderColor blue
+    LifeLineBackgroundColor #A9DCDF
+    
+    ParticipantBorderColor DeepSkyBlue
+    ParticipantBackgroundColor LightCyan
+    ParticipantFontName Arial
+    ParticipantFontSize 14
+}
+
+actor "Người chơi" as Player
+participant "GameManager" as GM
+participant "LevelManager\n(MapGenerator)" as LM
+participant "RoomController" as RC
+participant "Hệ thống Kẻ địch\n(Enemy AI/Boss)" as AI
+participant "RunManager\n(StatsManager)" as RM
+
+== Khởi tạo Màn chơi ==
+Player -> GM : Xác nhận bắt đầu màn chơi
+activate GM
+GM -> LM : Yêu cầu sinh bản đồ
+activate LM
+LM -> LM : Sử dụng Random Walk\nsinh các phòng
+LM -> RC : Khởi tạo các phòng & \nphân bổ Quái vật
+LM --> GM : Hoàn tất tạo bản đồ
+deactivate LM
+GM -> Player : Khởi tạo nhân vật vào điểm bắt đầu (Spawn)
+deactivate GM
+
+== Cơ chế lặp: Khám phá & Chiến đấu ==
+loop Khám phá từng phòng
+    Player -> RC : Di chuyển vào phòng mới
+    activate RC
+    RC -> RC : Đóng cửa phòng (Khóa lối ra)
+    RC -> AI : Kích hoạt trạng thái kẻ địch (Chase/Attack)
+    activate AI
+    
+    loop Quá trình Chiến đấu
+        Player <-> AI : Tương tác chiến đấu (Đánh, Lướt, Dùng kỹ năng)
+        
+        alt Rẽ nhánh 1: Người chơi nhận sát thương
+            AI -> Player : Gây sát thương & Hiệu ứng (Debuff/Knockback)
+            Player -> RM : Trừ HP và Kiểm tra Máu
+            activate RM
+            alt HP <= 0 (Hết máu)
+                RM -> RM : Kích hoạt Permadeath\n(Xóa tiến trình hiện tại)
+                RM -> GM : Phát tín hiệu kết thúc Game (Game Over)
+                GM -> Player : Hiển thị màn hình Thất bại & Đưa về Sảnh
+                return
+            end
+            deactivate RM
+        end
+        
+        alt Rẽ nhánh 2: Kẻ địch nhận sát thương
+            Player -> AI : Gây sát thương
+            AI -> AI : Kiểm tra Máu Kẻ địch
+            alt Kẻ địch hết HP
+                AI -> RC : Gửi sự kiện Kẻ địch chết
+            end
+        end
+    end
+    deactivate AI
+    
+    RC -> RC : Mở khóa cửa phòng
+    RC -> Player : Rơi vật phẩm thưởng (Kinh nghiệm, Vàng)
+    deactivate RC
+    
+    == Cơ chế Rẽ nhánh: Phòng Boss & Kết thúc ==
+    alt Là phòng Boss cuối (Rock Boss)?
+        Player -> AI : Chạm trán Boss Cuối
+        activate AI
+        note over Player, AI : Diễn biến chiến đấu với Boss tương tự vòng lặp trên
+        alt Đánh bại Boss
+            AI -> RM : Cộng thưởng lớn
+            deactivate AI
+            activate RM
+            RM -> RM : Lưu trữ dữ liệu vĩnh viễn\n(Kỹ năng đã mở khóa, Tiền tệ)
+            RM -> GM : Phát sự kiện Hoàn thành Màn chơi (Victory)
+            deactivate RM
+            activate GM
+            GM -> Player : Hiển thị màn hình Chiến thắng & Đưa về Sảnh
+            deactivate GM
+        end
+    else Không phải phòng Boss
+        note over Player : Tiếp tục đi sang phòng tiếp theo (Quay lại đầu vòng lặp)
+    end
+end
+@enduml
