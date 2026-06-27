@@ -9,6 +9,21 @@ public class RoomEnemySpawner : MonoBehaviour
     [Header("Spawn Rules")]
     [SerializeField] private int maxEnemiesInThisRoom = 3;
 
+    // Runtime pool — ưu tiên dùng list truyền từ MapGenerator
+    private List<EnemySpawnRate> _runtimePool;
+
+    /// <summary>
+    /// Khởi tạo bằng inline enemy pool (từ LevelConfig).
+    /// </summary>
+    public void Initialize(List<EnemySpawnRate> pool, int maxEnemies)
+    {
+        if (pool != null && pool.Count > 0) _runtimePool = pool;
+        if (maxEnemies > 0) maxEnemiesInThisRoom = maxEnemies;
+    }
+
+    /// <summary>
+    /// Fallback: khởi tạo bằng EnemyData SO (backward compatibility).
+    /// </summary>
     public void Initialize(EnemyData data, int maxEnemies)
     {
         if (data != null) enemyData = data;
@@ -32,9 +47,24 @@ public class RoomEnemySpawner : MonoBehaviour
         Enemy_Health.OnMonsterDefeated -= OnEnemyGlobalDie;
     }
 
+    /// <summary>
+    /// Trả về enemy pool hiệu lực: ưu tiên runtime pool, fallback về enemyData SO.
+    /// </summary>
+    private List<EnemySpawnRate> GetPool()
+    {
+        if (_runtimePool != null && _runtimePool.Count > 0)
+            return _runtimePool;
+
+        if (enemyData != null && enemyData.enemyPool != null)
+            return enemyData.enemyPool;
+
+        return null;
+    }
+
     public void ExecuteSpawning()
     {
-        if (enemyData == null || enemyData.enemyPool.Count == 0) return;
+        var pool = GetPool();
+        if (pool == null || pool.Count == 0) return;
 
         if (spawnPoints.Count == 0)
         {
@@ -56,7 +86,7 @@ public class RoomEnemySpawner : MonoBehaviour
         int spawnLimit = Mathf.Min(maxEnemiesInThisRoom, spawnPoints.Count);
         for (int i = 0; i < spawnLimit; i++)
         {
-            GameObject enemyPrefab = GetRandomEnemy();
+            GameObject enemyPrefab = GetRandomEnemy(pool);
             if (enemyPrefab != null)
             {
                 GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity, transform);
@@ -68,15 +98,6 @@ public class RoomEnemySpawner : MonoBehaviour
                 }
             }
         }
-
-        /*if (LevelManager.Instance != null)
-        {
-            Debug.Log($"<color=cyan>[RoomSpawner]</color> {gameObject.name}: Spawned {activeEnemies.Count} enemies! | In total: {LevelManager.Instance.targetKillsToWin}");
-        }
-        else
-        {
-            Debug.Log($"{gameObject.name}: Spawned {activeEnemies.Count} enemies!");
-        }*/
     }
 
     private void OnEnemyGlobalDie(int exp)
@@ -113,13 +134,13 @@ public class RoomEnemySpawner : MonoBehaviour
         }
     }
 
-    private GameObject GetRandomEnemy()
+    private GameObject GetRandomEnemy(List<EnemySpawnRate> pool)
     {
         float totalWeight = 0;
-        foreach (var enemy in enemyData.enemyPool) totalWeight += enemy.spawnChance;
+        foreach (var enemy in pool) totalWeight += enemy.spawnChance;
         float randomValue = Random.Range(0, totalWeight);
         float currentWeightSum = 0;
-        foreach (var enemy in enemyData.enemyPool)
+        foreach (var enemy in pool)
         {
             currentWeightSum += enemy.spawnChance;
             if (randomValue <= currentWeightSum) return enemy.enemyPrefab;

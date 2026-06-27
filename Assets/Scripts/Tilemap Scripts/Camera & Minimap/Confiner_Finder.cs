@@ -18,8 +18,22 @@ public class ConfinerFinder : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CinemachineConfiner2D confiner = GetComponent<CinemachineConfiner2D>();
-        confiner.m_BoundingShape2D = GameObject.FindWithTag("Confiner").GetComponent<PolygonCollider2D>();
+        CinemachineConfiner2D confinerComponent = GetComponent<CinemachineConfiner2D>();
+        if (confinerComponent != null)
+        {
+            GameObject confinerObj = GameObject.FindWithTag("Confiner");
+            if (confinerObj != null)
+            {
+                confinerComponent.m_BoundingShape2D = confinerObj.GetComponent<PolygonCollider2D>();
+            }
+            else
+            {
+                confinerComponent.m_BoundingShape2D = null;
+            }
+            
+            // Xóa cache cũ để Cinemachine nhận diện ranh giới mới ngay lập tức
+            confinerComponent.InvalidateCache();
+        }
     }
     void Awake()
     {

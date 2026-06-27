@@ -24,7 +24,7 @@ public class StatsUI : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("ToggleStats"))
+        if (Input.GetButtonDown("Cancel"))
         {
             if (statsOpen)
             {
@@ -37,6 +37,9 @@ public class StatsUI : MonoBehaviour
                     //Debug.Log("Cannot open Stats UI while Skill Tree is open!");
                     return;
                 }
+
+                // Prevent opening if the game is already paused by another panel (like Minimap or Pause Menu)
+                if (Time.timeScale == 0f) return;
 
                 // Open stats UI -> Stop the game
                 Time.timeScale = 0;
@@ -95,5 +98,24 @@ public class StatsUI : MonoBehaviour
 
         UpdateMeleeDamage();
         UpdateRangeDamage();
+    }
+
+    // Sự kiện cho nút Main Menu trong Stats Panel
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f; // Bỏ pause game trước khi chuyển scene
+        
+        // Cố gắng tìm PlayerHealth để dùng hàm reset toàn diện như khi chết
+        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.MainMenuButton();
+        }
+        else
+        {
+            // Nếu không tìm thấy thì cứ load thẳng
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        }
+        CloseStatsUI();
     }
 }

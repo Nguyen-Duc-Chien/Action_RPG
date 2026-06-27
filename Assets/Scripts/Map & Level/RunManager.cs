@@ -6,12 +6,7 @@ public class RunManager : MonoBehaviour
 {
     public static RunManager Instance;
 
-    [Header("Level Configs (20 levels — index 0 = Level 1)")]
     public List<LevelConfig> levelConfigs;
-
-    [Header("Debug")]
-    [Tooltip("Bật để mở khoá tất cả level khi test. Nhớ tắt trước khi build!")]
-    public bool unlockAllLevels = false;
 
     public ItemDatabase itemDatabase;
 
@@ -81,11 +76,14 @@ public class RunManager : MonoBehaviour
 
         if (levelNumber < 20)
         {
+            int nextLevel = levelNumber + 1;
+            PlayerPrefs.SetInt("LevelUnlocked_" + nextLevel, 1);
+
             int unlockedSoFar = PlayerPrefs.GetInt("UnlockedLevel", 1);
             if (levelNumber >= unlockedSoFar)
             {
-                PlayerPrefs.SetInt("UnlockedLevel", levelNumber + 1);
-                Debug.Log($"<color=gold>[RunManager]</color> Level {levelNumber + 1} unlocked!");
+                PlayerPrefs.SetInt("UnlockedLevel", nextLevel);
+                Debug.Log($"<color=gold>[RunManager]</color> Level {nextLevel} unlocked!");
             }
         }
 
@@ -96,6 +94,14 @@ public class RunManager : MonoBehaviour
     public void GoToLobby()
     {
         Debug.Log("<color=cyan>[RunManager]</color> Returning to lobby...");
+        
+        // Đưa player về tọa độ 0,0,0 khi quay lại sảnh
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = Vector3.zero;
+        }
+
         SceneManager.LoadScene(lobbySceneName);
     }
 
@@ -106,7 +112,11 @@ public class RunManager : MonoBehaviour
 
     public bool IsLevelUnlocked(int levelNumber)
     {
-        if (unlockAllLevels) return true;
+        if (PlayerPrefs.HasKey("LevelUnlocked_" + levelNumber))
+        {
+            return PlayerPrefs.GetInt("LevelUnlocked_" + levelNumber) == 1;
+        }
+
         int unlocked = PlayerPrefs.GetInt("UnlockedLevel", 1);
         return levelNumber <= unlocked;
     }
@@ -306,11 +316,11 @@ public class RunManager : MonoBehaviour
     }
 
     //[ContextMenu("Unlock All Levels (DEBUG)")]
-    public void UnlockAllLevelsDebug()
+    /*public void UnlockAllLevelsDebug()
     {
         PlayerPrefs.SetInt("UnlockedLevel", 20);
         PlayerPrefs.Save();
         Debug.LogWarning("[RunManager] All 20 levels unlocked!");
-    }
+    }*/
     
 }

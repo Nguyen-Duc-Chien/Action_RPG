@@ -22,6 +22,9 @@ namespace Minimap
             {
                 if (!isMinimapVisible)
                 {
+                    // Prevent opening if the game is already paused by another panel
+                    if (Time.timeScale == 0f) return;
+
                     Debug.Log("ToggleMap button pressed!");
                     Show();
                 }

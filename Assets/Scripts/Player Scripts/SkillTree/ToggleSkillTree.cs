@@ -33,6 +33,9 @@ public class ToggleSkillTree : MonoBehaviour
             return;
         }
 
+        // Prevent opening if the game is already paused by another panel (like Minimap or Pause Menu)
+        if (Time.timeScale == 0f) return;
+
         EnsureCanvasRef();
         if (skillsCanvas == null)
         {

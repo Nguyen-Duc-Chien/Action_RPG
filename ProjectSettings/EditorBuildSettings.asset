@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_Dungeon_RSG.unity
     guid: 8a5890091217c924a913a6323cf9fbb4
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 801b29c4716853c49b4c50a7ea4b57d8
   m_configObjects: {}

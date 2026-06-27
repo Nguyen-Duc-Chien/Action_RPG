@@ -179,14 +179,8 @@ public class PlayerHealth : MonoBehaviour
         Player_DebuffManager debuffMgr = GetComponent<Player_DebuffManager>();
         if (debuffMgr != null) debuffMgr.ResetAllDebuffs();
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.RestartRun();
-            return;
-        }
-
-        transform.position = startPosition;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        // Chuyển thẳng về Scene Main Menu (bỏ qua việc reset vị trí trong scene hiện tại)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void ResetPlayer(Vector3 spawnPosition)

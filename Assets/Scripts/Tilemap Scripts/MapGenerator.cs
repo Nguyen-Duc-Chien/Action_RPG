@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour
     public float roomLength;
     public float roomWidth;
 
-    private EnemyData _currentEnemyData;
+    private List<EnemySpawnRate> _currentEnemyPool;
     private int _maxEnemiesPerRoom = 3;
     
     private List<Vector2> occupiedPositions = new List<Vector2>();
@@ -31,7 +31,7 @@ public class MapGenerator : MonoBehaviour
                 if (cfg.totalRooms > 0)
                     totalRoomsToSpawn = cfg.totalRooms;
 
-                _currentEnemyData    = cfg.enemyData;
+                _currentEnemyPool    = cfg.GetEffectiveEnemyPool();
                 _maxEnemiesPerRoom   = cfg.maxEnemiesPerRoom;
 
                 Debug.Log($"<color=cyan>[MapGenerator]</color> Loaded config for Level {cfg.levelIndex}: {cfg.levelName} | Rooms: {totalRoomsToSpawn} | Max enemies/room: {_maxEnemiesPerRoom}");
@@ -130,7 +130,7 @@ public class MapGenerator : MonoBehaviour
 
             for (int i = 0; i < allSpawners.Count; i++)
             {
-                allSpawners[i].Initialize(_currentEnemyData, spawnsPerRoom[i]);
+                allSpawners[i].Initialize(_currentEnemyPool, spawnsPerRoom[i]);
                 if (spawnsPerRoom[i] > 0)
                 {
                     allSpawners[i].ExecuteSpawning();
@@ -146,7 +146,7 @@ public class MapGenerator : MonoBehaviour
         {
             foreach (var spawner in allSpawners)
             {
-                spawner.Initialize(_currentEnemyData, _maxEnemiesPerRoom);
+                spawner.Initialize(_currentEnemyPool, _maxEnemiesPerRoom);
                 spawner.ExecuteSpawning();
             }
         }

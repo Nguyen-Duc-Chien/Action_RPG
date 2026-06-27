@@ -109,8 +109,12 @@ public class LevelSelectUI : MonoBehaviour
 
         if (RunManager.Instance == null)
         {
-            Debug.LogWarning("[LevelSelectUI] RunManager.Instance is null!");
-            return;
+            RunManager.Instance = FindAnyObjectByType<RunManager>();
+            if (RunManager.Instance == null)
+            {
+                Debug.LogWarning("[LevelSelectUI] RunManager.Instance is null!");
+                return;
+            }
         }
 
         UpdateTabVisuals();
@@ -154,9 +158,7 @@ public class LevelSelectUI : MonoBehaviour
             }
 
             // Chỉ cho chơi level hiện tại (unlocked + chưa completed)
-            // Nếu đang debug → tất cả level đều chơi được
-            bool debugMode = RunManager.Instance.unlockAllLevels;
-            bool playable  = debugMode ? true : (unlocked && !completed);
+            bool playable  = unlocked && !completed;
 
             Button btn = btnObj.GetComponent<Button>();
             if (btn != null)
