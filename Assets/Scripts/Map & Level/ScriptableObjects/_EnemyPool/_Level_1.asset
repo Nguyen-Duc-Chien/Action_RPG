@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d748950082c3635429cbf32a1fd7b2da, type: 3}
+  m_Name: _Level_1
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyPool:
+  - enemyPrefab: {fileID: 8347366554583986359, guid: a7f1af13342b889429662c42d8be0cae, type: 3}
+    spawnChance: 30
+  - enemyPrefab: {fileID: 1275697865482374782, guid: 1c53a7c0292c71c4e95b857519137b82, type: 3}
+    spawnChance: 70

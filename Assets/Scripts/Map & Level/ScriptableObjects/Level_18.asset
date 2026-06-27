@@ -19,8 +19,9 @@ MonoBehaviour:
   - {fileID: 8279496780662168214, guid: a85368f612d205642af641aac84cf565, type: 3}
   - {fileID: 8279496780662168214, guid: 451493ce5a5a84942bb5de8dfa210ce4, type: 3}
   - {fileID: 8279496780662168214, guid: bc5fcfecc67ecdd439ce6a148071d0da, type: 3}
-  totalRooms: 7
-  enemyData: {fileID: 11400000, guid: a828f8bc7651fd445a51492b7b4bb1cb, type: 2}
-  maxEnemiesPerRoom: 6
-  targetKillsToWin: 41
+  totalRooms: 11
+  enemyPool: []
+  maxEnemiesPerRoom: 7
+  targetKillsToWin: 65
   hasBoss: 0
+  enemyData: {fileID: 11400000, guid: 591fd65374c220b49a4f370e5b64ba41, type: 2}
