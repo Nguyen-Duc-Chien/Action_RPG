@@ -9,6 +9,9 @@ public class InventoryManager : MonoBehaviour
     public TMP_Text goldText;
     public GameObject lootPrefab;
 
+    [Header("Level Rewards")]
+    public ItemSO skillKeyItem;
+
     public Transform player;
     private void Start()
     {
@@ -23,11 +26,22 @@ public class InventoryManager : MonoBehaviour
     private void OnEnable()
     {
         Loot.OnItemLooted += AddItem;
+        ExpManager.OnLevelUp += CheckLevelReward;
     }
 
     private void OnDisable()
     {
         Loot.OnItemLooted -= AddItem;
+        ExpManager.OnLevelUp -= CheckLevelReward;
+    }
+
+    private void CheckLevelReward(int level)
+    {
+        // Every 3 levels, give 1 skill key
+        if (level > 0 && level % 3 == 0 && skillKeyItem != null)
+        {
+            DropLoot(skillKeyItem, 1);
+        }
     }
 
     public void ResetInventory()
@@ -131,8 +145,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    #region Save/Load
-
     public void SaveToPlayerPrefs()
     {
         if (RunManager.Instance == null) return;
@@ -149,5 +161,4 @@ public class InventoryManager : MonoBehaviour
         RunManager.Instance.LoadInventory(itemSlots);
     }
 
-    #endregion
 }

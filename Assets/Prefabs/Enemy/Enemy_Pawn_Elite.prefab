@@ -203,6 +203,11 @@ MonoBehaviour:
       rollChance: 30
     - amount: 1
       rollChance: 70
+  - itemSO: {fileID: 11400000, guid: d43945ef961b21948acb3ef472de8b13, type: 2}
+    dropChance: 15
+    quantityTiers:
+    - amount: 1
+      rollChance: 100
   currentHealth: 20
   maxHealth: 20
 --- !u!114 &6385258515812990108

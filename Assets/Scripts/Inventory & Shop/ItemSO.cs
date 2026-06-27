@@ -24,6 +24,7 @@ public class ItemSO : ScriptableObject
     public float speed;
     public float meleeDamage;
     public float rangeDamage;
+    public int skillPoints;
 
     [Header("For Temporary Items")]
     public float duration;

@@ -99,10 +99,10 @@ public class SkillKeeper : MonoBehaviour
 
         toggleSkillTree = FindAnyObjectByType<ToggleSkillTree>(FindObjectsInactive.Include);
 
-        if (toggleSkillTree != null)
+        /*if (toggleSkillTree != null)
             Debug.Log("[SkillKeeper] ToggleSkillTree was auto-found at runtime (including inactive objects).");
         else
-            Debug.LogWarning("[SkillKeeper] ToggleSkillTree not found anywhere in scene (even inactive)!");
+            Debug.LogWarning("[SkillKeeper] ToggleSkillTree not found anywhere in scene (even inactive)!");*/
     }
 
     private void OpenPanel()

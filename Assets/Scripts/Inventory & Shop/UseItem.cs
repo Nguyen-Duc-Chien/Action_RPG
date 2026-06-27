@@ -17,6 +17,16 @@ public class UseItem : MonoBehaviour
             StatsManager.Instance.UpdateSpeed(itemSO.speed);
         Debug.Log($"Applied {itemSO.speed} speed from {itemSO.itemName}");  
 
+        if (itemSO.skillPoints > 0)
+        {
+            SkillTreeManager skillTree = FindAnyObjectByType<SkillTreeManager>();
+            if (skillTree != null)
+            {
+                skillTree.UpdateAbilityPoints(itemSO.skillPoints);
+                Debug.Log($"Applied {itemSO.skillPoints} skill points from {itemSO.itemName}");
+            }
+        }
+
         if (itemSO.duration > 0)
             StartCoroutine(EffectTimer(itemSO, itemSO.duration));
     }
@@ -29,9 +39,9 @@ public class UseItem : MonoBehaviour
             StatsManager.Instance.UpdateHealth(-itemSO.currentHealth);
         Debug.Log($"Removed {itemSO.currentHealth} health from {itemSO.itemName}");*/
 
-        if (itemSO.maxHealth > 0)
+        /*if (itemSO.maxHealth > 0)
             StatsManager.Instance.UpdateMaxHealth(-itemSO.maxHealth);
-        Debug.Log($"Removed {itemSO.maxHealth} max health from {itemSO.itemName}");
+        Debug.Log($"Removed {itemSO.maxHealth} max health from {itemSO.itemName}");*/
 
         if (itemSO.speed > 0)
             StatsManager.Instance.UpdateSpeed(-itemSO.speed);

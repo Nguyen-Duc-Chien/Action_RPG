@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dynamite
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Dynamite
-  itemDescription: 
+  itemDescription: 'Kaboom! Handle with care, or you''ll be the one getting blown away.'
   icon: {fileID: -4003982261762975687, guid: 5fa2f4a56d5cc2a499328bd7d754d24d, type: 3}
   isConsumable: 0
   isGold: 0

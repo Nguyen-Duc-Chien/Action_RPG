@@ -817,6 +817,7 @@ MonoBehaviour:
   gold: 0
   goldText: {fileID: 1910985417327615086}
   lootPrefab: {fileID: 1382322476351220468, guid: 9c9778c795ba9714f888ad3c29014add, type: 3}
+  skillKeyItem: {fileID: 11400000, guid: d43945ef961b21948acb3ef472de8b13, type: 2}
   player: {fileID: 0}
 --- !u!114 &5524028533306148908
 MonoBehaviour:

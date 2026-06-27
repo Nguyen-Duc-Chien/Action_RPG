@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,13 +29,12 @@ public class ShopInfo : MonoBehaviour
 
         List<string> stats = new List<string>();
         if (itemSO.currentHealth > 0) stats.Add("Health: " + itemSO.currentHealth.ToString());
+        if (itemSO.maxHealth > 0) stats.Add("Max Health: " + itemSO.maxHealth.ToString());
         if (itemSO.meleeDamage > 0) stats.Add("Melee Damage: " + itemSO.meleeDamage.ToString());
         if (itemSO.rangeDamage > 0) stats.Add("Range Damage: " + itemSO.rangeDamage.ToString());
         if (itemSO.speed > 0) stats.Add("Speed: " + itemSO.speed.ToString());
+        if (itemSO.skillPoints > 0) stats.Add("Skill Points: " + itemSO.skillPoints.ToString());
         if (itemSO.duration > 0) stats.Add("Duration: " + itemSO.duration.ToString());
-
-        if (stats.Count <= 0)
-            return;
         for (int i = 0; i < statTexts.Length; i++)
         {
             if(i < stats.Count)

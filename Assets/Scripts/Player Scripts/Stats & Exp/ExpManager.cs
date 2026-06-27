@@ -27,10 +27,12 @@ public class ExpManager : MonoBehaviour
     }
     public void Update()
     {
+        /*
+        //for debug, using / button in keyboard to gain exp
         if(Input.GetButtonDown("GainExpForDebug"))
         {
             GainExperience(2); 
-        }
+        }*/
     }
 
     private void OnEnable()

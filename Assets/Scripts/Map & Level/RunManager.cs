@@ -252,8 +252,6 @@ public class RunManager : MonoBehaviour
 
     #endregion
 
-    #region Skills Save/Load
-
     public void SaveSkills(SkillSlot[] slots, int availablePoints)
     {
         PlayerPrefs.SetInt("Skill_SlotCount", slots.Length);
@@ -289,7 +287,7 @@ public class RunManager : MonoBehaviour
             slots[i].UpdateUI();
         }
 
-        Debug.Log($"<color=cyan>[RunManager]</color> Skills loaded ({count} slots, {availablePoints} points)");
+        //Debug.Log($"<color=cyan>[RunManager]</color> Skills loaded ({count} slots, {availablePoints} points)");
     }
 
     public bool HasSkillsSave()
@@ -297,11 +295,8 @@ public class RunManager : MonoBehaviour
         return PlayerPrefs.HasKey("Skill_SlotCount");
     }
 
-    #endregion
-
-    #region Debug
-
-    [ContextMenu("Reset All Progress (DEBUG)")]
+    
+    //[ContextMenu("Reset All Progress (DEBUG)")]
     public void ResetAllProgress()
     {
         PlayerPrefs.DeleteAll();
@@ -310,13 +305,12 @@ public class RunManager : MonoBehaviour
         Debug.LogWarning("[RunManager] All progress has been reset (levels, gold, exp, inventory)!");
     }
 
-    [ContextMenu("Unlock All Levels (DEBUG)")]
+    //[ContextMenu("Unlock All Levels (DEBUG)")]
     public void UnlockAllLevelsDebug()
     {
         PlayerPrefs.SetInt("UnlockedLevel", 20);
         PlayerPrefs.Save();
         Debug.LogWarning("[RunManager] All 20 levels unlocked!");
     }
-
-    #endregion
+    
 }
