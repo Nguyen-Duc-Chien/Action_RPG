@@ -177,6 +177,7 @@ public class LevelSelectUI : MonoBehaviour
                 {
                     btn.onClick.AddListener(() =>
                     {
+                        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("UIClick");
                         Hide();
                         Time.timeScale = 1f;
                         RunManager.Instance.PlayLevel(levelNum - 1);

@@ -21,13 +21,23 @@ public class LevelSelectKeeper : MonoBehaviour
     {
         if (!playerInRange) return;
 
-        if (!isPanelOpen && Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact"))
         {
-            OpenPanel();
+            if (!isPanelOpen)
+            {
+                OpenPanel();
+            }
+            else
+            {
+                ClosePanel();
+            }
         }
-        else if (isPanelOpen && Input.GetButtonDown("Cancel"))
+        else if (Input.GetButtonDown("Cancel"))
         {
-            ClosePanel();
+            if (isPanelOpen)
+            {
+                ClosePanel();
+            }
         }
     }
 
@@ -85,6 +95,7 @@ public class LevelSelectKeeper : MonoBehaviour
         Time.timeScale = 0f;
 
         levelSelectUI.Show();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("KeeperInteract");
         Debug.Log("[LevelSelectKeeper] Panel opened.");
     }
     

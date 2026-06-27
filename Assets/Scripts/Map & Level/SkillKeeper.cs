@@ -114,6 +114,7 @@ public class SkillKeeper : MonoBehaviour
         }
 
         toggleSkillTree.OpenPanel();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("KeeperInteract");
         Debug.Log("[SkillKeeper] Skill Panel opened.");
     }
 

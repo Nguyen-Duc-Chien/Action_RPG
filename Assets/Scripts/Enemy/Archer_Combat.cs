@@ -18,6 +18,8 @@ public class Archer_Combat : MonoBehaviour
 
     public virtual void Attack()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("EnemyBowShoot");
+
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj == null) return;
         player = playerObj.transform;

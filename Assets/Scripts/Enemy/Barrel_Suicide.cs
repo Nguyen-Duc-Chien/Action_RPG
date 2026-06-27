@@ -195,6 +195,7 @@ public class Barrel_Suicide : MonoBehaviour
                 break;
 
             case BarrelState.Igniting:
+                if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BarrelIgnite");
                 anim.SetBool("isIgniting", true);
                 fuseTimer = 0f;
                 break;
@@ -227,6 +228,8 @@ public class Barrel_Suicide : MonoBehaviour
 
     private void PerformExplosion()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BarrelExplosion");
+
         isExploded = true;
         anim.SetTrigger("explode"); 
 

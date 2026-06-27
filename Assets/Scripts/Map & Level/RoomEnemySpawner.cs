@@ -18,7 +18,7 @@ public class RoomEnemySpawner : MonoBehaviour
     public void Initialize(List<EnemySpawnRate> pool, int maxEnemies)
     {
         if (pool != null && pool.Count > 0) _runtimePool = pool;
-        if (maxEnemies > 0) maxEnemiesInThisRoom = maxEnemies;
+        if (maxEnemies >= 0) maxEnemiesInThisRoom = maxEnemies;
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class RoomEnemySpawner : MonoBehaviour
     public void Initialize(EnemyData data, int maxEnemies)
     {
         if (data != null) enemyData = data;
-        if (maxEnemies > 0) maxEnemiesInThisRoom = maxEnemies;
+        if (maxEnemies >= 0) maxEnemiesInThisRoom = maxEnemies;
     }
 
     private List<Transform> spawnPoints = new List<Transform>();

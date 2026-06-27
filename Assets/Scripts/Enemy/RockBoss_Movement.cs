@@ -18,6 +18,7 @@ public class RockBoss_Movement : MonoBehaviour
     
     private EnemyState enemyState; 
     private float idleWaitTimer = 0f; 
+    private float roarTimer = 0f;
 
     private float lastMoveX = 0f;
     private float lastMoveY = -1f;
@@ -33,6 +34,7 @@ public class RockBoss_Movement : MonoBehaviour
     void Update()
     {
         if (idleWaitTimer > 0) idleWaitTimer -= Time.deltaTime;
+        if (roarTimer > 0) roarTimer -= Time.deltaTime;
 
         if (enemyState != EnemyState.Knockback && enemyState != EnemyState.Attacking)
         {
@@ -64,6 +66,12 @@ public class RockBoss_Movement : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectionRange, playerLayer);
         if (hits.Length > 0)
         {
+            if (roarTimer <= 0)
+            {
+                if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BossRoar");
+                roarTimer = 6f; // Roar every 6 seconds when player is near
+            }
+
             player = hits[0].transform;
             float distance = Vector2.Distance(transform.position, player.position);
             

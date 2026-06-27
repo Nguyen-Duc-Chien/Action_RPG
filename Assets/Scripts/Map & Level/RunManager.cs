@@ -52,6 +52,11 @@ public class RunManager : MonoBehaviour
         currentLevelIndex = index;
         string sceneName = (index < 10) ? forestSceneName : dungeonSceneName;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBGM(index < 10 ? "ForestBGM" : "DungeonBGM");
+        }
+
         Debug.Log($"<color=cyan>[RunManager]</color> Loading Level {index + 1} → Scene: {sceneName}");
         SceneManager.LoadScene(sceneName);
     }
@@ -95,6 +100,11 @@ public class RunManager : MonoBehaviour
     {
         Debug.Log("<color=cyan>[RunManager]</color> Returning to lobby...");
         
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBGM("LobbyBGM");
+        }
+
         // Đưa player về tọa độ 0,0,0 khi quay lại sảnh
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)

@@ -60,6 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (amount < 0)
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("PlayerHit");
             float currentResistance = Mathf.Clamp(StatsManager.Instance.damageResistance, 0f, 0.9f);
             amount = amount * (1f - currentResistance);
         }
@@ -116,6 +117,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("PlayerDie");
         Debug.Log("Player has died, GameOverPanel set active!");
         if (gameOverPanel != null)
         {
@@ -131,11 +133,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void MainMenuButton()
     {
+        if (AudioManager.Instance != null) {
+            AudioManager.Instance.PlaySFX("UIClick");
+            AudioManager.Instance.PlayBGM("MenuBGM");
+        }
         Time.timeScale = 1f;
 
         if (StatsManager.Instance != null)
         {
-            StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
+            StatsManager.Instance.ResetStats();
         }
         UpdateHealthUI(); 
 
@@ -150,10 +156,11 @@ public class PlayerHealth : MonoBehaviour
             foundExpManager.ResetExp();
         }
 
-        InventoryManager invManager = FindAnyObjectByType<InventoryManager>();
+        InventoryManager invManager = FindAnyObjectByType<InventoryManager>(FindObjectsInactive.Include);
         if (invManager != null)
         {
             invManager.ResetInventory();
+            invManager.SaveToPlayerPrefs(); // Also save empty inventory just to be safe
         }
 
         // Reset skills
@@ -185,7 +192,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetPlayer(Vector3 spawnPosition)
     {
-        StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
+        StatsManager.Instance.ResetStats();
         UpdateHealthUI();
 
         Player_DebuffManager debuffMgr = GetComponent<Player_DebuffManager>();
@@ -200,10 +207,11 @@ public class PlayerHealth : MonoBehaviour
             foundExpManager.ResetExp();
         }
 
-        InventoryManager invManager = FindAnyObjectByType<InventoryManager>();
+        InventoryManager invManager = FindAnyObjectByType<InventoryManager>(FindObjectsInactive.Include);
         if (invManager != null)
         {
             invManager.ResetInventory();
+            invManager.SaveToPlayerPrefs(); // Ensure it saves the cleared state
         }
 
         // Reset skills

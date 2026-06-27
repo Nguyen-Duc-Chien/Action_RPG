@@ -65,7 +65,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d03ce6df97ab8e4ebf7ed79ecc600f8, type: 2}
   - {fileID: 11400000, guid: 04bb72f153c148b4393ce26fa6603400, type: 2}
   - {fileID: 11400000, guid: 428970005da55d74eb5b47f0478d45dd, type: 2}
-  unlockAllLevels: 0
   itemDatabase: {fileID: 11400000, guid: aa686d0314545e24ab83a91c64608298, type: 2}
   lobbySceneName: Scene_Starting
   forestSceneName: Scene_Forest_RSG

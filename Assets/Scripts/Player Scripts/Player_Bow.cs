@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player_Bow : MonoBehaviour
 {
@@ -23,8 +24,14 @@ public class Player_Bow : MonoBehaviour
         // Update the direction 
         HandleAutoAim();
 
-        if (Input.GetButtonDown("Shoot") && shootTimer <= 0)
+        if (Input.GetMouseButtonDown(1) && shootTimer <= 0)
         {
+            if (StatsManager.Instance != null && !StatsManager.Instance.isBowUnlocked) return;
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+            anim.SetLayerWeight(0, 0);
+            anim.SetLayerWeight(1, 1);
+
             playerMovement.isShooting = true;
             anim.SetBool("isShooting", true);
 
@@ -37,21 +44,11 @@ public class Player_Bow : MonoBehaviour
                 playerMovement.ForceFlip(1);
             }
 
-            //Debug.Log("Shoot button pressed! Auto-aiming target!");
+            //Debug.Log("Right Mouse pressed! Auto-aiming target!");
         }
     }
 
-    private void OnEnable()
-    {
-        anim.SetLayerWeight(0, 0);
-        anim.SetLayerWeight(1, 1);
-    }
 
-    private void OnDisable()
-    {
-        anim.SetLayerWeight(0, 1);
-        anim.SetLayerWeight(1, 0);
-    }
 
     private void HandleAutoAim()
     {
@@ -102,6 +99,7 @@ public class Player_Bow : MonoBehaviour
     {
         if (shootTimer <= 0)
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("PlayerBow");
             GameObject arrowObj = Instantiate(arrowPrefab, launchPoint.position, Quaternion.identity);
             Arrow arrow = arrowObj.GetComponent<Arrow>();
 

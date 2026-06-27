@@ -63,6 +63,7 @@ public class PlayerDash : MonoBehaviour
     private IEnumerator DashCoroutine()
     {
         isDashing = true;
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("PlayerDash");
 
         // Tell PlayerMovement to stop normal movement
         if (playerMovement != null)

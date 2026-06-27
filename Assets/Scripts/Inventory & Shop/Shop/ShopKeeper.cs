@@ -39,6 +39,7 @@ public class ShopKeeper : MonoBehaviour
                     Time.timeScale = 0; // Pause the game when the shop is open
                     currentShopKeeper = this; // Set the current shopkeeper reference
                     isShopOpen = true;
+                    if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("KeeperInteract");
                     OnShopStateChanged?.Invoke(shopManager, true);
                     shopCanvasGroup.alpha = 1;
                     shopCanvasGroup.blocksRaycasts = true;
@@ -50,21 +51,33 @@ public class ShopKeeper : MonoBehaviour
                     OpenConsumablesShop();
                     // Default to opening the item shop, you can change this to open different shops based on your design
                 }
+                else
+                {
+                    CloseShop();
+                }
             }
             else if (Input.GetButtonDown("Cancel"))
             {
-                Debug.Log("Closed!");
-                Time.timeScale = 1; // Resume the game when the shop is closed
-                currentShopKeeper = null; // Clear the current shopkeeper reference
-                isShopOpen = false;
-                OnShopStateChanged?.Invoke(shopManager, false);
-                shopCanvasGroup.alpha = 0;
-                shopCanvasGroup.blocksRaycasts = false;
-                shopCanvasGroup.interactable = false;
-
-                shopkeeperCam.gameObject.SetActive(false);
+                if (isShopOpen)
+                {
+                    CloseShop();
+                }
             }
         }
+    }
+
+    private void CloseShop()
+    {
+        Debug.Log("Closed!");
+        Time.timeScale = 1; // Resume the game when the shop is closed
+        currentShopKeeper = null; // Clear the current shopkeeper reference
+        isShopOpen = false;
+        OnShopStateChanged?.Invoke(shopManager, false);
+        shopCanvasGroup.alpha = 0;
+        shopCanvasGroup.blocksRaycasts = false;
+        shopCanvasGroup.interactable = false;
+
+        shopkeeperCam.gameObject.SetActive(false);
     }
 
     public void OpenConsumablesShop()

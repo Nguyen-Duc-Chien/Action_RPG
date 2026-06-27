@@ -28,6 +28,33 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         MarkPersistentObjects();
+        SceneManager.sceneLoaded += OnSceneLoadedForUI;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoadedForUI;
+    }
+
+    private void OnSceneLoadedForUI(Scene scene, LoadSceneMode mode)
+    {
+        bool inMainMenu = scene.name == "MainMenu";
+        foreach (GameObject obj in persistentObjects)
+        {
+            if (obj == null) continue;
+            
+            // Nếu là Camera hoặc Player thì để nguyên không ẩn (để tránh lỗi freeze hoặc mất cam)
+            if (obj.name.Contains("Camera") || obj.CompareTag("Player"))
+            {
+                continue;
+            }
+
+            // Nếu là các thành phần giao diện (UI, Canvas) thì ẩn khi ở MainMenu
+            if (obj.name.Contains("Canvas") || obj.name.Contains("UI"))
+            {
+                obj.SetActive(!inMainMenu);
+            }
+        }
     }
 
     private void MarkPersistentObjects()
@@ -46,9 +73,14 @@ public class GameManager : MonoBehaviour
         // Destroy the current instance and all its persistent objects
         foreach (GameObject obj in persistentObjects)
         {            
-            Destroy(obj);
+            if (obj != null) Destroy(obj);
         }
         Destroy(gameObject);
+    }
+
+    public void DestroyPersistentState()
+    {
+        CleanUpAndDestroy();
     }
 
     /// <summary>

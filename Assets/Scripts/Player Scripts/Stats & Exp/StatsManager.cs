@@ -53,12 +53,88 @@ public class StatsManager : MonoBehaviour
     [HideInInspector] public float arrowBurnDuration = 2f;
     [HideInInspector] public float arrowBurnDamage = 1f;
 
+    private float defaultMeleeDamage;
+    private float defaultRangeDamage;
+    private float defaultWeaponRange;
+    private float defaultKnockbackForce;
+    private float defaultKnockbackTime;
+    private float defaultStunTime;
+    private float defaultArrowKnockbackForce;
+    private float defaultArrowKnockbackTime;
+    private float defaultArrowStunTime;
+    private float defaultSpeed;
+    private float defaultMaxHealth;
+    private float defaultDamageResistance;
+    private float defaultRegenInterval;
+    private float defaultRegenAmount;
+
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            SaveDefaultStats();
+        }
         else
             Destroy(gameObject);
+    }
+
+    private void SaveDefaultStats()
+    {
+        defaultMeleeDamage = meleeDamage;
+        defaultRangeDamage = rangeDamage;
+        defaultWeaponRange = weaponRange;
+        defaultKnockbackForce = knockbackForce;
+        defaultKnockbackTime = knockbackTime;
+        defaultStunTime = stunTime;
+        defaultArrowKnockbackForce = arrowKnockbackForce;
+        defaultArrowKnockbackTime = arrowKnockbackTime;
+        defaultArrowStunTime = arrowStunTime;
+        defaultSpeed = speed;
+        defaultMaxHealth = maxHealth;
+        defaultDamageResistance = damageResistance;
+        defaultRegenInterval = regenInterval;
+        defaultRegenAmount = regenAmount;
+    }
+
+    public void ResetStats()
+    {
+        meleeDamage = defaultMeleeDamage;
+        rangeDamage = defaultRangeDamage;
+        weaponRange = defaultWeaponRange;
+        knockbackForce = defaultKnockbackForce;
+        knockbackTime = defaultKnockbackTime;
+        stunTime = defaultStunTime;
+        arrowKnockbackForce = defaultArrowKnockbackForce;
+        arrowKnockbackTime = defaultArrowKnockbackTime;
+        arrowStunTime = defaultArrowStunTime;
+        speed = defaultSpeed;
+        maxHealth = defaultMaxHealth;
+        damageResistance = defaultDamageResistance;
+        regenInterval = defaultRegenInterval;
+        regenAmount = defaultRegenAmount;
+
+        currentHealth = maxHealth;
+
+        hasLowHealthResistanceSkill = false;
+        isLowHealthResistanceActive = false;
+        hasHealthRegenSkill = false;
+        isBowUnlocked = false;
+
+        arrowSlowChance = 0f;
+        arrowSlowDuration = 2f;
+        arrowSlowAmount = 0.2f;
+
+        arrowFreezeChance = 0f;
+        arrowFreezeDuration = 1f;
+
+        arrowBurnChance = 0f;
+        arrowBurnDuration = 2f;
+        arrowBurnDamage = 1f;
+
+        if (healthText != null) healthText.text = "HP: " + currentHealth + "/ " + maxHealth;
+        if (PlayerHealthUI.Instance != null) PlayerHealthUI.Instance.UpdateHealthUI(currentHealth, maxHealth);
+        if (statsUI != null) statsUI.UpdateAllStats();
     }
 
     public void UpdateMaxHealth(float amount)

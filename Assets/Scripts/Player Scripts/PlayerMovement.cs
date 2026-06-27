@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,10 +19,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Slash") && player_Combat.enabled == true)
+        if(Input.GetMouseButtonDown(0) && player_Combat.enabled == true)
         {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+            anim.SetLayerWeight(0, 1);
+            anim.SetLayerWeight(1, 0);
+
             player_Combat.Attack();
-            //Debug.Log("Slash button pressed! Attack animation should play!");
+            //Debug.Log("Left Mouse pressed! Attack animation should play!");
         }
     }
 
@@ -100,15 +106,20 @@ public class PlayerMovement : MonoBehaviour
         isKnockedback = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Confiner"))
         {
-            ConfinerFinder cameraFinder = FindAnyObjectByType<ConfinerFinder>();
-
-            if (cameraFinder != null)
+            // Đảm bảo tâm của người chơi thực sự nằm trong ranh giới phòng mới
+            // Ngăn chặn trường hợp Trigger phụ (tầm đánh, tương tác) chạm nhầm vào phòng bên cạnh
+            if (other.OverlapPoint(transform.position))
             {
-                cameraFinder.UpdateCameraBounds(other);
+                ConfinerFinder cameraFinder = FindAnyObjectByType<ConfinerFinder>();
+
+                if (cameraFinder != null)
+                {
+                    cameraFinder.UpdateCameraBounds(other);
+                }
             }
         }
     }

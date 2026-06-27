@@ -7,35 +7,18 @@ public class Player_ChangeEquipment : MonoBehaviour
 
     private void Start()
     {
-        if (StatsManager.Instance == null || !StatsManager.Instance.isBowUnlocked)
+        if (combat != null) combat.enabled = true;
+        if (bow != null) bow.enabled = true;
+
+        if (combat != null && combat.anim != null)
         {
-            if (combat != null) combat.enabled = true;
-            if (bow != null) bow.enabled = false;
+            combat.anim.SetLayerWeight(0, 1);
+            combat.anim.SetLayerWeight(1, 0);
         }
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("ChangeEquipment"))
-        {
-            if (StatsManager.Instance == null || !StatsManager.Instance.isBowUnlocked)
-            {
-                if (bow != null && bow.enabled) bow.enabled = false;
-                if (combat != null && !combat.enabled) combat.enabled = true;
-                return;
-            }
-            if (combat.enabled)
-            {
-                combat.enabled = false;
-                bow.enabled = true;
-                Debug.Log("Switched to Bow!");
-            }
-            else
-            {
-                combat.enabled = true;
-                bow.enabled = false;
-                Debug.Log("Switched to Melee!");
-            }
-        }
+        // Disabled swapping since both weapons use left and right click independently now.
     }
 }

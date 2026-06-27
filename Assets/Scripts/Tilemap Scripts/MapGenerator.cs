@@ -58,6 +58,27 @@ public class MapGenerator : MonoBehaviour
         if (firstRoom.GetComponent<RoomWalls>()) spawnedRooms.Add(firstRoom.GetComponent<RoomWalls>());
         LinkSpikeToPlayer(firstRoom);
 
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = currentPos;
+
+            ConfinerFinder cameraFinder = FindAnyObjectByType<ConfinerFinder>();
+            if (cameraFinder != null)
+            {
+                Collider2D[] colliders = firstRoom.GetComponentsInChildren<Collider2D>();
+                foreach (Collider2D col in colliders)
+                {
+                    if (col.CompareTag("Confiner"))
+                    {
+                        cameraFinder.SnapCameraTo(currentPos);
+                        cameraFinder.UpdateCameraBounds(col);
+                        break;
+                    }
+                }
+            }
+        }
+
         RoomEnemySpawner startSpawner = firstRoom.GetComponent<RoomEnemySpawner>();
         if (startSpawner != null)
         {
@@ -131,14 +152,13 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < allSpawners.Count; i++)
             {
                 allSpawners[i].Initialize(_currentEnemyPool, spawnsPerRoom[i]);
-                if (spawnsPerRoom[i] > 0)
-                {
-                    allSpawners[i].ExecuteSpawning();
-                }
+                allSpawners[i].ExecuteSpawning(); // Luôn gọi để đánh dấu đã spawn (tránh dính OnTriggerEnter2D)
             }
 
-            if (enemiesLeft > 0 && LevelManager.Instance != null)
+            if (LevelManager.Instance != null)
             {
+                // Luôn luôn ghi đè targetKillsToWin bằng ĐÚNG số quái đã được chia (targetTotal - enemiesLeft)
+                // Đảm bảo không bao giờ bị lệch số lượng thanh tiến trình
                 LevelManager.Instance.OverrideKillTarget(targetTotal - enemiesLeft);
             }
         }

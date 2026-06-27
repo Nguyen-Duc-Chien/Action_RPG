@@ -955,7 +955,7 @@ MonoBehaviour:
   - {fileID: 8773569032886549946}
   - {fileID: 7543749279193801604}
   pointsText: {fileID: 8317195112715846375}
-  availablePoints: 52
+  availablePoints: 0
 --- !u!114 &3389328522770012300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2281,7 +2281,19 @@ MonoBehaviour:
   m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6217761696609157788}
+        m_TargetAssemblyTypeName: StatsUI, Assembly-CSharp
+        m_MethodName: OnVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2266254108787963081
 GameObject:
   m_ObjectHideFlags: 0
@@ -11374,7 +11386,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7865670387872251672}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

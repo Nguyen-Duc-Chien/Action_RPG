@@ -24,11 +24,18 @@ public class EnergyManager : MonoBehaviour
 
     private float regenPauseTimer = 0f;
 
+    private float defaultMaxEnergy;
+    private float defaultPassiveRegenRate;
+    private float defaultKillRegenAmount;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            defaultMaxEnergy = maxEnergy;
+            defaultPassiveRegenRate = passiveRegenRate;
+            defaultKillRegenAmount = killRegenAmount;
         }
         else
         {
@@ -103,6 +110,10 @@ public class EnergyManager : MonoBehaviour
     /// </summary>
     public void ResetEnergy()
     {
+        maxEnergy = defaultMaxEnergy;
+        passiveRegenRate = defaultPassiveRegenRate;
+        killRegenAmount = defaultKillRegenAmount;
+
         currentEnergy = maxEnergy;
         regenPauseTimer = 0f;
         NotifyUI();

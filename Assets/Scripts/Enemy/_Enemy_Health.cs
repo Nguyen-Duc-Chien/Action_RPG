@@ -58,12 +58,21 @@ public class Enemy_Health : MonoBehaviour
         {
             Die();
         }
+        else if (amount < 0)
+        {
+            if (GetComponent<RockBoss_Combat>() != null)
+            {
+                if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BossHurt");
+            }
+        }
         //Debug.Log("Enemy health changed by: " + amount + ", current health: " + currentHealth);
     }
 
     private void Die()
     {
         isDead = true;
+
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("EnemyDeath");
 
         if (OnMonsterDefeated != null) OnMonsterDefeated(expReward);
 

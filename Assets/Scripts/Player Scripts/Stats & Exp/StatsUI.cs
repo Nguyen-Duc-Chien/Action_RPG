@@ -48,6 +48,7 @@ public class StatsUI : MonoBehaviour
                 statsCanvas.blocksRaycasts = true;
                 statsCanvas.interactable = true;
                 statsOpen = true;
+                if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("UIClick");
                 //Debug.Log("Stats UI opened!");
             }
         }
@@ -67,6 +68,7 @@ public class StatsUI : MonoBehaviour
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }
             statsOpen = false;
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("UIClick");
             //Debug.Log("Stats UI closed!");
         }
     }
@@ -98,6 +100,15 @@ public class StatsUI : MonoBehaviour
 
         UpdateMeleeDamage();
         UpdateRangeDamage();
+    }
+
+    // Sự kiện cho thanh Slider điều chỉnh âm thanh
+    public void OnVolumeChanged(float volume)
+    {
+        // Thay đổi âm lượng tổng của toàn bộ game (0.0 đến 1.0)
+        AudioListener.volume = volume;
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
     }
 
     // Sự kiện cho nút Main Menu trong Stats Panel

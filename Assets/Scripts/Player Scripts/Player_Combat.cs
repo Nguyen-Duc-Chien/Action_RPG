@@ -21,6 +21,7 @@ public class Player_Combat : MonoBehaviour
     {
         if(timer <= 0)
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("PlayerMelee");
             anim.SetBool("isAttacking", true);
             timer = cooldown;
         }

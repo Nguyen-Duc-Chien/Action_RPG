@@ -15,6 +15,8 @@ public class Torch_Combat : MonoBehaviour
 
     public void Attack()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("TorchAttack");
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, weaponRange, playerLayer);
 
         if (hits.Length > 0)

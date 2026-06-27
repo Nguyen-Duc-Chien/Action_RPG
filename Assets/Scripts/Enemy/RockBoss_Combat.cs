@@ -117,6 +117,7 @@ public class RockBoss_Combat : MonoBehaviour
     // ===== SWIPE (Đánh tay gần) =====
     private void PerformSwipe()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BossSwipe");
         movementScript.ChangeState(EnemyState.Attacking);
         swipeCooldownTimer = GetEffectiveCooldown(swipeCooldown);
         anim.SetTrigger("swipeTrig");
@@ -128,6 +129,7 @@ public class RockBoss_Combat : MonoBehaviour
     // ===== STOMP (Dậm đất AOE) =====
     private void PerformStomp()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("BossStomp");
         movementScript.ChangeState(EnemyState.Attacking);
         stompCooldownTimer = GetEffectiveCooldown(stompCooldown);
         anim.SetTrigger("stompTrig");
