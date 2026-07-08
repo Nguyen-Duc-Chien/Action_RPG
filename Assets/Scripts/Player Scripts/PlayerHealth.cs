@@ -186,6 +186,12 @@ public class PlayerHealth : MonoBehaviour
         Player_DebuffManager debuffMgr = GetComponent<Player_DebuffManager>();
         if (debuffMgr != null) debuffMgr.ResetAllDebuffs();
 
+        // Xóa dữ liệu ván chơi dở (vì đã chết, không cho continue)
+        if (RunManager.Instance != null)
+        {
+            RunManager.Instance.ClearRunSave();
+        }
+
         // Chuyển thẳng về Scene Main Menu (bỏ qua việc reset vị trí trong scene hiện tại)
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }

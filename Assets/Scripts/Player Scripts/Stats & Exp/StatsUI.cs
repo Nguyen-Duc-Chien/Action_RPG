@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro; // Using this for TextMeshPro
 
 public class StatsUI : MonoBehaviour
@@ -9,6 +10,11 @@ public class StatsUI : MonoBehaviour
     public ToggleSkillTree toggleSkillTree;
 
     private bool statsOpen = false;
+
+    /// <summary>
+    /// True khi MainMenu đang được load additive bên trên scene gameplay (overlay mode).
+    /// </summary>
+    public static bool isOverlayActive = false;
 
     // Getter to check if the stats UI is currently open
     public bool IsStatsOpen => statsOpen;
@@ -114,19 +120,33 @@ public class StatsUI : MonoBehaviour
     // Sự kiện cho nút Main Menu trong Stats Panel
     public void GoToMainMenu()
     {
-        Time.timeScale = 1f; // Bỏ pause game trước khi chuyển scene
-        
-        // Cố gắng tìm PlayerHealth để dùng hàm reset toàn diện như khi chết
-        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
-        if (playerHealth != null)
+        // Đóng Stats UI trước
+        statsCanvas.alpha = 0;
+        statsCanvas.blocksRaycasts = false;
+        statsCanvas.interactable = false;
+        statsOpen = false;
+
+        // Pause game (giữ timeScale = 0 để mọi thứ đứng yên)
+        Time.timeScale = 0f;
+
+        // Ẩn persistent objects (Player, HUD, Canvas) 
+        if (GameManager.Instance != null)
         {
-            playerHealth.MainMenuButton();
+            GameManager.Instance.SetPersistentObjectsVisible(false);
         }
-        else
+
+        // Phát âm thanh
+        if (AudioManager.Instance != null)
         {
-            // Nếu không tìm thấy thì cứ load thẳng
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            AudioManager.Instance.PlaySFX("UIClick");
+            AudioManager.Instance.PlayBGM("MenuBGM");
         }
-        CloseStatsUI();
+
+        // Load MainMenu bên trên scene gameplay (Additive) - giữ nguyên scene hiện tại
+        isOverlayActive = true;
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
+
+        Debug.Log("[StatsUI] MainMenu loaded as overlay. Game paused.");
     }
 }
+

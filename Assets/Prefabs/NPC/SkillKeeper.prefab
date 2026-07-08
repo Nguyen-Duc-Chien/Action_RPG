@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 9077904820702112558}
   - component: {fileID: 1092855354929682461}
   - component: {fileID: 1277444939319862373}
+  - component: {fileID: 3310724493355240801}
   m_Layer: 14
   m_Name: SkillKeeper
   m_TagString: Untagged
@@ -234,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5985214791343067243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.04, y: -4.05, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
@@ -289,7 +290,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 49
+  m_SortingOrder: 11
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7151335025817718036, guid: 3c6f70de92ab50346ae9e39f4d14fe3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -373,3 +374,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillKeeper
   toggleSkillTree: {fileID: 0}
   anim: {fileID: 6990675453447537476}
+--- !u!114 &3310724493355240801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985214791343067243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7704c16c8b8ea2841ba5604fb5f1b2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleSkillTree
+  skillsCanvas: {fileID: 0}
+  statsUI: {fileID: 0}

@@ -110,6 +110,26 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Di chuyển portal tới vị trí mới (gọi từ MapGenerator sau khi generate xong map).
+    /// Đảm bảo collider trên portal là trigger để không chặn player.
+    /// </summary>
+    public void RepositionPortal(Vector3 position)
+    {
+        if (nextLevelPortal == null) return;
+
+        nextLevelPortal.transform.position = position;
+
+        // Đảm bảo tất cả collider trên portal là trigger (không chặn physics)
+        Collider2D[] portalColliders = nextLevelPortal.GetComponentsInChildren<Collider2D>(true);
+        foreach (Collider2D col in portalColliders)
+        {
+            col.isTrigger = true;
+        }
+
+        Debug.Log($"<color=cyan>[LevelManager]</color> Portal repositioned to: {position}");
+    }
+
     private void OpenNextLevelPortal()
     {
         isPortalOpened = true;

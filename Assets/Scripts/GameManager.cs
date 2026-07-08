@@ -38,6 +38,26 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoadedForUI(Scene scene, LoadSceneMode mode)
     {
+        // Bỏ qua khi MainMenu được load additive (overlay mode)
+        if (mode == LoadSceneMode.Additive) return;
+
+        // ── Xóa duplicate EventSystem (giữ lại cái persistent, xóa cái scene-local) ──
+        // Khi scene dungeon/forest có EventSystem riêng + persistent EventSystem → UI chết
+        UnityEngine.EventSystems.EventSystem[] allES = 
+            FindObjectsByType<UnityEngine.EventSystems.EventSystem>(FindObjectsInactive.Include);
+        if (allES.Length > 1)
+        {
+            foreach (var es in allES)
+            {
+                // Xóa EventSystem nằm trong scene vừa load (không phải DontDestroyOnLoad)
+                if (es.gameObject.scene == scene)
+                {
+                    Debug.Log($"<color=yellow>[GameManager]</color> Removing duplicate EventSystem from scene: {scene.name}");
+                    Destroy(es.gameObject);
+                }
+            }
+        }
+
         bool inMainMenu = scene.name == "MainMenu";
         foreach (GameObject obj in persistentObjects)
         {
@@ -65,6 +85,18 @@ public class GameManager : MonoBehaviour
             {
                 DontDestroyOnLoad(obj);
             }
+        }
+    }
+
+    /// <summary>
+    /// Ẩn/hiện các persistent objects khi chuyển sang Main Menu overlay.
+    /// </summary>
+    public void SetPersistentObjectsVisible(bool visible)
+    {
+        foreach (GameObject obj in persistentObjects)
+        {
+            if (obj == null) continue;
+            obj.SetActive(visible);
         }
     }
 

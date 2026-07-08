@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,6 +21,13 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && player_Combat.enabled == true)
         {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+            // If currently shooting bow, cancel it first
+            if (isShooting)
+            {
+                isShooting = false;
+                anim.SetBool("isShooting", false);
+            }
 
             anim.SetLayerWeight(0, 1);
             anim.SetLayerWeight(1, 0);

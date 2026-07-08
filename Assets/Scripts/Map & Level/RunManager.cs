@@ -315,7 +315,63 @@ public class RunManager : MonoBehaviour
         return PlayerPrefs.HasKey("Skill_SlotCount");
     }
 
-    
+
+
+    #region Run State Save/Load
+
+    /// <summary>
+    /// Lưu toàn bộ trạng thái ván chơi: level index, scene name, player position
+    /// </summary>
+    public void SaveRunState(string sceneName, Vector3 playerPosition)
+    {
+        PlayerPrefs.SetInt("Run_CurrentLevelIndex", currentLevelIndex);
+        PlayerPrefs.SetString("Run_SceneName", sceneName);
+        PlayerPrefs.SetFloat("Run_PlayerPosX", playerPosition.x);
+        PlayerPrefs.SetFloat("Run_PlayerPosY", playerPosition.y);
+        PlayerPrefs.SetFloat("Run_PlayerPosZ", playerPosition.z);
+        PlayerPrefs.Save();
+        Debug.Log($"<color=cyan>[RunManager]</color> Run state saved: Scene={sceneName}, Pos={playerPosition}, Level={currentLevelIndex}");
+    }
+
+    public bool HasRunSave()
+    {
+        return PlayerPrefs.HasKey("Run_SceneName");
+    }
+
+    public string LoadRunSceneName()
+    {
+        return PlayerPrefs.GetString("Run_SceneName", "");
+    }
+
+    public Vector3 LoadRunPlayerPosition()
+    {
+        float x = PlayerPrefs.GetFloat("Run_PlayerPosX", 0f);
+        float y = PlayerPrefs.GetFloat("Run_PlayerPosY", 0f);
+        float z = PlayerPrefs.GetFloat("Run_PlayerPosZ", 0f);
+        return new Vector3(x, y, z);
+    }
+
+    public int LoadRunLevelIndex()
+    {
+        return PlayerPrefs.GetInt("Run_CurrentLevelIndex", 0);
+    }
+
+    /// <summary>
+    /// Xóa dữ liệu ván chơi dở (gọi khi chết)
+    /// </summary>
+    public void ClearRunSave()
+    {
+        PlayerPrefs.DeleteKey("Run_CurrentLevelIndex");
+        PlayerPrefs.DeleteKey("Run_SceneName");
+        PlayerPrefs.DeleteKey("Run_PlayerPosX");
+        PlayerPrefs.DeleteKey("Run_PlayerPosY");
+        PlayerPrefs.DeleteKey("Run_PlayerPosZ");
+        PlayerPrefs.Save();
+        Debug.Log("<color=cyan>[RunManager]</color> Run save cleared.");
+    }
+
+    #endregion
+
     //[ContextMenu("Reset All Progress (DEBUG)")]
     public void ResetAllProgress()
     {

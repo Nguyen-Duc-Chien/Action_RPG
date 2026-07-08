@@ -152,14 +152,23 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < allSpawners.Count; i++)
             {
                 allSpawners[i].Initialize(_currentEnemyPool, spawnsPerRoom[i]);
-                allSpawners[i].ExecuteSpawning(); // Luôn gọi để đánh dấu đã spawn (tránh dính OnTriggerEnter2D)
+                allSpawners[i].ExecuteSpawning();
+            }
+
+            // Tính chính xác tổng quái THỰC SỰ đã phân bổ (tránh lệch thanh tiến trình)
+            int actualSpawned = 0;
+            for (int i = 0; i < spawnsPerRoom.Length; i++)
+                actualSpawned += spawnsPerRoom[i];
+
+            if (actualSpawned < targetTotal)
+            {
+                Debug.LogWarning($"<color=orange>[MapGenerator]</color> Not enough spawn points! Target: {targetTotal}, Actual spawned: {actualSpawned}");
             }
 
             if (LevelManager.Instance != null)
             {
-                // Luôn luôn ghi đè targetKillsToWin bằng ĐÚNG số quái đã được chia (targetTotal - enemiesLeft)
-                // Đảm bảo không bao giờ bị lệch số lượng thanh tiến trình
-                LevelManager.Instance.OverrideKillTarget(targetTotal - enemiesLeft);
+                // Ghi đè bằng ĐÚNG số quái thực tế đã spawn, không phải target config
+                LevelManager.Instance.OverrideKillTarget(actualSpawned);
             }
         }
         else
@@ -171,9 +180,13 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        // Di chuyển portal tới phòng cuối cùng (tránh bị collider chặn ở vị trí cố định)
         if (LevelManager.Instance != null)
         {
-            Debug.Log($"[MapGenerator] Created {totalRoomsToSpawn} rooms! Total enemies: <color=yellow>{LevelManager.Instance.targetKillsToWin}</color>.");
+            Vector2 lastRoomPos = occupiedPositions[occupiedPositions.Count - 1];
+            LevelManager.Instance.RepositionPortal(new Vector3(lastRoomPos.x, lastRoomPos.y, 0f));
+
+            Debug.Log($"[MapGenerator] Created {totalRoomsToSpawn} rooms! Total enemies: <color=yellow>{LevelManager.Instance.targetKillsToWin}</color>. Portal → Room at {lastRoomPos}");
         }
         else
         {
