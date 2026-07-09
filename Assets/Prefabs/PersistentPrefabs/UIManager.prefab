@@ -10671,8 +10671,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsUI: {fileID: 6217761696609157788}
   healthText: {fileID: 0}
-  meleeDamage: 2
-  rangeDamage: 1
+  meleeDamage: 10
+  rangeDamage: 6
   weaponRange: 0.3
   knockbackForce: 8
   knockbackTime: 0.15
@@ -10681,14 +10681,14 @@ MonoBehaviour:
   arrowKnockbackTime: 0.15
   arrowStunTime: 0.1
   speed: 3
-  maxHealth: 20
-  currentHealth: 20
+  maxHealth: 100
+  currentHealth: 100
   damageResistance: 0
   hasLowHealthResistanceSkill: 0
   isLowHealthResistanceActive: 0
   hasHealthRegenSkill: 0
   regenInterval: 5
-  regenAmount: 2
+  regenAmount: 5
   isBowUnlocked: 0
   arrowSlowChance: 0
   arrowSlowDuration: 2

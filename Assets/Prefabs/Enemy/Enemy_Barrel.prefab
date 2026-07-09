@@ -192,8 +192,8 @@ MonoBehaviour:
       rollChance: 25
     - amount: 1
       rollChance: 75
-  currentHealth: 8
-  maxHealth: 8
+  currentHealth: 25
+  maxHealth: 25
 --- !u!114 &4830662375791826098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +211,8 @@ MonoBehaviour:
   chaseTriggerRange: 3.2
   explodeTriggerRange: 2
   maxExplosionRadius: 2.5
-  maxDamage: 35
-  minDamage: 10
+  maxDamage: 40
+  minDamage: 15
   knockbackForce: 10
   stunTime: 0.3
   fuseDuration: 1

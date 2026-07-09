@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Ranged_Combat
   arrowPrefab: {fileID: 7478499875519044494, guid: 17a7355ce00c1f940adc9e4ed3e79ab9, type: 3}
   firePoint: {fileID: 1452898382268155680}
-  damage: 3
+  damage: 8
   arrowSpeed: 8
   knockbackForce: 6
   stunTime: 0.2
@@ -313,8 +313,8 @@ MonoBehaviour:
       rollChance: 20
     - amount: 1
       rollChance: 80
-  currentHealth: 5
-  maxHealth: 5
+  currentHealth: 25
+  maxHealth: 25
 --- !u!114 &6786733013768587021
 MonoBehaviour:
   m_ObjectHideFlags: 0

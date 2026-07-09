@@ -214,8 +214,8 @@ MonoBehaviour:
     quantityTiers:
     - amount: 1
       rollChance: 100
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 500
+  maxHealth: 500
 --- !u!114 &1392134371788668651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,8 +279,8 @@ MonoBehaviour:
   stompRange: 2
   swipeCooldown: 1
   stompCooldown: 1
-  swipeDamage: 6
-  stompDamage: 4
+  swipeDamage: 20
+  stompDamage: 15
   swipeKnockbackForce: 8
   stompKnockbackForce: 12
   stunTime: 0.3

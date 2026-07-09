@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Frostbite_Archer_Combat
   arrowPrefab: {fileID: 7478499875519044494, guid: 17a7355ce00c1f940adc9e4ed3e79ab9, type: 3}
   firePoint: {fileID: 1940326371300029806}
-  damage: 3
+  damage: 8
   arrowSpeed: 8
   knockbackForce: 6
   stunTime: 0.2
@@ -306,8 +306,8 @@ MonoBehaviour:
       rollChance: 20
     - amount: 1
       rollChance: 80
-  currentHealth: 5
-  maxHealth: 5
+  currentHealth: 30
+  maxHealth: 30
 --- !u!114 &994567730847947383
 MonoBehaviour:
   m_ObjectHideFlags: 0

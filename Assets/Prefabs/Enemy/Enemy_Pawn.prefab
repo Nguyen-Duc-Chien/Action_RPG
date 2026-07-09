@@ -265,8 +265,8 @@ MonoBehaviour:
       rollChance: 30
     - amount: 1
       rollChance: 70
-  currentHealth: 7
-  maxHealth: 7
+  currentHealth: 30
+  maxHealth: 30
 --- !u!114 &7580377130416118228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d906bd12e20bb458c2f6b7bac244e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pawn_Red_Combat
-  damage: 2
+  damage: 6
   attackPoint: {fileID: 2384419897444172182}
   weaponRange: 0.3
   knockbackForce: 4

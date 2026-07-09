@@ -208,8 +208,8 @@ MonoBehaviour:
     quantityTiers:
     - amount: 1
       rollChance: 100
-  currentHealth: 20
-  maxHealth: 20
+  currentHealth: 100
+  maxHealth: 100
 --- !u!114 &6385258515812990108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d906bd12e20bb458c2f6b7bac244e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pawn_Red_Combat
-  damage: 3
+  damage: 10
   attackPoint: {fileID: 7636606193984089807}
   weaponRange: 0.8
   knockbackForce: 4

@@ -195,15 +195,28 @@ public class MapGenerator : MonoBehaviour
     }
     void LinkSpikeToPlayer(GameObject roomObject)
     {
-        Tilemap[] roomTilemaps = roomObject.GetComponentsInChildren<Tilemap>();
+        Tilemap[] roomTilemaps = roomObject.GetComponentsInChildren<Tilemap>(true);
         foreach (Tilemap tm in roomTilemaps)
         {
             if (tm.gameObject.name == "Spikes_Trap")
             {
                 PlayerSpikeHandler playerSpikeHandler = FindAnyObjectByType<PlayerSpikeHandler>();
+                if (playerSpikeHandler == null)
+                {
+                    GameObject player = GameObject.FindWithTag("Player");
+                    if (player != null)
+                    {
+                        playerSpikeHandler = player.GetComponent<PlayerSpikeHandler>();
+                    }
+                }
+
                 if (playerSpikeHandler != null)
                 {
                     playerSpikeHandler.AddSpikeTilemap(tm);
+                }
+                else
+                {
+                    Debug.LogWarning($"[MapGenerator] PlayerSpikeHandler NOT found when trying to link spike tilemap '{tm.name}' from room '{roomObject.name}'!");
                 }
                 break;
             }

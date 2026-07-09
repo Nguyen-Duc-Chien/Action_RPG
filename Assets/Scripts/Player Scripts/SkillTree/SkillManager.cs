@@ -44,7 +44,7 @@ public class SkillManager : MonoBehaviour
 
             //Column 2
             case "Health_MaxHPBoost_1":     // Increase max health
-                StatsManager.Instance.UpdateMaxHealth(1);
+                StatsManager.Instance.UpdateMaxHealth(5);
                 //Debug.Log("Health_MaxHPBoost_1 applied.");
                 break;
             case "Health_Resistance":   // Decrease damage taken when your health is so low
@@ -52,7 +52,7 @@ public class SkillManager : MonoBehaviour
                 //Debug.Log("Health_Resistance unlocked.");
                 break;
             case "Health_MaxHPBoost_2":     // Increase max health for more survivability
-                StatsManager.Instance.UpdateMaxHealth(1);
+                StatsManager.Instance.UpdateMaxHealth(5);
                 //Debug.Log("Health_MaxHPBoost_2 applied.");
                 break;
             case "Health_Regeneration": // Regenerate HP when your health is low
@@ -62,7 +62,7 @@ public class SkillManager : MonoBehaviour
 
             //Column 3
             case "Melee Damage Up 1":   // Increase melee damage
-                StatsManager.Instance.UpdateMeleeDamage(0.5f);
+                StatsManager.Instance.UpdateMeleeDamage(2.5f);
                 //Debug.Log("Melee Damage Up 1 applied.");
                 break;
             case "Knockback Force 1":   // Increase knockback force and knockback duration of melee attacks
@@ -71,7 +71,7 @@ public class SkillManager : MonoBehaviour
                 //Debug.Log("Knockback Force 1 applied.");
                 break;
             /*case "Melee Damage Up 2":   // Increase melee damage for more damage output
-                StatsManager.Instance.UpdateMeleeDamage(0.5f);
+                StatsManager.Instance.UpdateMeleeDamage(2.5f);
                 //Debug.Log("Melee Damage Up 2 applied.");
                 break;
             case "Knockback Force 2":   // Increase knockback force and knockback duration of melee attacks for more
@@ -98,11 +98,11 @@ public class SkillManager : MonoBehaviour
                 //Debug.Log("Bow has been unlocked!");
                 break;
             case "Ranged Damage Up 1":  // Increase damage of arrows
-                StatsManager.Instance.UpdateRangeDamage(0.5f);
+                StatsManager.Instance.UpdateRangeDamage(1.5f);
                 //Debug.Log("Ranged Damage Up 1 applied.");
                 break;
             case "Ranged Damage Up 2":  // Increase damage of arrows
-                StatsManager.Instance.UpdateRangeDamage(0.5f);
+                StatsManager.Instance.UpdateRangeDamage(1.5f);
                 //Debug.Log("Ranged Damage Up 2 applied.");
                 break;
             case "Rapid Shot":          // Increases the aim radius and decreases the cooldown of the bow, allowing for faster shooting
@@ -137,7 +137,7 @@ public class SkillManager : MonoBehaviour
             case "Burning Arrow":       // Have a small chance to set enemies on fire when hit with an arrow, dealing burn DoT
                 StatsManager.Instance.arrowBurnChance = 0.5f;
                 StatsManager.Instance.arrowBurnDuration = 2f;
-                StatsManager.Instance.arrowBurnDamage = 1f;
+                StatsManager.Instance.arrowBurnDamage = 3f;
                 Debug.Log("Burning Arrow applied.");
                 break;
             case "Knockback Arrow":     // Increase knockback force and knockback duration of arrows
@@ -146,7 +146,7 @@ public class SkillManager : MonoBehaviour
                 Debug.Log("Knockback Arrow applied to Ranged Stats.");
                 break;
             case "Ranged Damage Up":    // Increase damage of arrows
-                StatsManager.Instance.UpdateRangeDamage(0.5f);
+                StatsManager.Instance.UpdateRangeDamage(1.5f);
                 Debug.Log("Ranged Damage Up applied.");
                 break;
             case "Extra DoT":           // Increase the chance to set enemies on fire and increase DoT burn duration of arrows

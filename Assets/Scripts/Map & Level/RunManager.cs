@@ -32,7 +32,7 @@ public class RunManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("UnlockedLevel", 0) == 0)
         {
-            PlayerPrefs.SetInt("UnlockedLevel", 1);
+            PlayerPrefs.SetInt("UnlockedLevel", 11);
             PlayerPrefs.Save();
         }
     }

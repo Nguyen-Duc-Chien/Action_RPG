@@ -22,7 +22,7 @@ MonoBehaviour:
   buyPrice: 1
   canSell: 1
   sellPrice: 1
-  currentHealth: 1.5
+  currentHealth: 10
   maxHealth: 0
   speed: 1.5
   meleeDamage: 0

@@ -10,8 +10,12 @@ public class Elevation_Entry : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        bool isPlayer = collision.gameObject.CompareTag("Player");
+        bool isNonAStarEnemy = collision.gameObject.CompareTag("Enemy") && collision.gameObject.GetComponent<AStarPathfinder>() == null;
+
+        if (isPlayer)
         {
+            // Player: toggle global colliders as original
             foreach (Collider2D mountain in mountainColliders)
             {
                 mountain.enabled = false;
@@ -22,7 +26,26 @@ public class Elevation_Entry : MonoBehaviour
                 boundary.enabled = true;
             }
 
-            collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 12;
+            SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                sr.sortingOrder = 12;
+            }
+        }
+        else if (isNonAStarEnemy)
+        {
+            // Enemy: per-entity ignore collision, không tắt collider toàn cục
+            foreach (Collider2D mountain in mountainColliders)
+            {
+                if (mountain != null)
+                    Physics2D.IgnoreCollision(collision, mountain, true);
+            }
+
+            SpriteRenderer sr = collision.gameObject.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                sr.sortingOrder = 12;
+            }
         }
     }
 }

@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ea2e7d7a2464a4f925eaaab0a2390c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 6
   attackPoint: {fileID: 7588897735595883946}
   weaponRange: 0.8
   knockbackForce: 5
@@ -186,7 +186,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   burnDuration: 2
-  burnDamagePerSecond: 1
+  burnDamagePerSecond: 3
 --- !u!114 &1948989639987323354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +265,8 @@ MonoBehaviour:
     quantityTiers:
     - amount: 1
       rollChance: 100
-  currentHealth: 8
-  maxHealth: 8
+  currentHealth: 35
+  maxHealth: 35
 --- !u!114 &7727330500347567421
 MonoBehaviour:
   m_ObjectHideFlags: 0
